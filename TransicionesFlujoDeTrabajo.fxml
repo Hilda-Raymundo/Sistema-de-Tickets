@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1" fx:controller="sistemadetickets.TransicionesFlujoDeTrabajoController">
+   <children>
+      <AnchorPane id="AnchorPane" layoutY="7.0" prefHeight="520.0" prefWidth="650.0">
+         <children>
+            <Pane layoutY="-12.0" prefHeight="239.0" prefWidth="658.0" style="-fx-background-color: #96C549;">
+               <children>
+                  <Label layoutX="31.0" layoutY="59.0" text="Transicion de estados" textFill="WHITE">
+                     <font>
+                        <Font name="Segoe UI Black" size="30.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Pane layoutY="108.0" prefHeight="410.0" prefWidth="658.0" style="-fx-background-color: white; -fx-background-radius: 50;">
+               <children>
+                  <Label layoutX="34.0" layoutY="63.0" text="Regla de transición:" />
+                  <Label layoutX="34.0" layoutY="25.0" text="Estado al que puede transicionar" />
+                  <Button layoutX="474.0" layoutY="365.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="161.0" style="-fx-background-color: orange; -fx-background-radius: 50;" text="Guardar Transición">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Label layoutX="32.0" layoutY="100.0" text="Accion automática:" />
+                  <Label layoutX="32.0" layoutY="169.0" text="Transiciones seleccionadas:" />
+                  <Button layoutX="389.0" layoutY="96.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="75.0" style="-fx-background-color: #96C549; -fx-background-radius: 50;" text="Añadir">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <TableView layoutX="32.0" layoutY="194.0" prefHeight="141.0" prefWidth="346.0">
+                     <columns>
+                        <TableColumn prefWidth="96.79999542236328" text="Estado" />
+                        <TableColumn prefWidth="112.79998779296875" text="Regla" />
+                        <TableColumn prefWidth="144.79998779296875" text="AccionAutomatica" />
+                     </columns>
+                  </TableView>
+                  <Button layoutX="389.0" layoutY="193.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="75.0" style="-fx-background-color: yellow; -fx-background-radius: 50;" text="Quitar">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <ComboBox layoutX="220.0" layoutY="21.0" prefWidth="150.0" />
+                  <ComboBox layoutX="152.0" layoutY="59.0" prefHeight="25.0" prefWidth="218.0" />
+                  <ComboBox layoutX="152.0" layoutY="96.0" prefHeight="25.0" prefWidth="218.0" />
+               </children>
+            </Pane>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

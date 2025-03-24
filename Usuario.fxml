@@ -9,8 +9,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="750.0" prefWidth="1000.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1" fx:controller="sistemadetickets.UsuarioController">
+<AnchorPane id="AnchorPane" prefHeight="750.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sistemadetickets.UsuarioController">
    <children>
       <Pane layoutX="8.0" layoutY="227.0" prefHeight="424.0" prefWidth="982.0" style="-fx-background-color: #96C549; -fx-background-radius: 30;">
          <children>
@@ -21,9 +20,9 @@
                         <Image url="@imagenes/crear.png" />
                      </image>
                   </ImageView>
-                  <Button layoutX="86.0" layoutY="12.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="369.0" style="-fx-background-color: none;" text="Crear Ticket">
+                  <Button layoutX="70.0" layoutY="12.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="445.0" style="-fx-background-color: none; -fx-label-padding: 5;" text="Crear Ticket" textAlignment="RIGHT">
                      <font>
-                        <Font name="Segoe UI" size="26.0" />
+                        <Font name="Segoe UI" size="20.0" />
                      </font>
                      <cursor>
                         <Cursor fx:constant="HAND" />
@@ -38,9 +37,9 @@
                         <Image url="@imagenes/consultar.png" />
                      </image>
                   </ImageView>
-                  <Button layoutX="86.0" layoutY="13.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="369.0" style="-fx-background-color: none;" text="Consultar Tickets">
+                  <Button layoutX="70.0" layoutY="13.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="445.0" style="-fx-background-color: none; -fx-label-padding: 5;" text="Consultar Tickets">
                      <font>
-                        <Font name="Segoe UI" size="26.0" />
+                        <Font name="Segoe UI" size="20.0" />
                      </font>
                      <cursor>
                         <Cursor fx:constant="HAND" />
@@ -55,9 +54,9 @@
                         <Image url="@imagenes/agregar.png" />
                      </image>
                   </ImageView>
-                  <Button layoutX="86.0" layoutY="12.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="369.0" style="-fx-background-color: none;" text="Agregar Nota">
+                  <Button layoutX="70.0" layoutY="12.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="445.0" style="-fx-background-color: none; -fx-label-padding: 5;" text="Agregar Nota">
                      <font>
-                        <Font name="Segoe UI" size="26.0" />
+                        <Font name="Segoe UI" size="20.0" />
                      </font>
                      <cursor>
                         <Cursor fx:constant="HAND" />
@@ -72,9 +71,9 @@
                         <Image url="@imagenes/cancelar.png" />
                      </image>
                   </ImageView>
-                  <Button layoutX="86.0" layoutY="12.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="369.0" style="-fx-background-color: none;" text="Cancelar Ticket">
+                  <Button layoutX="70.0" layoutY="12.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="445.0" style="-fx-background-color: none; -fx-label-padding: 5;" text="Cancelar Ticket">
                      <font>
-                        <Font name="Segoe UI" size="26.0" />
+                        <Font name="Segoe UI" size="20.0" />
                      </font>
                      <cursor>
                         <Cursor fx:constant="HAND" />

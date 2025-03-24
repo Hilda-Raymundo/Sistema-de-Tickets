@@ -15,20 +15,20 @@ import javafx.stage.Stage;
  * @author hraym
  */
 public class SistemaDeTickets extends Application {
-
+    
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         launch(args);
     }
-
+    
     @Override
     public void start(Stage formulario) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("Usuario.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("Admin.fxml"));
         formulario.setTitle("Login");
         formulario.setScene(new Scene(root));
         formulario.show();
-    }
+    }    
         
 }
