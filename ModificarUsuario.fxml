@@ -11,8 +11,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1" fx:controller="sistemadetickets.ModificarUsuarioController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sistemadetickets.ModificarUsuarioController">
    <children>
       <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0">
          <children>
@@ -44,7 +43,7 @@
                      </font>
                   </TextField>
                   <Label layoutX="513.0" layoutY="85.0" text="Correo:" />
-                  <Button layoutX="720.0" layoutY="369.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="126.0" style="-fx-background-color: orange; -fx-background-radius: 50;" text="Modificar">
+                  <Button fx:id="modificarUsuario" layoutX="720.0" layoutY="369.0" mnemonicParsing="false" onAction="#modificarUsuario" prefHeight="30.0" prefWidth="126.0" style="-fx-background-color: orange; -fx-background-radius: 50;" text="Modificar">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
@@ -73,7 +72,7 @@
                   </TextField>
                   <ComboBox layoutX="512.0" layoutY="290.0" prefWidth="150.0" />
                   <ComboBox layoutX="680.0" layoutY="290.0" prefWidth="150.0" />
-                  <Button layoutX="587.0" layoutY="369.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="126.0" style="-fx-background-color: red; -fx-background-radius: 50;" text="Cancelar">
+                  <Button fx:id="cancelar" layoutX="587.0" layoutY="369.0" mnemonicParsing="false" onAction="#cancelar" prefHeight="30.0" prefWidth="126.0" style="-fx-background-color: red; -fx-background-radius: 50;" text="Cancelar">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>

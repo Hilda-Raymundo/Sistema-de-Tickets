@@ -11,8 +11,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="550.0" prefWidth="750.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1" fx:controller="sistemadetickets.EliminarRolController">
+<AnchorPane id="AnchorPane" prefHeight="550.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sistemadetickets.EliminarRolController">
    <children>
       <Pane prefHeight="239.0" prefWidth="750.0" style="-fx-background-color: #96C549;">
          <children>
@@ -44,7 +43,7 @@
                   <Font size="15.0" />
                </font>
             </TextArea>
-            <Button layoutX="526.0" layoutY="311.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="171.0" style="-fx-background-color: red; -fx-background-radius: 50;" text="Eliminar Rol">
+            <Button fx:id="eliminar" layoutX="526.0" layoutY="311.0" mnemonicParsing="false" onAction="#eliminarRol" prefHeight="30.0" prefWidth="171.0" style="-fx-background-color: red; -fx-background-radius: 50;" text="Eliminar Rol">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>

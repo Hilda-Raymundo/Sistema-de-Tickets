@@ -11,8 +11,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1" fx:controller="sistemadetickets.CrearRolController">
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sistemadetickets.CrearRolController">
    <children>
       <Pane layoutY="-12.0" prefHeight="239.0" prefWidth="812.0" style="-fx-background-color: #96C549;">
          <children>
@@ -40,7 +39,7 @@
             </TextField>
             <Label layoutX="441.0" layoutY="123.0" text="Descripción:" />
             <TextArea layoutX="441.0" layoutY="140.0" prefHeight="107.0" prefWidth="297.0" />
-            <Button layoutX="612.0" layoutY="345.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="126.0" style="-fx-background-color: orange; -fx-background-radius: 50;" text="Crear">
+            <Button fx:id="crear" layoutX="612.0" layoutY="345.0" mnemonicParsing="false" onAction="#crearRol" prefHeight="30.0" prefWidth="126.0" style="-fx-background-color: orange; -fx-background-radius: 50;" text="Crear">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>

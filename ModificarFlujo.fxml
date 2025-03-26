@@ -11,8 +11,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1" fx:controller="sistemadetickets.ModificarFlujoController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sistemadetickets.ModificarFlujoController">
    <children>
       <AnchorPane id="AnchorPane" layoutX="-6.0" layoutY="3.0" prefHeight="520.0" prefWidth="650.0">
          <children>
@@ -34,7 +33,7 @@
                         <Font size="15.0" />
                      </font>
                   </TextField>
-                  <Button layoutX="434.0" layoutY="337.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="126.0" style="-fx-background-color: orange; -fx-background-radius: 50;" text="Guardar">
+                  <Button fx:id="modificarFlujoTrabajo" layoutX="434.0" layoutY="337.0" mnemonicParsing="false" onAction="#modificarFlujoTrabajo" prefHeight="30.0" prefWidth="126.0" style="-fx-background-color: orange; -fx-background-radius: 50;" text="Guardar">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
@@ -42,7 +41,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Button layoutX="295.0" layoutY="337.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="126.0" style="-fx-background-color: red; -fx-background-radius: 50;" text="Cancelar">
+                  <Button fx:id="cancelar" layoutX="295.0" layoutY="337.0" mnemonicParsing="false" onAction="#cancelar" prefHeight="30.0" prefWidth="126.0" style="-fx-background-color: red; -fx-background-radius: 50;" text="Cancelar">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>

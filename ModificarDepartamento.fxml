@@ -11,8 +11,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1" fx:controller="sistemadetickets.ModificarDepartamentoController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sistemadetickets.ModificarDepartamentoController">
    <children>
       <Pane layoutX="-9.0" prefHeight="239.0" prefWidth="954.0" style="-fx-background-color: #96C549;">
          <children>
@@ -41,7 +40,7 @@
             </TextField>
             <Label layoutX="389.0" layoutY="97.0" text="Descripción:" />
             <TextArea layoutX="389.0" layoutY="120.0" prefHeight="107.0" prefWidth="297.0" />
-            <Button layoutX="809.0" layoutY="438.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="126.0" style="-fx-background-color: orange; -fx-background-radius: 50;" text="Modificar">
+            <Button fx:id="modificarDepartamento" layoutX="809.0" layoutY="438.0" mnemonicParsing="false" onAction="#modificarDepartamento" prefHeight="30.0" prefWidth="126.0" style="-fx-background-color: orange; -fx-background-radius: 50;" text="Modificar">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>

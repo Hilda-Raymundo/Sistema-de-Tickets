@@ -4,17 +4,16 @@
  */
 package sistemadetickets;
 
+import java.awt.Button;
+import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 /**
@@ -27,75 +26,56 @@ public class AdminController implements Initializable {
     /**
      * Initializes the controller class.
      */
+    AbrirVentana abrir = new AbrirVentana();
+    CerrarVentana cerrar = new CerrarVentana();
     
+    public javafx.scene.control.Button configuracionDelSistema;
+        
     @FXML
     private void abrirConfiguracionDelSistema() throws IOException{
-        Stage formulario = new Stage();
-        Parent root = FXMLLoader.load(getClass().getResource("ConfiguracionDelSistema.fxml"));
-        formulario.setTitle("Login");
-        formulario.setScene(new Scene(root));
-        formulario.show();
+        abrir.abrirVentana("ConfiguracionDelSistema.fxml");
+        cerrar.cerrar(configuracionDelSistema);
     }
     
     @FXML
     private void abrirGestionRolesPermisos() throws IOException{
-        Stage formulario = new Stage();
-        Parent root = FXMLLoader.load(getClass().getResource("GestionRolesPermisos.fxml"));
-        formulario.setTitle("Login");
-        formulario.setScene(new Scene(root));
-        formulario.show();
+        abrir.abrirVentana("GestionRolesPermisos.fxml");
+        cerrar.cerrar(configuracionDelSistema);
     }
     
     @FXML
     private void abrirGestionDepartamento() throws IOException{
-        Stage formulario = new Stage();
-        Parent root = FXMLLoader.load(getClass().getResource("GestionDepartamento.fxml"));
-        formulario.setTitle("Login");
-        formulario.setScene(new Scene(root));
-        formulario.show();
+        abrir.abrirVentana("GestionDepartamento.fxml");
+        cerrar.cerrar(configuracionDelSistema);
     }
     
     @FXML
     private void abrirGestionUsuarios() throws IOException{
-        Stage formulario = new Stage();
-        Parent root = FXMLLoader.load(getClass().getResource("GestionUsuarios.fxml"));
-        formulario.setTitle("Login");
-        formulario.setScene(new Scene(root));
-        formulario.show();
+        abrir.abrirVentana("GestionUsuarios.fxml");
+        cerrar.cerrar(configuracionDelSistema);
     }
     
     @FXML
     private void abrirGestionEstadosTicket() throws IOException{
-        Stage formulario = new Stage();
-        Parent root = FXMLLoader.load(getClass().getResource("GestionEstadosTicket.fxml"));
-        formulario.setTitle("Login");
-        formulario.setScene(new Scene(root));
-        formulario.show();
+        abrir.abrirVentana("GestionEstadosTicket.fxml");
+        cerrar.cerrar(configuracionDelSistema);
     }
     
     @FXML
     private void abrirGestionFlujosDeTrabajo() throws IOException{
-        Stage formulario = new Stage();
-        Parent root = FXMLLoader.load(getClass().getResource("GestionFlujosDeTrabajo.fxml"));
-        formulario.setTitle("Login");
-        formulario.setScene(new Scene(root));
-        formulario.show();
+        abrir.abrirVentana("GestionFlujosDeTrabajo.fxml");
+        cerrar.cerrar(configuracionDelSistema);
     }
     
     @FXML
     private void abrirGestionTicket() throws IOException{
-        Stage formulario = new Stage();
-        Parent root = FXMLLoader.load(getClass().getResource("GestionarTicket.fxml"));
-        formulario.setTitle("Login");
-        formulario.setScene(new Scene(root));
-        formulario.show();
+        abrir.abrirVentana("GestionarTicket.fxml");
+        cerrar.cerrar(configuracionDelSistema);
     }
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
     }   
-    
-    
-    
+        
 }

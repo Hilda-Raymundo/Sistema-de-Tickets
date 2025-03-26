@@ -13,8 +13,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1" fx:controller="sistemadetickets.GestionEstadosTicketController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sistemadetickets.GestionEstadosTicketController">
    <children>
       <Pane layoutX="1.0" layoutY="-7.0" prefHeight="766.0" prefWidth="976.0" style="-fx-background-color: white;">
          <children>
@@ -30,6 +29,7 @@
                         <Font name="Segoe UI Black" size="24.0" />
                      </font>
                   </Label>
+                  <Button fx:id="atras" layoutX="181.0" layoutY="712.0" mnemonicParsing="false" onAction="#atras" text="Regresar" />
                </children>
             </Pane>
             <ImageView fitHeight="97.0" fitWidth="131.0" layoutX="858.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
@@ -46,7 +46,7 @@
                </columns>
             </TableView>
             <Label layoutX="254.0" layoutY="116.0" text="Estado:" />
-            <Button layoutX="701.0" layoutY="23.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="149.0" style="-fx-background-color: #96C549; -fx-background-radius: 50;" text="Crear Nuevo Estado">
+            <Button fx:id="crearEstado" layoutX="701.0" layoutY="23.0" mnemonicParsing="false" onAction="#crearEstado" prefHeight="26.0" prefWidth="149.0" style="-fx-background-color: #96C549; -fx-background-radius: 50;" text="Crear Nuevo Estado">
                <font>
                   <Font name="Rockwell" size="14.0" />
                </font>
@@ -54,7 +54,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button layoutX="775.0" layoutY="679.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="186.0" style="-fx-background-color: orange; -fx-background-radius: 50;" text="Modificar Estado">
+            <Button fx:id="modificarEstado" layoutX="775.0" layoutY="679.0" mnemonicParsing="false" onAction="#modificarEstado" prefHeight="35.0" prefWidth="186.0" style="-fx-background-color: orange; -fx-background-radius: 50;" text="Modificar Estado">
                <font>
                   <Font name="Rockwell" size="18.0" />
                </font>
@@ -62,7 +62,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button layoutX="775.0" layoutY="721.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="186.0" style="-fx-background-color: red; -fx-background-radius: 50;" text="Eliminar Estado">
+            <Button fx:id="eliminarEstado" layoutX="775.0" layoutY="721.0" mnemonicParsing="false" onAction="#eliminarEstado" prefHeight="31.0" prefWidth="186.0" style="-fx-background-color: red; -fx-background-radius: 50;" text="Eliminar Estado">
                <font>
                   <Font name="Rockwell" size="18.0" />
                </font>

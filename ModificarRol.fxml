@@ -11,8 +11,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="900.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1" fx:controller="sistemadetickets.ModificarRolController">
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sistemadetickets.ModificarRolController">
    <children>
       <Pane prefHeight="239.0" prefWidth="900.0" style="-fx-background-color: #96C549;">
          <children>
@@ -44,7 +43,7 @@
                   <Font size="15.0" />
                </font>
             </TextArea>
-            <Button layoutX="692.0" layoutY="454.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="194.0" style="-fx-background-color: orange; -fx-background-radius: 50;" text="Guardar Modificaciones">
+            <Button fx:id="modificar" layoutX="692.0" layoutY="454.0" mnemonicParsing="false" onAction="#modificarRol" prefHeight="30.0" prefWidth="194.0" style="-fx-background-color: orange; -fx-background-radius: 50;" text="Guardar Modificaciones">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
