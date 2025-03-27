@@ -20,7 +20,7 @@
                         <Image url="@imagenes/crear.png" />
                      </image>
                   </ImageView>
-                  <Button layoutX="70.0" layoutY="12.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="445.0" style="-fx-background-color: none; -fx-label-padding: 5;" text="Crear Ticket" textAlignment="RIGHT">
+                  <Button fx:id="crearTicket" layoutX="70.0" layoutY="12.0" mnemonicParsing="false" onAction="#crearTicket" prefHeight="50.0" prefWidth="445.0" style="-fx-background-color: none; -fx-label-padding: 5;" text="Crear Ticket" textAlignment="RIGHT">
                      <font>
                         <Font name="Segoe UI" size="20.0" />
                      </font>
@@ -37,7 +37,7 @@
                         <Image url="@imagenes/consultar.png" />
                      </image>
                   </ImageView>
-                  <Button layoutX="70.0" layoutY="13.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="445.0" style="-fx-background-color: none; -fx-label-padding: 5;" text="Consultar Tickets">
+                  <Button fx:id="consultarTicket" layoutX="70.0" layoutY="13.0" mnemonicParsing="false" onAction="#consultarTicket" prefHeight="50.0" prefWidth="445.0" style="-fx-background-color: none; -fx-label-padding: 5;" text="Consultar Tickets">
                      <font>
                         <Font name="Segoe UI" size="20.0" />
                      </font>
@@ -54,7 +54,7 @@
                         <Image url="@imagenes/agregar.png" />
                      </image>
                   </ImageView>
-                  <Button layoutX="70.0" layoutY="12.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="445.0" style="-fx-background-color: none; -fx-label-padding: 5;" text="Agregar Nota">
+                  <Button fx:id="agregarNota" layoutX="70.0" layoutY="12.0" mnemonicParsing="false" onAction="#agregarNota" prefHeight="56.0" prefWidth="445.0" style="-fx-background-color: none; -fx-label-padding: 5;" text="Agregar Nota">
                      <font>
                         <Font name="Segoe UI" size="20.0" />
                      </font>
@@ -71,7 +71,7 @@
                         <Image url="@imagenes/cancelar.png" />
                      </image>
                   </ImageView>
-                  <Button layoutX="70.0" layoutY="12.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="445.0" style="-fx-background-color: none; -fx-label-padding: 5;" text="Cancelar Ticket">
+                  <Button fx:id="cancelarTicket" layoutX="70.0" layoutY="12.0" mnemonicParsing="false" onAction="#cancelarTicket" prefHeight="50.0" prefWidth="445.0" style="-fx-background-color: none; -fx-label-padding: 5;" text="Cancelar Ticket">
                      <font>
                         <Font name="Segoe UI" size="20.0" />
                      </font>
@@ -98,7 +98,7 @@
             <Font name="Segoe UI Black" size="27.0" />
          </font>
       </Label>
-      <Button layoutX="315.0" layoutY="664.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="369.0" style="-fx-background-color: #96C549; -fx-background-radius: 50;" text="Salir y Cerrar Sesión" textFill="WHITE">
+      <Button fx:id="atras" layoutX="315.0" layoutY="664.0" mnemonicParsing="false" onAction="#atras" prefHeight="25.0" prefWidth="369.0" style="-fx-background-color: #96C549; -fx-background-radius: 50;" text="Salir y Cerrar Sesión" textFill="WHITE">
          <font>
             <Font name="Segoe UI Black" size="26.0" />
          </font>

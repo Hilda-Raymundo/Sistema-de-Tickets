@@ -14,8 +14,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1" fx:controller="sistemadetickets.CrearTicketController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sistemadetickets.CrearTicketController">
    <children>
       <AnchorPane id="AnchorPane" prefHeight="750.0" prefWidth="1000.0">
          <children>
@@ -68,7 +67,7 @@
                   <Font name="Segoe UI Black" size="27.0" />
                </font>
             </Label>
-            <Button layoutX="843.0" layoutY="704.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="142.0" style="-fx-background-color: #96C549; -fx-background-radius: 50;" text="Crear">
+            <Button fx:id="crear" layoutX="843.0" layoutY="704.0" mnemonicParsing="false" onAction="#crear" prefHeight="26.0" prefWidth="142.0" style="-fx-background-color: #96C549; -fx-background-radius: 50;" text="Crear">
                <font>
                   <Font name="Segoe UI Black" size="15.0" />
                </font>
@@ -76,7 +75,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button layoutX="691.0" layoutY="704.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="142.0" style="-fx-background-color: red; -fx-background-radius: 50;" text="Cancelar">
+            <Button fx:id="cancelar" layoutX="691.0" layoutY="704.0" mnemonicParsing="false" onAction="#cancelar" prefHeight="26.0" prefWidth="142.0" style="-fx-background-color: red; -fx-background-radius: 50;" text="Cancelar">
                <font>
                   <Font name="Segoe UI Black" size="15.0" />
                </font>

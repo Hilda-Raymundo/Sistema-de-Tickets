@@ -25,7 +25,7 @@ public class SistemaDeTickets extends Application {
     
     @Override
     public void start(Stage formulario) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("Admin.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("Usuario.fxml"));
         formulario.setTitle("Login");
         formulario.setScene(new Scene(root));
         formulario.show();

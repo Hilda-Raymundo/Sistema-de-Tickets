@@ -4,8 +4,10 @@
  */
 package sistemadetickets;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javax.swing.JOptionPane;
 
@@ -14,28 +16,29 @@ import javax.swing.JOptionPane;
  *
  * @author hraym
  */
-public class ModificarEstadoController implements Initializable {
+public class AgregarNotaController implements Initializable {
 
     /**
      * Initializes the controller class.
      */
     
-    public javafx.scene.control.Button atras;
-    public javafx.scene.control.Button modificar;
-    
     AbrirVentana abrir = new AbrirVentana();
     CerrarVentana cerrar = new CerrarVentana();
     
-    public void atras() throws Exception{
+    public javafx.scene.control.Button atras;
+    public javafx.scene.control.Button agregarNota;
+        
+    @FXML
+    private void atras() throws IOException{
+        abrir.abrirVentana("Login.fxml");
         cerrar.cerrar(atras);
-        abrir.abrirVentana("GestionarTicket.fxml");
     }
     
-    public void modificar() throws Exception{
-        JOptionPane.showMessageDialog(null, "Se modificó el estado exitosamente");
-        cerrar.cerrar(modificar);
-        abrir.abrirVentana("GestionarTicket.fxml");
-        abrir.abrirVentana("TicketsPendientes.fxml");
+    @FXML
+    private void agregarNota() throws IOException{
+        JOptionPane.showMessageDialog(null, "Se agregó la nota exitosamente");
+        abrir.abrirVentana("Login.fxml");
+        cerrar.cerrar(agregarNota);
     }
     
     @Override

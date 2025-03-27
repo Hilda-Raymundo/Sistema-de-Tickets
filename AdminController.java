@@ -30,6 +30,12 @@ public class AdminController implements Initializable {
     CerrarVentana cerrar = new CerrarVentana();
     
     public javafx.scene.control.Button configuracionDelSistema;
+    public javafx.scene.control.Button abrirGestionRolesPermisos;
+    public javafx.scene.control.Button abrirGestionDepartamento;
+    public javafx.scene.control.Button abrirGestionUsuarios;
+    public javafx.scene.control.Button abrirGestionEstadosTicket;
+    public javafx.scene.control.Button abrirGestionFlujosDeTrabajo;
+    public javafx.scene.control.Button abrirGestionDeTicket;
         
     @FXML
     private void abrirConfiguracionDelSistema() throws IOException{
@@ -40,37 +46,37 @@ public class AdminController implements Initializable {
     @FXML
     private void abrirGestionRolesPermisos() throws IOException{
         abrir.abrirVentana("GestionRolesPermisos.fxml");
-        cerrar.cerrar(configuracionDelSistema);
+        cerrar.cerrar(abrirGestionRolesPermisos);
     }
     
     @FXML
     private void abrirGestionDepartamento() throws IOException{
         abrir.abrirVentana("GestionDepartamento.fxml");
-        cerrar.cerrar(configuracionDelSistema);
+        cerrar.cerrar(abrirGestionDepartamento);
     }
     
     @FXML
     private void abrirGestionUsuarios() throws IOException{
         abrir.abrirVentana("GestionUsuarios.fxml");
-        cerrar.cerrar(configuracionDelSistema);
+        cerrar.cerrar(abrirGestionUsuarios);
     }
     
     @FXML
     private void abrirGestionEstadosTicket() throws IOException{
         abrir.abrirVentana("GestionEstadosTicket.fxml");
-        cerrar.cerrar(configuracionDelSistema);
+        cerrar.cerrar(abrirGestionEstadosTicket);
     }
     
     @FXML
     private void abrirGestionFlujosDeTrabajo() throws IOException{
         abrir.abrirVentana("GestionFlujosDeTrabajo.fxml");
-        cerrar.cerrar(configuracionDelSistema);
+        cerrar.cerrar(abrirGestionFlujosDeTrabajo);
     }
     
     @FXML
-    private void abrirGestionTicket() throws IOException{
+    private void abrirGestionDeTicket() throws IOException{
         abrir.abrirVentana("GestionarTicket.fxml");
-        cerrar.cerrar(configuracionDelSistema);
+        cerrar.cerrar(abrirGestionDeTicket);
     }
     
     @Override

@@ -12,8 +12,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1" fx:controller="sistemadetickets.SolicitudCancelacionTicketController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sistemadetickets.SolicitudCancelacionTicketController">
    <children>
       <AnchorPane id="AnchorPane" layoutX="10.0" layoutY="10.0" prefHeight="645.0" prefWidth="1000.0">
          <children>
@@ -53,7 +52,7 @@
                   <Font name="Segoe UI Black" size="27.0" />
                </font>
             </Label>
-            <Button layoutX="787.0" layoutY="572.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="198.0" style="-fx-background-color: #96C549; -fx-background-radius: 50;" text="Solicitar Cancelación">
+            <Button fx:id="solicitarCancelacion" layoutX="787.0" layoutY="572.0" mnemonicParsing="false" onAction="#solicitarCancelacion" prefHeight="31.0" prefWidth="198.0" style="-fx-background-color: #96C549; -fx-background-radius: 50;" text="Solicitar Cancelación">
                <font>
                   <Font name="Segoe UI Black" size="15.0" />
                </font>
@@ -61,7 +60,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button layoutX="635.0" layoutY="572.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="142.0" style="-fx-background-color: red; -fx-background-radius: 50;" text="Cancelar">
+            <Button fx:id="atras" layoutX="635.0" layoutY="572.0" mnemonicParsing="false" onAction="#atras" prefHeight="26.0" prefWidth="142.0" style="-fx-background-color: red; -fx-background-radius: 50;" text="Salir">
                <font>
                   <Font name="Segoe UI Black" size="15.0" />
                </font>
