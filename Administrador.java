@@ -12,7 +12,7 @@ public class Administrador extends Persona{
     
     public Administrador(String nombreCompleto, String correo, String nombreUsuario, String contrasenia, String rol, String estado) {
         super(nombreCompleto, correo, nombreUsuario, contrasenia, rol, estado);
-    }
+    }    
     
     public void establecerParametrosSistema(){
     

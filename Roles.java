@@ -4,6 +4,8 @@
  */
 package sistemadetickets;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author hraym
@@ -11,7 +13,34 @@ package sistemadetickets;
 public class Roles extends ParametrosSistema{
     
     private String[] permisosAsignados;
+    private boolean vacio = true;
 
+    public String[] getPermisosAsignados() {
+        return permisosAsignados;
+    }
+
+    public void setPermisosAsignados(String[] permisosAsignados) {
+        for(int i=0; i<= permisosAsignados.length; i++){
+            if(vacio==true){
+                if(permisosAsignados[i].equals("")){
+                    vacio = true;
+                }else{
+                    vacio = false;
+                }
+            }
+            this.permisosAsignados[i] = permisosAsignados[i];
+        }
+        
+        if(vacio==true){
+            JOptionPane.showMessageDialog(null, "El campo ROLES ASIGNADOS está vacío");
+            for(int i = 0; i<permisosAsignados.length;i++){
+                this.permisosAsignados[i] =  "";
+            }
+        }else{
+            vacio = true;
+        }
+    }
+    
     public Roles(String identificador, String nombre, String descripcion) {
         super(identificador, nombre, descripcion);
     }

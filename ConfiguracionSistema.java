@@ -50,7 +50,11 @@ public class ConfiguracionSistema {
     }
 
     public void setIdioma(String idioma) {
-        this.idioma = idioma;
+        if(idioma.equals("")){
+            JOptionPane.showMessageDialog(null, "El camp IDIOMA está vacío");
+        }else{
+            this.idioma = idioma;
+        }
     }
 
     public String getZonaHoraria() {
@@ -58,7 +62,11 @@ public class ConfiguracionSistema {
     }
 
     public void setZonaHoraria(String zonaHoraria) {
-        this.zonaHoraria = zonaHoraria;
+        if(zonaHoraria.equals("")){
+            JOptionPane.showMessageDialog(null, "El campo ZONA HORARIA está vacío");
+        }else{
+            this.zonaHoraria = zonaHoraria;
+        }
     }
 
     public int getTiempoVencimientoTicketsInactivos() {

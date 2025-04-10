@@ -4,6 +4,8 @@
  */
 package sistemadetickets;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author hraym
@@ -19,7 +21,43 @@ public class ParametrosSistema {
         this.nombre = nombre;
         this.descripcion = descripcion;
     }
-    
+
+    public String getIdentificador() {
+        return identificador;
+    }
+
+    public void setIdentificador(String identificador) {
+        if(identificador.equals("")){
+            System.out.println("El identificador es invalido");
+        }else{
+            this.identificador = identificador;
+        }
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        if(nombre.equals("")){
+            JOptionPane.showMessageDialog(null, "El campo NOMBRE está vacío");
+        }else{
+            this.nombre = nombre;
+        }
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        if(descripcion.equals("")){
+            JOptionPane.showMessageDialog(null, "El campo DESCRIPCION está vacío");
+        }else{
+            this.descripcion = descripcion;
+        }
+    }
+        
     public void consultarTickets(){
         
     }

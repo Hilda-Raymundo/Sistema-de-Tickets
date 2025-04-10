@@ -4,6 +4,8 @@
  */
 package sistemadetickets;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author hraym
@@ -11,7 +13,19 @@ package sistemadetickets;
 public class Tecnicos extends Persona{
     
     private String departamento;
-    
+
+    public String getDepartamento() {
+        return departamento;
+    }
+
+    public void setDepartamento(String departamento) {
+        if(departamento.equals("")){
+            JOptionPane.showMessageDialog(null, "El campo DEPARTAMENTO está vacío");
+        }else{
+            this.departamento = departamento;
+        }
+    }
+        
     public Tecnicos(String nombreCompleto, String correo, String nombreUsuario, String contrasenia, String rol, String estado) {
         super(nombreCompleto, correo, nombreUsuario, contrasenia, rol, estado);
     }
