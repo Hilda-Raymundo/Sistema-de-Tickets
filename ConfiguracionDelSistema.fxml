@@ -20,14 +20,14 @@
                <children>
                   <Pane layoutX="22.0" layoutY="24.0" prefHeight="582.0" prefWidth="254.0" />
                   <Label layoutX="325.0" layoutY="24.0" text="Parámetros" />
-                  <TextField layoutX="325.0" layoutY="79.0" prefHeight="25.0" prefWidth="239.0" style="-fx-background-color: none; -fx-border-color: green;">
+                  <TextField fx:id="nombreEmpresa" layoutX="325.0" layoutY="79.0" prefHeight="25.0" prefWidth="239.0" style="-fx-background-color: none; -fx-border-color: green;">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </TextField>
                   <Label layoutX="325.0" layoutY="62.0" text="Nombre Empresa" />
                   <Label layoutX="325.0" layoutY="127.0" text="Logo Empresa" />
-                  <Button layoutX="410.0" layoutY="123.0" mnemonicParsing="false" style="-fx-background-color: #96C549; -fx-background-radius: 50;" text="Cargar Imagen" textFill="WHITE">
+                  <Button layoutX="410.0" layoutY="123.0" mnemonicParsing="false" onAction="#cargarLogo" style="-fx-background-color: #96C549; -fx-background-radius: 50;" text="Cargar Imagen" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
@@ -37,33 +37,33 @@
                   </Button>
                   <Pane layoutX="325.0" layoutY="160.0" prefHeight="155.0" prefWidth="200.0" style="-fx-border-color: green;">
                      <children>
-                        <ImageView fitHeight="128.0" fitWidth="175.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="logo" fitHeight="128.0" fitWidth="175.0" layoutX="13.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
                      </children>
                   </Pane>
                   <Label layoutX="325.0" layoutY="327.0" text="Idioma" />
                   <Label layoutX="541.0" layoutY="327.0" text="Zona Horaria" />
-                  <ComboBox layoutX="325.0" layoutY="357.0" prefWidth="150.0">
+                  <ComboBox fx:id="idiomas" layoutX="325.0" layoutY="357.0" onMouseClicked="#comboBoxIdiomas" prefWidth="150.0">
                      <cursor>
                         <Cursor fx:constant="CLOSED_HAND" />
                      </cursor>
                   </ComboBox>
-                  <ComboBox layoutX="535.0" layoutY="357.0" prefWidth="150.0">
+                  <ComboBox fx:id="zonaHoraria" layoutX="535.0" layoutY="357.0" onMouseClicked="#comboBoxZonaHoraria" prefWidth="150.0">
                      <cursor>
                         <Cursor fx:constant="CLOSED_HAND" />
                      </cursor>
                   </ComboBox>
                   <Label layoutX="325.0" layoutY="397.0" prefHeight="17.0" prefWidth="184.0" text="Tiempo(días) vencimiento tickets" />
-                  <Spinner layoutX="326.0" layoutY="426.0">
+                  <Spinner fx:id="diasVencimiento" layoutX="326.0" layoutY="426.0">
                      <cursor>
                         <Cursor fx:constant="CLOSED_HAND" />
                      </cursor>
                   </Spinner>
                   <Label layoutX="325.0" layoutY="473.0" prefHeight="17.0" prefWidth="184.0" text="Niveles Prioridad" />
-                  <CheckBox layoutX="326.0" layoutY="500.0" mnemonicParsing="false" text="Baja" />
-                  <CheckBox layoutX="326.0" layoutY="528.0" mnemonicParsing="false" text="Media Baja" />
-                  <CheckBox layoutX="326.0" layoutY="558.0" mnemonicParsing="false" text="Media" />
-                  <CheckBox layoutX="326.0" layoutY="589.0" mnemonicParsing="false" text="Media Alta" />
-                  <CheckBox layoutX="326.0" layoutY="619.0" mnemonicParsing="false" text="Alta" />
+                  <CheckBox fx:id="nivel1" layoutX="326.0" layoutY="500.0" mnemonicParsing="false" text="Baja" />
+                  <CheckBox fx:id="nivel2" layoutX="326.0" layoutY="528.0" mnemonicParsing="false" text="Media Baja" />
+                  <CheckBox fx:id="nivel3" layoutX="326.0" layoutY="558.0" mnemonicParsing="false" text="Media" />
+                  <CheckBox fx:id="nivel4" layoutX="326.0" layoutY="589.0" mnemonicParsing="false" text="Media Alta" />
+                  <CheckBox fx:id="nivel5" layoutX="326.0" layoutY="619.0" mnemonicParsing="false" text="Alta" />
                   <Button fx:id="guardar" layoutX="653.0" layoutY="638.0" mnemonicParsing="false" onAction="#guardar" style="-fx-background-color: orange; -fx-background-radius: 50;" text="Guardar Configuración" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="12.0" />
@@ -72,7 +72,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Button fx:id="volver" layoutX="578.0" layoutY="638.0" mnemonicParsing="false" onAction="#cancelar" style="-fx-background-color: red; -fx-background-radius: 50;" text="Cancelar" textFill="WHITE">
+                  <Button fx:id="cancelar" layoutX="578.0" layoutY="638.0" mnemonicParsing="false" onAction="#cancelar" style="-fx-background-color: red; -fx-background-radius: 50;" text="Cancelar" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>

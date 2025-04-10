@@ -29,7 +29,7 @@
             </Pane>
             <Pane layoutX="223.0" layoutY="123.0" prefHeight="162.0" prefWidth="248.0" style="-fx-background-color: #e8f5db; -fx-background-radius: 20;">
                <children>
-                  <Button fx:id="configuracionDelSistema" layoutX="10.0" layoutY="123.0" mnemonicParsing="false" onAction="#abrirConfiguracionDelSistema" prefHeight="25.0" prefWidth="228.0" style="-fx-background-color: white; -fx-background-radius: 50;" text="Configuración del Sistema">
+                  <Button fx:id="configuracionDelSistema" layoutX="10.0" layoutY="123.0" mnemonicParsing="false" onAction="#configuracionDelSistema" prefHeight="25.0" prefWidth="228.0" style="-fx-background-color: white; -fx-background-radius: 50;" text="Configuración del Sistema">
                      <font>
                         <Font name="Segoe UI Black" size="13.0" />
                      </font>
@@ -46,7 +46,7 @@
             </ImageView>
             <Pane layoutX="480.0" layoutY="123.0" prefHeight="162.0" prefWidth="248.0" style="-fx-background-color: #ddeeb7; -fx-background-radius: 20;">
                <children>
-                  <Button fx:id="abrirGestionRolesPermisos" layoutX="10.0" layoutY="121.0" mnemonicParsing="false" onAction="#abrirGestionRolesPermisos" prefHeight="25.0" prefWidth="228.0" style="-fx-background-color: white; -fx-background-radius: 50;" text="Gestión de Roles y Permisos">
+                  <Button fx:id="gestionRolesPermisos" layoutX="10.0" layoutY="121.0" mnemonicParsing="false" onAction="#gestionRolesPermisos" prefHeight="25.0" prefWidth="228.0" style="-fx-background-color: white; -fx-background-radius: 50;" text="Gestión de Roles y Permisos">
                      <font>
                         <Font name="Segoe UI Black" size="13.0" />
                      </font>
@@ -58,7 +58,7 @@
             </Pane>
             <Pane layoutX="738.0" layoutY="123.0" prefHeight="162.0" prefWidth="248.0" style="-fx-background-color: #c8de96; -fx-background-radius: 20;">
                <children>
-                  <Button fx:id="abrirGestionDepartamento" layoutX="10.0" layoutY="121.0" mnemonicParsing="false" onAction="#abrirGestionDepartamento" prefHeight="25.0" prefWidth="228.0" style="-fx-background-color: white; -fx-background-radius: 50;" text="Gestión de Departamentos">
+                  <Button fx:id="gestionDepartamentos" layoutX="10.0" layoutY="121.0" mnemonicParsing="false" onAction="#gestionDepartamentos" prefHeight="25.0" prefWidth="228.0" style="-fx-background-color: white; -fx-background-radius: 50;" text="Gestión de Departamentos">
                      <font>
                         <Font name="Segoe UI Black" size="13.0" />
                      </font>
@@ -70,7 +70,7 @@
             </Pane>
             <Pane layoutX="223.0" layoutY="294.0" prefHeight="162.0" prefWidth="248.0" style="-fx-background-color: #9bb55e; -fx-background-radius: 20;">
                <children>
-                  <Button fx:id="abrirGestionUsuarios" layoutX="10.0" layoutY="121.0" mnemonicParsing="false" onAction="#abrirGestionUsuarios" prefHeight="25.0" prefWidth="228.0" style="-fx-background-color: white; -fx-background-radius: 50;" text="Gestión de usuarios">
+                  <Button fx:id="gestionUsuarios" layoutX="10.0" layoutY="121.0" mnemonicParsing="false" onAction="#gestionUsuarios" prefHeight="25.0" prefWidth="228.0" style="-fx-background-color: white; -fx-background-radius: 50;" text="Gestión de usuarios">
                      <font>
                         <Font name="Segoe UI Black" size="13.0" />
                      </font>
@@ -82,7 +82,7 @@
             </Pane>
             <Pane layoutX="480.0" layoutY="294.0" prefHeight="162.0" prefWidth="248.0" style="-fx-background-color: #728840; -fx-background-radius: 20;">
                <children>
-                  <Button fx:id="abrirGestionEstadosTicket" layoutX="10.0" layoutY="121.0" mnemonicParsing="false" onAction="#abrirGestionEstadosTicket" prefHeight="25.0" prefWidth="228.0" style="-fx-background-color: white; -fx-background-radius: 50;" text="Gestión de Estados de Ticket">
+                  <Button fx:id="gestionEstadosTicket" layoutX="10.0" layoutY="121.0" mnemonicParsing="false" onAction="#gestionEstadosTicket" prefHeight="25.0" prefWidth="228.0" style="-fx-background-color: white; -fx-background-radius: 50;" text="Gestión de Estados de Ticket">
                      <font>
                         <Font name="Segoe UI Black" size="13.0" />
                      </font>
@@ -94,7 +94,7 @@
             </Pane>
             <Pane layoutX="738.0" layoutY="294.0" prefHeight="162.0" prefWidth="248.0" style="-fx-background-color: #566820; -fx-background-radius: 20;">
                <children>
-                  <Button fx:id="abrirGestionFlujosDeTrabajo" layoutX="10.0" layoutY="121.0" mnemonicParsing="false" onAction="#abrirGestionFlujosDeTrabajo" prefHeight="25.0" prefWidth="228.0" style="-fx-background-color: white; -fx-background-radius: 50;" text="Gestión de Flujos de Trabajo">
+                  <Button fx:id="gestionFlujosTrabajo" layoutX="10.0" layoutY="121.0" mnemonicParsing="false" onAction="#gestionFlujosTrabajo" prefHeight="25.0" prefWidth="228.0" style="-fx-background-color: white; -fx-background-radius: 50;" text="Gestión de Flujos de Trabajo">
                      <font>
                         <Font name="Segoe UI Black" size="13.0" />
                      </font>
@@ -106,7 +106,7 @@
             </Pane>
             <Pane layoutX="223.0" layoutY="469.0" prefHeight="162.0" prefWidth="248.0" style="-fx-background-color: #3c5718; -fx-background-radius: 20;">
                <children>
-                  <Button fx:id="abrirGestionDeTicket" layoutX="10.0" layoutY="121.0" mnemonicParsing="false" onAction="#abrirGestionDeTicket" prefHeight="25.0" prefWidth="228.0" style="-fx-background-color: white; -fx-background-radius: 50;" text="Gestión de tickets">
+                  <Button fx:id="gestionTickets" layoutX="10.0" layoutY="121.0" mnemonicParsing="false" onAction="#gestionTickets" prefHeight="25.0" prefWidth="228.0" style="-fx-background-color: white; -fx-background-radius: 50;" text="Gestión de tickets">
                      <font>
                         <Font name="Segoe UI Black" size="13.0" />
                      </font>

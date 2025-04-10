@@ -44,7 +44,7 @@ public class UsuarioController implements Initializable {
     
     @FXML
     private void agregarNota() throws IOException{
-        abrir.abrirVentana("AgregarNota.fxml");
+        abrir.abrirVentana("Notas.fxml");
         cerrar.cerrar(agregarNota);
     }
     
@@ -56,7 +56,7 @@ public class UsuarioController implements Initializable {
     
     @FXML
     private void atras() throws IOException{
-        abrir.abrirVentana("Login.fxml");
+        abrir.abrirVentana("Principal.fxml");
         cerrar.cerrar(atras);
     }
     
