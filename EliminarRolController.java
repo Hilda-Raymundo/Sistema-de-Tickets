@@ -8,6 +8,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.*;
 import javax.swing.JOptionPane;
 
 /**
@@ -20,16 +21,15 @@ public class EliminarRolController implements Initializable {
     /**
      * Initializes the controller class.
      */
-    AbrirVentana abrir = new AbrirVentana();
-    CerrarVentana cerrar = new CerrarVentana();
-    
     public javafx.scene.control.Button eliminar;
+    public TextField rolSeleccionado;
+    public TextField nombreRol;
+    public TextArea descripcionRol;
     
     @FXML
     public void eliminarRol() throws Exception{
-        JOptionPane.showMessageDialog(null, "Se eliminó el Rol exitosamente");
-        cerrar.cerrar(eliminar);
-        abrir.abrirVentana("GestionRolesPermisos.fxml");
+        Administrador admin = new Administrador("", "", "", "", "", "");
+        admin.eliminarRoles(eliminar, rolSeleccionado.getText());
     }
     
     @Override

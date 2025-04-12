@@ -10,7 +10,7 @@ import javax.swing.JOptionPane;
  *
  * @author hraym
  */
-public class ParametrosSistema {
+abstract class ParametrosSistema extends OperacionesVentana{
     
     private String identificador;
     private String nombre;
@@ -58,8 +58,6 @@ public class ParametrosSistema {
         }
     }
         
-    public void consultarTickets(){
-        
-    }
-    
+    public abstract void consultarTickets();
+   
 }

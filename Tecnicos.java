@@ -50,4 +50,9 @@ public class Tecnicos extends Persona{
         
     }
     
+    @Override
+    public void consultarTickets(){
+        
+    }
+    
 }

@@ -4,10 +4,12 @@
  */
 package sistemadetickets;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.*;
 import javax.swing.JOptionPane;
 
 /**
@@ -20,32 +22,29 @@ public class GestionarPermisoController implements Initializable {
     /**
      * Initializes the controller class.
      */
-    AbrirVentana abrir = new AbrirVentana();
-    CerrarVentana cerrar = new CerrarVentana();
     
     public javafx.scene.control.Button crearPermiso;
     public javafx.scene.control.Button modificarPermiso;
     public javafx.scene.control.Button eliminarPermiso;
+    public TextField nombrePermisoSeleccionado;
+    public TextField nombrePermiso;
+    public TextArea descripcionPermiso;
+    
+    Administrador admin = new Administrador("", "", "", "", "", "");
     
     @FXML
-    public void crearPermiso() throws Exception{
-        JOptionPane.showMessageDialog(null, "Se creó el permiso exitosamente");
-        cerrar.cerrar(crearPermiso);
-        abrir.abrirVentana("GestionRolesPermisos.fxml");
+    public void crearPermiso() throws IOException{
+        admin.crearPermisos(crearPermiso, nombrePermiso.getText(), descripcionPermiso.getText());
     }
     
     @FXML
     public void modificarPermiso() throws Exception{
-        JOptionPane.showMessageDialog(null, "Se modificó el permiso exitosamente");
-        cerrar.cerrar(modificarPermiso);
-        abrir.abrirVentana("GestionRolesPermisos.fxml");
+        admin.modificarPermisos(modificarPermiso, descripcionPermiso.getText());
     }
     
     @FXML
     public void eliminarPermiso() throws Exception{
-        JOptionPane.showMessageDialog(null, "Se eliminó el permiso exitosamente");
-        cerrar.cerrar(eliminarPermiso);
-        abrir.abrirVentana("GestionRolesPermisos.fxml");
+        admin.eliminarPermisos(eliminarPermiso, nombrePermisoSeleccionado.getText());
     }
     
     @Override

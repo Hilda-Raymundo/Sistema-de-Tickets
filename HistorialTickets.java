@@ -32,4 +32,9 @@ public class HistorialTickets extends Historial{
         this.numeroTicket = numeroTicket;
     }   
     
+    @Override
+    public void mostrarHistorial(){
+    
+    }
+    
 }

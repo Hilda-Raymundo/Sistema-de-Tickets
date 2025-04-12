@@ -4,11 +4,17 @@
  */
 package sistemadetickets;
 
+import java.io.IOException;
+import javafx.scene.control.Button;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author hraym
  */
 public class Administrador extends Persona{
+    
+    private Roles parametros = new Roles("", "", "");
     
     public Administrador(String nombreCompleto, String correo, String nombreUsuario, String contrasenia, String rol, String estado) {
         super(nombreCompleto, correo, nombreUsuario, contrasenia, rol, estado);
@@ -22,16 +28,35 @@ public class Administrador extends Persona{
     
     }
     
-    public void crearRoles(){
-    
+    public void crearRoles(Button cerrar, String nombre, String descripcion) throws IOException{
+        parametros.setNombre(nombre);
+        parametros.setDescripcion(descripcion);
+        if(nombre.equals("") || descripcion.equals("")){
+        }else{
+        JOptionPane.showMessageDialog(null, "¡Creación exitosa!");
+        cerrar(cerrar);
+        abrirVentana("GestionRolesPermisos.fxml");
+        }
     }
     
-    public void modificarRoles(){
-    
+    public void modificarRoles(Button modificar, String descripcion) throws IOException{
+        parametros.setDescripcion(descripcion);
+        if(descripcion.equals("")){
+        }else{
+        JOptionPane.showMessageDialog(null, "¡Modificación exitosa!");
+        cerrar(modificar);
+        abrirVentana("GestionRolesPermisos.fxml");
+        }
     }
     
-    public void eliminarRoles(){
-    
+    public void eliminarRoles(Button modificar, String rolSeleccionado) throws IOException{
+        if(rolSeleccionado.equals("")){
+            JOptionPane.showMessageDialog(null, "El campo ROL está vacío");
+        }else{
+        JOptionPane.showMessageDialog(null, "¡Eliminación exitosa!");
+        cerrar(modificar);
+        abrirVentana("GestionRolesPermisos.fxml");
+        }
     }
     
     public void consultarRoles(){
@@ -42,16 +67,35 @@ public class Administrador extends Persona{
     
     }
     
-    public void crearPermisos(){
-    
+    public void crearPermisos(Button cerrar, String nombrePermiso, String descripcionPermiso) throws IOException{
+        parametros.setNombre(nombrePermiso);
+        parametros.setDescripcion(descripcionPermiso);
+        if(nombrePermiso.equals("") || descripcionPermiso.equals("")){
+        }else{
+        JOptionPane.showMessageDialog(null, "¡Creación exitosa!");
+        cerrar(cerrar);
+        abrirVentana("GestionRolesPermisos.fxml");
+        }
     }
     
-    public void modificarPermisos(){
-    
+    public void modificarPermisos(Button modificar, String descripcionPermiso) throws IOException{
+        parametros.setDescripcion(descripcionPermiso);
+        if(descripcionPermiso.equals("")){
+        }else{
+            JOptionPane.showMessageDialog(null, "¡Modificación Exitosa!");
+            cerrar(modificar);
+            abrirVentana("GestionRolesPermisos.fxml");
+        }
     }
     
-    public void eliminarPermisos(){
-    
+    public void eliminarPermisos(Button eliminar, String permisoSeleccionado) throws IOException{
+        if(permisoSeleccionado.equals("")){
+            JOptionPane.showMessageDialog(null, "El campo PERMISO está vacío");
+        }else{
+            JOptionPane.showMessageDialog(null, "¡Eliminación Exitosa!");
+            cerrar(eliminar);
+            abrirVentana("GestionRolesPermisos.fxml");
+        }
     }
     
     public void asignarPermisos(){
@@ -114,15 +158,22 @@ public class Administrador extends Persona{
     
     }
     
-    public void crearDepartamento(){
+    public void crearDepartamento(Button cerrar, String nombreDepartamento, String descripcionDepartamento) throws IOException{
+        parametros.setNombre(nombreDepartamento);
+        parametros.setDescripcion(descripcionDepartamento);
+        if(nombreDepartamento.equals("") || descripcionDepartamento.equals("")){
+        }else{
+            JOptionPane.showMessageDialog(null, "¡Creación Exitosa!");
+            cerrar(cerrar);
+            abrirVentana("GestionDepartamento.fxml");
+        }
+    }
+    
+    public void modificarDepartamento(Button cerrar, String descripcionDepartamento){
     
     }
     
-    public void modificarDepartamento(){
-    
-    }
-    
-    public void eliminarDepartamento(){
+    public void eliminarDepartamento(Button cerrar, String nombreDepartamentoSeleccionado){
     
     }
     
@@ -164,6 +215,11 @@ public class Administrador extends Persona{
     
     public void consultarEstado(){
     
+    }
+    
+    @Override
+    public void consultarTickets(){
+        
     }
     
 }

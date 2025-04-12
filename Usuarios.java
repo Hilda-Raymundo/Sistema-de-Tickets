@@ -22,4 +22,9 @@ public class Usuarios extends Persona{
     
     }
     
+    @Override
+    public void consultarTickets(){
+        
+    }
+    
 }

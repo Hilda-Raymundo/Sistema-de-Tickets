@@ -10,7 +10,7 @@ import javax.swing.JOptionPane;
  *
  * @author hraym
  */
-public class Persona {
+abstract class Persona extends OperacionesVentana{
     
     private String nombreCompleto;
     private String correo;
@@ -100,9 +100,7 @@ public class Persona {
         }
     }
         
-    public void consultarTickets(){
-        
-    }
+    public abstract void consultarTickets();
     
     public void agregarNota(){
     

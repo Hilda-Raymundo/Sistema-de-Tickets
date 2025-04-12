@@ -32,13 +32,13 @@
               </columns>
             </TableView>
             <Label layoutX="441.0" layoutY="55.0" text="Nombre:" />
-            <TextField layoutX="441.0" layoutY="79.0" prefHeight="31.0" prefWidth="297.0">
+            <TextField fx:id="nombreRol" layoutX="441.0" layoutY="79.0" prefHeight="31.0" prefWidth="297.0">
                <font>
                   <Font size="15.0" />
                </font>
             </TextField>
             <Label layoutX="441.0" layoutY="123.0" text="Descripción:" />
-            <TextArea layoutX="441.0" layoutY="140.0" prefHeight="107.0" prefWidth="297.0" />
+            <TextArea fx:id="descripcionRol" layoutX="441.0" layoutY="140.0" prefHeight="107.0" prefWidth="297.0" />
             <Button fx:id="crear" layoutX="612.0" layoutY="345.0" mnemonicParsing="false" onAction="#crearRol" prefHeight="30.0" prefWidth="126.0" style="-fx-background-color: orange; -fx-background-radius: 50;" text="Crear">
                <font>
                   <Font name="System Bold" size="14.0" />

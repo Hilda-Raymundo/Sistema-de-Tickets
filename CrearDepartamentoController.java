@@ -8,6 +8,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.*;
 import javax.swing.JOptionPane;
 
 /**
@@ -21,16 +22,14 @@ public class CrearDepartamentoController implements Initializable {
      * Initializes the controller class.
      */
     
-    AbrirVentana abrir = new AbrirVentana();
-    CerrarVentana cerrar = new CerrarVentana();
-    
     public javafx.scene.control.Button crearDepartamento;
+    public TextField nombreDepartamento;
+    public TextArea descripcionDepartamento;
     
     @FXML
     public void crearDepartamento() throws Exception{
-        JOptionPane.showMessageDialog(null, "Se creó el departamento exitosamente");
-        cerrar.cerrar(crearDepartamento);
-        abrir.abrirVentana("GestionDepartamento.fxml");
+        Administrador admin = new Administrador("", "", "", "", "", "");
+        admin.crearDepartamento(crearDepartamento, nombreDepartamento.getText(), descripcionDepartamento.getText());
     }
     
     @Override

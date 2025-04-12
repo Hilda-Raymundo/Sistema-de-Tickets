@@ -32,7 +32,7 @@
                   <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-            <Button layoutX="339.0" layoutY="327.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="198.0" style="-fx-background-color: #96C549; -fx-background-radius: 50;" text="LOGIN" textFill="WHITE">
+            <Button fx:id="loguearse" layoutX="339.0" layoutY="327.0" mnemonicParsing="false" onMouseClicked="#login" prefHeight="37.0" prefWidth="198.0" style="-fx-background-color: #96C549; -fx-background-radius: 50;" text="LOGIN" textFill="WHITE">
                <font>
                   <Font name="Segoe UI Black" size="21.0" />
                </font>
@@ -42,12 +42,12 @@
             </Button>
             <Text layoutX="309.0" layoutY="139.0" strokeType="OUTSIDE" strokeWidth="0.0" text="_________________________________________________" wrappingWidth="258.39996337890625" />
             <Text layoutX="308.0" layoutY="240.0" strokeType="OUTSIDE" strokeWidth="0.0" text="_________________________________________________" wrappingWidth="258.39996337890625" />
-            <TextField layoutX="309.0" layoutY="95.0" prefHeight="25.0" prefWidth="240.0" style="-fx-border-style: none;">
+            <TextField fx:id="usuario" layoutX="309.0" layoutY="95.0" prefHeight="25.0" prefWidth="240.0" style="-fx-border-style: none;">
                <font>
                   <Font size="18.0" />
                </font>
             </TextField>
-            <TextField layoutX="309.0" layoutY="196.0" prefHeight="25.0" prefWidth="240.0">
+            <TextField fx:id="password" layoutX="309.0" layoutY="196.0" prefHeight="25.0" prefWidth="240.0">
                <font>
                   <Font size="18.0" />
                </font>

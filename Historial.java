@@ -11,7 +11,7 @@ import javax.swing.JOptionPane;
  *
  * @author hraym
  */
-public class Historial {
+abstract class Historial {
     
     private int numeroModificacion;
     private Date fechaModificacion;
@@ -69,8 +69,6 @@ public class Historial {
         }
     }
         
-    public void mostrarHistorial(){
-    
-    }
+    public abstract void mostrarHistorial();
     
 }

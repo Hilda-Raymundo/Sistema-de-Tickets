@@ -32,13 +32,13 @@
                </columns>
             </TableView>
             <Label layoutX="400.0" layoutY="53.0" text="Nombre:" />
-            <TextField layoutX="400.0" layoutY="79.0" prefHeight="31.0" prefWidth="297.0">
+            <TextField fx:id="nombreRol" layoutX="400.0" layoutY="79.0" prefHeight="31.0" prefWidth="297.0">
                <font>
                   <Font size="15.0" />
                </font>
             </TextField>
             <Label layoutX="398.0" layoutY="123.0" text="Descripción:" />
-            <TextArea layoutX="400.0" layoutY="140.0" prefHeight="107.0" prefWidth="297.0">
+            <TextArea fx:id="descripcionRol" layoutX="400.0" layoutY="140.0" prefHeight="107.0" prefWidth="297.0">
                <font>
                   <Font size="15.0" />
                </font>
@@ -51,7 +51,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <TextField layoutX="122.0" layoutY="22.0" prefHeight="25.0" prefWidth="230.0">
+            <TextField fx:id="rolSeleccionado" layoutX="122.0" layoutY="22.0" prefHeight="25.0" prefWidth="230.0">
                <font>
                   <Font size="15.0" />
                </font>

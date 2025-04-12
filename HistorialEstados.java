@@ -16,4 +16,9 @@ public class HistorialEstados extends Historial{
         super(numeroModificacion, fechaModificacion, usuario, descripcion);
     }
     
+    @Override
+    public void mostrarHistorial(){
+    
+    }
+    
 }

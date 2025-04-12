@@ -41,13 +41,16 @@ public class Permisos extends ParametrosSistema{
         }
     }
     
-    
-
     public Permisos(String identificador, String nombre, String descripcion) {
         super(identificador, nombre, descripcion);
     }
     
     public void asignarRoles(){
+    
+    }
+    
+    @Override
+    public void consultarTickets(){
     
     }
     

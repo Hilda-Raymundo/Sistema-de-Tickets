@@ -58,4 +58,9 @@ public class Estados extends ParametrosSistema{
         super(identificador, nombre, descripcion);
     }
     
+    @Override
+    public void consultarTickets(){
+    
+    }
+    
 }

@@ -74,4 +74,9 @@ public class Departamentos extends ParametrosSistema{
     public void crearColaAtencion(){
         
     }
+    
+    @Override
+    public void consultarTickets(){
+    
+    }
 }

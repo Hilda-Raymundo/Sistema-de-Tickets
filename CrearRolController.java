@@ -7,7 +7,7 @@ package sistemadetickets;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.Initializable;
-import javax.swing.JOptionPane;
+import javafx.scene.control.*;
 
 /**
  * FXML Controller class
@@ -18,15 +18,14 @@ public class CrearRolController implements Initializable {
 
     /**
      * Initializes the controller class.
-     */
-    AbrirVentana abrir = new AbrirVentana();
-    CerrarVentana cerrar = new CerrarVentana();
+     */    
     public javafx.scene.control.Button crear;
+    public TextField nombreRol;
+    public TextArea descripcionRol;
     
     public void crearRol() throws Exception{
-        JOptionPane.showMessageDialog(null, "Se creó el Rol exitosamente");
-        cerrar.cerrar(crear);
-        abrir.abrirVentana("GestionRolesPermisos.fxml");
+        Administrador admin = new Administrador("", "", "", "", "", "");
+        admin.crearRoles(crear, nombreRol.getText(), descripcionRol.getText());
     }
     
     @Override

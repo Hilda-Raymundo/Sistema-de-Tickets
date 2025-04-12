@@ -4,6 +4,8 @@
  */
 package sistemadetickets;
 
+import java.io.IOException;
+import javafx.scene.control.Button;
 import javax.swing.JOptionPane;
 
 /**
@@ -50,6 +52,11 @@ public class Roles extends ParametrosSistema{
     }
     
     public void asignarPermiso(){
+    
+    }
+    
+    @Override
+    public void consultarTickets(){
     
     }
     
