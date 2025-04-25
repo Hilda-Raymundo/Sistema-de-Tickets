@@ -4,9 +4,8 @@
  */
 package sistemadetickets;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.beans.Statement;
+import java.sql.*;
 
 /**
  *
@@ -15,7 +14,7 @@ import java.sql.SQLException;
 public class conection {
  
     public static boolean probarConexion() {
-        // Datos de conexión a Neon PostgreSQL (reemplazar con los datos correctos)
+        // Datos de conexión a Neon PostgreSQL
         String url = "jdbc:postgresql://ep-summer-bar-a4h60bj0-pooler.us-east-1.aws.neon.tech/sistema_tickets?sslmode=require";
         String user = "sistema_tickets_owner";
         String pass = "npg_sjqrm9zFRP0f";
@@ -29,5 +28,4 @@ public class conection {
             return false;
         }
     }
-    
 }
