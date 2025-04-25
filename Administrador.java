@@ -169,12 +169,26 @@ public class Administrador extends Persona{
         }
     }
     
-    public void modificarDepartamento(Button cerrar, String descripcionDepartamento){
-    
+    public void modificarDepartamento(Button cerrar, String departamentoSeleccionado,String nombreDepartamento,String descripcionDepartamento) throws IOException{
+        parametros.setNombre(nombreDepartamento);
+        parametros.setDescripcion(descripcionDepartamento);
+        if(nombreDepartamento.equals("") || descripcionDepartamento.equals("")){
+        }else{
+            JOptionPane.showMessageDialog(null, "Se modificó el departamento exitosamente");
+            cerrar(cerrar);
+            abrirVentana("GestionDepartamento.fxml");
+        }
     }
     
-    public void eliminarDepartamento(Button cerrar, String nombreDepartamentoSeleccionado){
-    
+    public void eliminarDepartamento(Button cerrar, String nombreDepartamentoSeleccionado) throws IOException{
+        parametros.setNombre(nombreDepartamentoSeleccionado);
+        if(nombreDepartamentoSeleccionado.equals("")){
+        
+        }else{
+            JOptionPane.showMessageDialog(null, "Se eliminó el departamento exitosamente");
+            cerrar(cerrar);
+            abrirVentana("GestionDepartamento.fxml");
+        }        
     }
     
     public void consultarDepartamentos(){

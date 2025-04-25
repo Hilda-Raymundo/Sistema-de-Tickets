@@ -8,7 +8,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javax.swing.JOptionPane;
+import javafx.scene.control.*;
 
 /**
  * FXML Controller class
@@ -20,16 +20,15 @@ public class EliminarDepartamentoController implements Initializable {
     /**
      * Initializes the controller class.
      */
-    AbrirVentana abrir = new AbrirVentana();
-    CerrarVentana cerrar = new CerrarVentana();
-    
+    public TextField departamentoSeleccionado;
+    public TextField nombreDepartamento;
+    public TextArea descripcionDepartamento;
     public javafx.scene.control.Button eliminarDepartamento;
     
     @FXML
     public void eliminarDepartamento() throws Exception{
-        JOptionPane.showMessageDialog(null, "Se eliminó el departamento exitosamente");
-        cerrar.cerrar(eliminarDepartamento);
-        abrir.abrirVentana("GestionDepartamento.fxml");
+        Administrador admin = new Administrador("", "", "", "", "", "");
+        admin.eliminarDepartamento(eliminarDepartamento, departamentoSeleccionado.getText());        
     }
     @Override
     public void initialize(URL url, ResourceBundle rb) {

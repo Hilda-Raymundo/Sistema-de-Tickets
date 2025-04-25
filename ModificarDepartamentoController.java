@@ -8,7 +8,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javax.swing.JOptionPane;
+import javafx.scene.control.*;
 
 /**
  * FXML Controller class
@@ -20,16 +20,15 @@ public class ModificarDepartamentoController implements Initializable {
     /**
      * Initializes the controller class.
      */
-    AbrirVentana abrir = new AbrirVentana();
-    CerrarVentana cerrar = new CerrarVentana();
-    
+    public TextField departamentoSeleccionado;
+    public TextField nombreDepartamento;
+    public TextArea descripcionDepartamento;
     public javafx.scene.control.Button modificarDepartamento;
     
     @FXML
     public void modificarDepartamento() throws Exception{
-        JOptionPane.showMessageDialog(null, "Se modificó el departamento exitosamente");
-        cerrar.cerrar(modificarDepartamento);
-        abrir.abrirVentana("GestionDepartamento.fxml");
+        Administrador admin = new Administrador("", "", "", "", "", "");
+        admin.modificarDepartamento(modificarDepartamento, departamentoSeleccionado.getText(), nombreDepartamento.getText(), descripcionDepartamento.getText());        
     }
     
     @Override

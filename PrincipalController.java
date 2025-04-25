@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javax.swing.JOptionPane;
@@ -42,6 +43,10 @@ public class PrincipalController implements Initializable {
                         cerrar.cerrar(loguearse);
                         i = usuarios.length +1;
                         usuarioEncontrado=true;
+                        boolean conectado = conection.probarConexion();
+                         Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setContentText(conectado ? "¡Conectado a Neon PostgreSQL!" : "Error de conexión.");
+                        alert.showAndWait();
                     }else if(roles[i].equals("tecnico")){   
                         JOptionPane.showMessageDialog(null, "Bienvenido Tecnico!");
                         abrir.abrirVentana("Tecnico.fxml");
