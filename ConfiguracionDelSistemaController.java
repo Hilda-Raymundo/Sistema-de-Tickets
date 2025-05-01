@@ -4,10 +4,14 @@
  */
 package sistemadetickets;
 
+import java.sql.ResultSet;
+import java.sql.PreparedStatement;
 import java.awt.image.BufferedImage;
+import java.beans.Statement;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
@@ -33,6 +37,7 @@ public class ConfiguracionDelSistemaController implements Initializable {
     AbrirVentana abrir = new AbrirVentana();
     CerrarVentana cerrar = new CerrarVentana();
     
+    private String sql;
     public javafx.scene.control.Button cancelar;
     public javafx.scene.control.Button guardar;
     public TextField nombreEmpresa;
@@ -63,9 +68,12 @@ public class ConfiguracionDelSistemaController implements Initializable {
     
     @FXML
     public void cancelar() throws IOException{
-        parametro.cancelarConfiguracion();
-        abrir.abrirVentana("Admin.fxml");
-        cerrar.cerrar(cancelar);
+        int opcionSeleccionada = JOptionPane.showConfirmDialog(null, "¿Está seguro de cancelar la configuración?", "Cancelar",JOptionPane.YES_NO_OPTION);
+        if(opcionSeleccionada == JOptionPane.YES_OPTION){
+            parametro.cancelarConfiguracion();
+            abrir.abrirVentana("Admin.fxml");
+            cerrar.cerrar(cancelar);
+        }
     }
     
     @FXML
@@ -128,6 +136,39 @@ public class ConfiguracionDelSistemaController implements Initializable {
         SpinnerValueFactory<Integer> listaDiasVencimiento = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 365);
         listaDiasVencimiento.setValue(1);
         diasVencimiento.setValueFactory(listaDiasVencimiento);
+        
+        conection conectado = new conection();
+        sql = "SELECT * FROM configuracion_sistema";
+        
+        try{
+            conectado.consulta(sql);
+            nombreEmpresa.setText(conectado.getNombreEmpresa());
+            idiomas.setValue(conectado.getIdioma());
+            zonaHoraria.setValue(conectado.getZonaHoraria());
+            diasVencimiento.getValueFactory().setValue(conectado.getTiempoVencimientoTicketsInactivos());
+            String nivelesPrioridad = conectado.getNivelesPrioridad();
+            String[] elementos = nivelesPrioridad.split(",\\s*");
+            for(String elemento:elementos){
+                if(nivel1.getText().equals(elemento)){
+                    nivel1.setSelected(true);
+                }
+                if(nivel2.getText().equals(elemento)){
+                    nivel2.setSelected(true);
+                }
+                if(nivel3.getText().equals(elemento)){
+                    nivel3.setSelected(true);
+                }
+                if(nivel4.getText().equals(elemento)){
+                    nivel4.setSelected(true);
+                }
+                if(nivel5.getText().equals(elemento)){
+                    nivel5.setSelected(true);
+                }
+            }
+            
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Erroresss: " + e.toString());
+        }
     }
     
 }

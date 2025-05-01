@@ -59,11 +59,11 @@
                      </cursor>
                   </Spinner>
                   <Label layoutX="325.0" layoutY="473.0" prefHeight="17.0" prefWidth="184.0" text="Niveles Prioridad" />
-                  <CheckBox fx:id="nivel1" layoutX="326.0" layoutY="500.0" mnemonicParsing="false" text="Baja" />
-                  <CheckBox fx:id="nivel2" layoutX="326.0" layoutY="528.0" mnemonicParsing="false" text="Media Baja" />
-                  <CheckBox fx:id="nivel3" layoutX="326.0" layoutY="558.0" mnemonicParsing="false" text="Media" />
-                  <CheckBox fx:id="nivel4" layoutX="326.0" layoutY="589.0" mnemonicParsing="false" text="Media Alta" />
-                  <CheckBox fx:id="nivel5" layoutX="326.0" layoutY="619.0" mnemonicParsing="false" text="Alta" />
+                  <CheckBox fx:id="nivel1" layoutX="326.0" layoutY="500.0" mnemonicParsing="false" text="BAJO" />
+                  <CheckBox fx:id="nivel2" layoutX="326.0" layoutY="528.0" mnemonicParsing="false" text="MEDIA BAJA" />
+                  <CheckBox fx:id="nivel3" layoutX="326.0" layoutY="558.0" mnemonicParsing="false" text="MEDIO" />
+                  <CheckBox fx:id="nivel4" layoutX="326.0" layoutY="589.0" mnemonicParsing="false" text="MEDIA ALTA" />
+                  <CheckBox fx:id="nivel5" layoutX="326.0" layoutY="619.0" mnemonicParsing="false" text="ALTO" />
                   <Button fx:id="guardar" layoutX="653.0" layoutY="638.0" mnemonicParsing="false" onAction="#guardar" style="-fx-background-color: orange; -fx-background-radius: 50;" text="Guardar Configuración" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="12.0" />
