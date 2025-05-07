@@ -5,6 +5,7 @@
 package sistemadetickets;
 
 import java.sql.*;
+import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
 /**
@@ -20,6 +21,9 @@ public class conection {
     private String zonaHoraria;
     private int tiempoVencimientoTicketsInactivos;
     private String nivelesPrioridad;
+    
+    AbrirVentana abrir = new AbrirVentana();
+    CerrarVentana cerrar = new CerrarVentana();
 
     public String getIdioma() {
         return idioma;
@@ -61,7 +65,7 @@ public class conection {
         this.nivelesPrioridad = nivelesPrioridad;
     }
      
-    public void consulta(String script){
+    public void consulta(String script) throws SQLException{
         connect = null;
         PreparedStatement ps = null;
         conectar();
@@ -80,6 +84,8 @@ public class conection {
         } catch (Exception e) {
             // Si hay un error en la conexión
             JOptionPane.showMessageDialog(null, "ERRORES:" + e.toString());
+        }finally{
+            connect.close();
         }
         
     }
@@ -92,7 +98,7 @@ public class conection {
 
         try {
             connect = DriverManager.getConnection(url, user, pass);
-            JOptionPane.showMessageDialog(null, "conexion exitosa! ");
+//            JOptionPane.showMessageDialog(null, "conexion exitosa! ");
             // Si la conexión es exitosa
         } catch (Exception e) {
             // Si hay un error en la conexión
@@ -101,6 +107,43 @@ public class conection {
         
         return connect;
     }
-
     
+    public void loguearse(String usuario, String contrasenia) throws SQLException{
+        connect = null;
+        PreparedStatement ps = null;
+        PreparedStatement ps2 = null;
+        conectar();
+        
+        try {
+            ps = connect.prepareStatement("SELECT * FROM usuarios");
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                if(usuario.equals(rs.getString("nombre_usuario"))){
+                    if(contrasenia.equals(rs.getString("contrasenia"))){
+                        ps2 = connect.prepareStatement("SELECT nombre_rol FROM roles INNER JOIN usuarios ON roles.id_rol = '"+ rs.getString("id_rol") +"' ");
+                        ResultSet rs2 = ps2.executeQuery();
+                        if(rs2.next()){
+                             JOptionPane.showMessageDialog(null, "BIENVENIDO " + rs2.getString("nombre_rol"));
+                             if(rs2.getString("nombre_rol").equals("administrador")){
+                                 abrir.abrirVentana("Admin.fxml");
+                             }
+                             if(rs2.getString("nombre_rol").equals("tecnico")){
+                                 abrir.abrirVentana("Tecnico.fxml");
+                             }
+                             if(rs2.getString("nombre_rol").equals("usuario")){
+                                 abrir.abrirVentana("Usuario.fxml");
+                             }
+                        }
+                    }else{
+                        System.out.println("contrasenia incorrecta");
+                    }
+                }                
+            }
+        } catch (Exception e) {
+            // Si hay un error en la conexión
+            JOptionPane.showMessageDialog(null, "ERRORES:" + e.toString());
+        }finally{
+            connect.close();
+        }
+    }
 }

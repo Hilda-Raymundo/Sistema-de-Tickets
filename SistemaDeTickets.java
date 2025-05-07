@@ -30,6 +30,9 @@ public class SistemaDeTickets extends Application {
         formulario.setTitle("Login");
         formulario.setScene(new Scene(root));
         formulario.show();
+        
+      
+        
     }    
         
 }
