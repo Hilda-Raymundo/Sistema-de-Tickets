@@ -5,7 +5,9 @@
 package sistemadetickets;
 
 import java.sql.*;
-import javax.swing.JButton;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -68,18 +70,38 @@ public class conection {
     public void consulta(String script) throws SQLException{
         connect = null;
         PreparedStatement ps = null;
+        PreparedStatement ps2 = null;
+        PreparedStatement ps3 = null;
+        PreparedStatement ps4 = null;
         conectar();
         
         try {
             ps = connect.prepareStatement(script);
             ResultSet rs = ps.executeQuery();
             if(rs.next()){
-                setNombreEmpresa(rs.getString("nombreEmpresa"));
-                setIdioma(rs.getString("idioma"));
-                setZonaHoraria(rs.getString("zonaHoraria"));
-                setTiempoVencimientoTicketsInactivos(rs.getInt("tiempoVencimientoTicketsInactivos"));
-                setNivelesPrioridad(rs.getString("nivelesPrioridad"));
-                JOptionPane.showMessageDialog(null, "EXITO");
+                setNombreEmpresa(rs.getString("nombre_empresa"));
+                setTiempoVencimientoTicketsInactivos(rs.getInt("tiempo_vencimiento_tickets_inactivos"));
+                
+                ps2 = connect.prepareStatement("SELECT nombre_idioma FROM idiomas INNER JOIN configuracion_sistema ON idiomas.id_idioma = '"+ rs.getString("idioma") +"' ");
+                ResultSet rs2 = ps2.executeQuery();
+                if(rs2.next()){
+                   setIdioma(rs2.getString("nombre_idioma"));
+                }
+                
+                ps3 = connect.prepareStatement("SELECT nombre_zona_horaria FROM zonas_horarias INNER JOIN configuracion_sistema ON zonas_horarias.id_zona_horaria = '"+ rs.getString("zona_horaria") +"' ");
+                ResultSet rs3 = ps3.executeQuery();
+                if(rs3.next()){
+                   setZonaHoraria(rs3.getString("nombre_zona_horaria"));
+                }
+                                
+                ps4 = connect.prepareStatement("SELECT nombre_prioridad FROM prioridades INNER JOIN prioridades_configuracion_sistema ON prioridades.id_prioridad = prioridades_configuracion_sistema.id_prioridad");
+                ResultSet rs4 = ps4.executeQuery();
+                ArrayList<String> prioridades = new ArrayList<>();
+                while(rs4.next()){
+                   prioridades.add(rs4.getString("nombre_prioridad"));
+                }
+            }else{
+                JOptionPane.showMessageDialog(null, "ERROR");
             }
         } catch (Exception e) {
             // Si hay un error en la conexión
@@ -87,7 +109,27 @@ public class conection {
         }finally{
             connect.close();
         }
+    }
+    
+    public ArrayList consultaListados(String sql, String parametroEspecifico) throws SQLException{
+        ArrayList<String> listado = new ArrayList<>();
+        connect = null;
+        PreparedStatement ps = null;
+        conectar();
         
+        try {
+            ps = connect.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                listado.add(rs.getString(parametroEspecifico));
+            }
+        } catch (Exception e) {
+            // Si hay un error en la conexión
+            JOptionPane.showMessageDialog(null, "ERRORES:" + e.toString());
+        }finally{
+            connect.close();
+        }
+        return listado;
     }
     
     public Connection conectar() {
@@ -104,7 +146,6 @@ public class conection {
             // Si hay un error en la conexión
             JOptionPane.showMessageDialog(null, "ERRO:" + e.toString());
         }
-        
         return connect;
     }
     
@@ -133,6 +174,7 @@ public class conection {
                              if(rs2.getString("nombre_rol").equals("usuario")){
                                  abrir.abrirVentana("Usuario.fxml");
                              }
+                             abrir.usuarioQueIngreso(rs.getInt("id_usuario"));
                         }
                     }else{
                         System.out.println("contrasenia incorrecta");

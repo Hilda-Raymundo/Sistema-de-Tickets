@@ -26,4 +26,7 @@ public class AbrirVentana {
         formulario.show();
     }
     
+    public void usuarioQueIngreso(int idUsuario){
+        System.out.println(idUsuario);
+    }
 }

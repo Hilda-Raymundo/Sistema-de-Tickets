@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -44,12 +45,6 @@ public class ConfiguracionDelSistemaController implements Initializable {
     public ComboBox<String> idiomas;
     public ComboBox<String> zonaHoraria;
     public Spinner<Integer> diasVencimiento;
-    public CheckBox nivel1;
-    public CheckBox nivel2;
-    public CheckBox nivel3;
-    public CheckBox nivel4;
-    public CheckBox nivel5;
-    public String[] listaPrioridades;
     private int indice = 0;
     public ImageView logo;
     ConfiguracionSistema parametro = new ConfiguracionSistema();
@@ -86,27 +81,6 @@ public class ConfiguracionDelSistemaController implements Initializable {
             parametro.setIdioma(idiomas.getSelectionModel().getSelectedItem().toString());
             parametro.setZonaHoraria(zonaHoraria.getSelectionModel().getSelectedItem().toString());
             
-            if(nivel1.isSelected()){
-            parametro.setNivelesPrioridad(nivel1.getText(), indice);
-            indice++;
-            } 
-            if(nivel2.isSelected()){
-                parametro.setNivelesPrioridad(nivel2.getText(), indice);
-                indice++;
-            }
-            if(nivel3.isSelected()){
-                parametro.setNivelesPrioridad(nivel3.getText(), indice);
-                indice++;
-            } 
-            if(nivel4.isSelected()){
-                parametro.setNivelesPrioridad(nivel4.getText(), indice);
-                indice++;
-            } 
-            if(nivel5.isSelected()){
-                parametro.setNivelesPrioridad(nivel5.getText(), indice);
-                indice++;
-            }
-            
             if(indice>2){
                 parametro.guardarConfiguracion();
                 abrir.abrirVentana("Admin.fxml");
@@ -119,15 +93,11 @@ public class ConfiguracionDelSistemaController implements Initializable {
     }
     
     @FXML
-    public void comboBoxIdiomas() throws IOException{
-        idiomas.getItems().add("Inglés");
-        idiomas.getItems().add("Español");
+    public void comboBoxIdiomas() throws IOException{        
     }
     
     @FXML
     public void comboBoxZonaHoraria() throws IOException{
-        zonaHoraria.getItems().add("GMT-6");
-        zonaHoraria.getItems().add("UTC-05");
     }
     
     @Override
@@ -146,26 +116,16 @@ public class ConfiguracionDelSistemaController implements Initializable {
             idiomas.setValue(conectado.getIdioma());
             zonaHoraria.setValue(conectado.getZonaHoraria());
             diasVencimiento.getValueFactory().setValue(conectado.getTiempoVencimientoTicketsInactivos());
-            String nivelesPrioridad = conectado.getNivelesPrioridad();
-            String[] elementos = nivelesPrioridad.split(",\\s*");
-            for(String elemento:elementos){
-                if(nivel1.getText().equals(elemento)){
-                    nivel1.setSelected(true);
-                }
-                if(nivel2.getText().equals(elemento)){
-                    nivel2.setSelected(true);
-                }
-                if(nivel3.getText().equals(elemento)){
-                    nivel3.setSelected(true);
-                }
-                if(nivel4.getText().equals(elemento)){
-                    nivel4.setSelected(true);
-                }
-                if(nivel5.getText().equals(elemento)){
-                    nivel5.setSelected(true);
-                }
+            ArrayList<String> listado = new ArrayList<>();
+            listado = conectado.consultaListados("select nombre_idioma from idiomas order by nombre_idioma", "nombre_idioma");
+            for(int i = 0; i<listado.size(); i++){
+                idiomas.getItems().add(listado.get(i));
             }
-            
+            ArrayList<String> listado2 = new ArrayList<>();
+            listado2 = conectado.consultaListados("select nombre_zona_horaria from zonas_horarias order by nombre_zona_horaria", "nombre_zona_horaria");
+            for(int i = 0; i<listado2.size(); i++){
+                zonaHoraria.getItems().add(listado2.get(i));
+            }
         }catch(Exception e){
             JOptionPane.showMessageDialog(null, "Erroresss: " + e.toString());
         }

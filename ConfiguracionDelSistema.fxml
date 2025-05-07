@@ -2,10 +2,11 @@
 
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -19,15 +20,15 @@
             <Pane layoutX="46.0" layoutY="33.0" prefHeight="677.0" prefWidth="819.0" style="-fx-background-radius: 20; -fx-background-color: white;">
                <children>
                   <Pane layoutX="22.0" layoutY="24.0" prefHeight="582.0" prefWidth="254.0" />
-                  <Label layoutX="325.0" layoutY="24.0" text="Parámetros" />
-                  <TextField fx:id="nombreEmpresa" layoutX="325.0" layoutY="79.0" prefHeight="25.0" prefWidth="239.0" style="-fx-background-color: none; -fx-border-color: green;">
+                  <Label layoutX="325.0" layoutY="16.0" text="Parámetros" />
+                  <TextField fx:id="nombreEmpresa" layoutX="422.0" layoutY="40.0" prefHeight="25.0" prefWidth="239.0" style="-fx-background-color: none; -fx-border-color: green;">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </TextField>
-                  <Label layoutX="325.0" layoutY="62.0" text="Nombre Empresa" />
-                  <Label layoutX="325.0" layoutY="127.0" text="Logo Empresa" />
-                  <Button layoutX="410.0" layoutY="123.0" mnemonicParsing="false" onAction="#cargarLogo" style="-fx-background-color: #96C549; -fx-background-radius: 50;" text="Cargar Imagen" textFill="WHITE">
+                  <Label layoutX="325.0" layoutY="48.0" text="Nombre Empresa" />
+                  <Label layoutX="324.0" layoutY="93.0" text="Logo Empresa" />
+                  <Button layoutX="410.0" layoutY="89.0" mnemonicParsing="false" onAction="#cargarLogo" style="-fx-background-color: #96C549; -fx-background-radius: 50;" text="Cargar Imagen" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
@@ -35,35 +36,30 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Pane layoutX="325.0" layoutY="160.0" prefHeight="155.0" prefWidth="200.0" style="-fx-border-color: green;">
+                  <Pane layoutX="322.0" layoutY="131.0" prefHeight="155.0" prefWidth="200.0" style="-fx-border-color: green;">
                      <children>
                         <ImageView fx:id="logo" fitHeight="128.0" fitWidth="175.0" layoutX="13.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
                      </children>
                   </Pane>
-                  <Label layoutX="325.0" layoutY="327.0" text="Idioma" />
-                  <Label layoutX="541.0" layoutY="327.0" text="Zona Horaria" />
-                  <ComboBox fx:id="idiomas" layoutX="325.0" layoutY="357.0" onMouseClicked="#comboBoxIdiomas" prefWidth="150.0">
+                  <Label layoutX="325.0" layoutY="298.0" text="Idioma" />
+                  <Label layoutX="543.0" layoutY="298.0" text="Zona Horaria" />
+                  <ComboBox fx:id="idiomas" layoutX="325.0" layoutY="315.0" onMouseClicked="#comboBoxIdiomas" prefWidth="150.0">
                      <cursor>
                         <Cursor fx:constant="CLOSED_HAND" />
                      </cursor>
                   </ComboBox>
-                  <ComboBox fx:id="zonaHoraria" layoutX="535.0" layoutY="357.0" onMouseClicked="#comboBoxZonaHoraria" prefWidth="150.0">
+                  <ComboBox fx:id="zonaHoraria" layoutX="535.0" layoutY="315.0" onMouseClicked="#comboBoxZonaHoraria" prefWidth="150.0">
                      <cursor>
                         <Cursor fx:constant="CLOSED_HAND" />
                      </cursor>
                   </ComboBox>
-                  <Label layoutX="325.0" layoutY="397.0" prefHeight="17.0" prefWidth="184.0" text="Tiempo(días) vencimiento tickets" />
-                  <Spinner fx:id="diasVencimiento" layoutX="326.0" layoutY="426.0">
+                  <Label layoutX="325.0" layoutY="351.0" prefHeight="17.0" prefWidth="184.0" text="Tiempo(días) vencimiento tickets" />
+                  <Spinner fx:id="diasVencimiento" layoutX="326.0" layoutY="368.0">
                      <cursor>
                         <Cursor fx:constant="CLOSED_HAND" />
                      </cursor>
                   </Spinner>
-                  <Label layoutX="325.0" layoutY="473.0" prefHeight="17.0" prefWidth="184.0" text="Niveles Prioridad" />
-                  <CheckBox fx:id="nivel1" layoutX="326.0" layoutY="500.0" mnemonicParsing="false" text="BAJO" />
-                  <CheckBox fx:id="nivel2" layoutX="326.0" layoutY="528.0" mnemonicParsing="false" text="MEDIA BAJA" />
-                  <CheckBox fx:id="nivel3" layoutX="326.0" layoutY="558.0" mnemonicParsing="false" text="MEDIO" />
-                  <CheckBox fx:id="nivel4" layoutX="326.0" layoutY="589.0" mnemonicParsing="false" text="MEDIA ALTA" />
-                  <CheckBox fx:id="nivel5" layoutX="326.0" layoutY="619.0" mnemonicParsing="false" text="ALTO" />
+                  <Label layoutX="325.0" layoutY="413.0" prefHeight="17.0" prefWidth="184.0" text="Niveles Prioridad" />
                   <Button fx:id="guardar" layoutX="653.0" layoutY="638.0" mnemonicParsing="false" onAction="#guardar" style="-fx-background-color: orange; -fx-background-radius: 50;" text="Guardar Configuración" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="12.0" />
@@ -80,6 +76,12 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
+                  <TableView layoutX="325.0" layoutY="441.0" prefHeight="185.0" prefWidth="454.0">
+                    <columns>
+                      <TableColumn prefWidth="75.0" text="C1" />
+                      <TableColumn prefWidth="75.0" text="C2" />
+                    </columns>
+                  </TableView>
                </children>
             </Pane>
          </children>
