@@ -24,31 +24,30 @@ public class GestionUsuariosController implements Initializable {
     public javafx.scene.control.Button activarDesactivarUsuario;
     public javafx.scene.control.Button atras;
     
-    AbrirVentana abrir = new AbrirVentana();
-    CerrarVentana cerrar = new CerrarVentana();
+    OperacionesVentana operaciones = new OperacionesVentana();
     
     @FXML
     private void registrarNuevoUsuario() throws Exception{
-        abrir.abrirVentana("RegistrarUsuario.fxml");
-        cerrar.cerrar(registrarNuevoUsuario);
+        operaciones.abrirVentana("RegistrarUsuario.fxml");
+        operaciones.cerrar(registrarNuevoUsuario);
     }
     
     @FXML
     private void modificarUsuario() throws Exception{
-        abrir.abrirVentana("ModificarUsuario.fxml");
-        cerrar.cerrar(modificarUsuario);
+        operaciones.abrirVentana("ModificarUsuario.fxml");
+        operaciones.cerrar(modificarUsuario);
     }
     
     @FXML
     private void activarDesactivarUsuario() throws Exception{
-        abrir.abrirVentana("ActivarDesactivarUsuario.fxml");
-        cerrar.cerrar(activarDesactivarUsuario);
+        operaciones.abrirVentana("ActivarDesactivarUsuario.fxml");
+        operaciones.cerrar(activarDesactivarUsuario);
     }
     
     @FXML
     private void atras() throws Exception{
-        abrir.abrirVentana("Admin.fxml");
-        cerrar.cerrar(atras);
+        operaciones.abrirVentana("Admin.fxml");
+        operaciones.cerrar(atras);
     }
     
     @Override

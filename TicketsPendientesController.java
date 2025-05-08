@@ -25,29 +25,28 @@ public class TicketsPendientesController implements Initializable {
     public javafx.scene.control.Button adjuntarDocumentacion;
     public javafx.scene.control.Button atras;
     
-    AbrirVentana abrir = new AbrirVentana();
-    CerrarVentana cerrar = new CerrarVentana();
+    OperacionesVentana operaciones = new OperacionesVentana();
     
     public void cambiarEstado() throws Exception{
-        cerrar.cerrar(cambiarEstado);
-        abrir.abrirVentana("ModificarEstado.fxml");
+        operaciones.cerrar(cambiarEstado);
+        operaciones.abrirVentana("ModificarEstado.fxml");
     }
     
     public void agregarNota() throws Exception{
         JOptionPane.showMessageDialog(null, "Se agregó la nota exitosamente");
-        cerrar.cerrar(agregarNota);
-        abrir.abrirVentana("Tecnico.fxml");
+        operaciones.cerrar(agregarNota);
+        operaciones.abrirVentana("Tecnico.fxml");
     }
     
     public void adjuntarDocumentacion() throws Exception{
         JOptionPane.showMessageDialog(null, "Se agregó la documentación exitosamente");
-        cerrar.cerrar(adjuntarDocumentacion);
-        abrir.abrirVentana("Tecnico.fxml");
+        operaciones.cerrar(adjuntarDocumentacion);
+        operaciones.abrirVentana("Tecnico.fxml");
     }
     
     public void atras() throws Exception{
-        cerrar.cerrar(atras);
-        abrir.abrirVentana("Tecnico.fxml");
+        operaciones.cerrar(atras);
+        operaciones.abrirVentana("Tecnico.fxml");
     }
     
     @Override

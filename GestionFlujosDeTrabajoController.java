@@ -26,32 +26,31 @@ public class GestionFlujosDeTrabajoController implements Initializable {
     public javafx.scene.control.Button eliminarFlujo;
     public javafx.scene.control.Button atras;
     
-    AbrirVentana abrir = new AbrirVentana();
-    CerrarVentana cerrar = new CerrarVentana();
+    OperacionesVentana operaciones = new OperacionesVentana();
     
     @FXML
     private void nuevoFlujo() throws Exception{
-        abrir.abrirVentana("CrearNuevoFlujo.fxml");
-        cerrar.cerrar(nuevoFlujo);
+        operaciones.abrirVentana("CrearNuevoFlujo.fxml");
+        operaciones.cerrar(nuevoFlujo);
     }
     
     @FXML
     private void modificarFlujo() throws Exception{
-        abrir.abrirVentana("ModificarFlujo.fxml");
-        cerrar.cerrar(modificarFlujo);
+        operaciones.abrirVentana("ModificarFlujo.fxml");
+        operaciones.cerrar(modificarFlujo);
     }
     
     @FXML
     private void eliminarFlujo() throws Exception{
         JOptionPane.showMessageDialog(null, "Se eliminó el flujo exitosamente");
-        abrir.abrirVentana("Admin.fxml");
-        cerrar.cerrar(eliminarFlujo);
+        operaciones.abrirVentana("Admin.fxml");
+        operaciones.cerrar(eliminarFlujo);
     }
     
     @FXML
     private void atras() throws Exception{
-        abrir.abrirVentana("Admin.fxml");
-        cerrar.cerrar(atras);
+        operaciones.abrirVentana("Admin.fxml");
+        operaciones.cerrar(atras);
     }
     
     @Override

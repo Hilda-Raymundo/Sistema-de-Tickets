@@ -13,14 +13,18 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.CheckBoxTableCell;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
 import javafx.stage.FileChooser;
+import javafx.util.Callback;
 import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
 
@@ -35,8 +39,7 @@ public class ConfiguracionDelSistemaController implements Initializable {
      * Initializes the controller class.
      */
     
-    AbrirVentana abrir = new AbrirVentana();
-    CerrarVentana cerrar = new CerrarVentana();
+    OperacionesVentana operaciones = new OperacionesVentana();
     
     private String sql;
     public javafx.scene.control.Button cancelar;
@@ -46,8 +49,18 @@ public class ConfiguracionDelSistemaController implements Initializable {
     public ComboBox<String> zonaHoraria;
     public Spinner<Integer> diasVencimiento;
     private int indice = 0;
-    public ImageView logo;
+    public ImageView logo; 
     ConfiguracionSistema parametro = new ConfiguracionSistema();
+    @FXML
+    public TableView<DatosTableView> tablaPrioridades;
+    @FXML
+    public TableColumn<DatosTableView, String> nombrePrioridad;
+    @FXML
+    public TableColumn<DatosTableView, Boolean> estadoPrioridad;
+    @FXML
+    public TableView<DatosTableView> tablaPrioridadesPrevias;
+    @FXML
+    public TableColumn<DatosTableView, String> nombrePrioridadPrevia;
     
     @FXML
     public void cargarLogo() throws IOException{
@@ -66,8 +79,8 @@ public class ConfiguracionDelSistemaController implements Initializable {
         int opcionSeleccionada = JOptionPane.showConfirmDialog(null, "¿Está seguro de cancelar la configuración?", "Cancelar",JOptionPane.YES_NO_OPTION);
         if(opcionSeleccionada == JOptionPane.YES_OPTION){
             parametro.cancelarConfiguracion();
-            abrir.abrirVentana("Admin.fxml");
-            cerrar.cerrar(cancelar);
+            operaciones.abrirVentana("Admin.fxml");
+            operaciones.cerrar(cancelar);
         }
     }
     
@@ -83,8 +96,8 @@ public class ConfiguracionDelSistemaController implements Initializable {
             
             if(indice>2){
                 parametro.guardarConfiguracion();
-                abrir.abrirVentana("Admin.fxml");
-                cerrar.cerrar(guardar);
+                operaciones.abrirVentana("Admin.fxml");
+                operaciones.cerrar(guardar);
             }else{
                 JOptionPane.showMessageDialog(null, "Se requieren al menos 3 niveles de prioridad");
                 indice = 0;
@@ -126,9 +139,22 @@ public class ConfiguracionDelSistemaController implements Initializable {
             for(int i = 0; i<listado2.size(); i++){
                 zonaHoraria.getItems().add(listado2.get(i));
             }
+            nombrePrioridad.setCellValueFactory(cellData->cellData.getValue().dato1());
+            estadoPrioridad.setCellValueFactory(cellData->cellData.getValue().checkbox());
+            estadoPrioridad.setCellFactory(CheckBoxTableCell.forTableColumn(estadoPrioridad));
+            estadoPrioridad.setEditable(true);
+            tablaPrioridades.setEditable(true);
+            tablaPrioridades.setItems(conectado.obtenerListado("SELECT nombre_prioridad FROM prioridades", "nombre_prioridad"));
+            nombrePrioridadPrevia.setCellValueFactory(cellData->cellData.getValue().dato1());
+            tablaPrioridadesPrevias.setItems(conectado.obtenerListado("select nombre_prioridad from prioridades inner join prioridades_configuracion_sistema on prioridades.id_prioridad = prioridades_configuracion_sistema.id_prioridad inner join configuracion_sistema on prioridades_configuracion_sistema.id_configuracion_sistema = configuracion_sistema.id_configuracion_sistema and configuracion_sistema.seleccionada = 'si'", "nombre_prioridad"));
         }catch(Exception e){
             JOptionPane.showMessageDialog(null, "Erroresss: " + e.toString());
         }
+        
+        
     }
+    
+    
+    
     
 }

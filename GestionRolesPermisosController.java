@@ -31,8 +31,7 @@ public class GestionRolesPermisosController implements Initializable {
     public javafx.scene.control.Button atras;
     public TableView tablaRoles;
     
-    AbrirVentana abrir = new AbrirVentana();
-    CerrarVentana cerrar = new CerrarVentana();
+    OperacionesVentana operaciones = new OperacionesVentana();
     
     public GestionRolesPermisosController(/*String[][] roles, String[][] permisos*/){
 //        this.roles = new String[roles.length][2];
@@ -69,32 +68,32 @@ public class GestionRolesPermisosController implements Initializable {
     
     @FXML
     private void crearRol() throws Exception{
-        abrir.abrirVentana("CrearRol.fxml");
-        cerrar.cerrar(crearRol);
+        operaciones.abrirVentana("CrearRol.fxml");
+        operaciones.cerrar(crearRol);
     }
     
     @FXML
     private void modificarRol() throws Exception{
-        abrir.abrirVentana("ModificarRol.fxml");
-        cerrar.cerrar(modificarRol);
+        operaciones.abrirVentana("ModificarRol.fxml");
+        operaciones.cerrar(modificarRol);
     }
     
     @FXML
     private void eliminarRol() throws Exception{
-        abrir.abrirVentana("EliminarRol.fxml");
-        cerrar.cerrar(eliminarRol);
+        operaciones.abrirVentana("EliminarRol.fxml");
+        operaciones.cerrar(eliminarRol);
     }
     
     @FXML
     private void gestionarPermiso() throws Exception{
-        abrir.abrirVentana("GestionarPermiso.fxml");
-        cerrar.cerrar(gestionarPermiso);
+        operaciones.abrirVentana("GestionarPermiso.fxml");
+        operaciones.cerrar(gestionarPermiso);
     }
     
     @FXML
     private void atras() throws Exception{
-        abrir.abrirVentana("Admin.fxml");
-        cerrar.cerrar(atras);
+        operaciones.abrirVentana("Admin.fxml");
+        operaciones.cerrar(atras);
     }
     
     @Override

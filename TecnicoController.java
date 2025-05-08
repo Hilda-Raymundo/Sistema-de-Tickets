@@ -27,37 +27,36 @@ public class TecnicoController implements Initializable {
     public javafx.scene.control.Button adjuntarDocumentacion;
     public javafx.scene.control.Button gestionarSolicitudDeTicket;
     
-    AbrirVentana abrir = new AbrirVentana();
-    CerrarVentana cerrar = new CerrarVentana();
+    OperacionesVentana operaciones = new OperacionesVentana();
     
     public void tomarTicket() throws Exception{
-        cerrar.cerrar(tomarTicket);
-        abrir.abrirVentana("TicketsPendientes.fxml");
+        operaciones.cerrar(tomarTicket);
+        operaciones.abrirVentana("TicketsPendientes.fxml");
     }
     
     public void ticketsPendientes() throws Exception{
-        cerrar.cerrar(ticketsPendientes);
-        abrir.abrirVentana("TicketsPendientes.fxml");
+        operaciones.cerrar(ticketsPendientes);
+        operaciones.abrirVentana("TicketsPendientes.fxml");
     }
     
     public void resolverTicket() throws Exception{
-        cerrar.cerrar(resolverTicket);
-        abrir.abrirVentana("TicketsPendientes.fxml");
+        operaciones.cerrar(resolverTicket);
+        operaciones.abrirVentana("TicketsPendientes.fxml");
     }
     
     public void agregarNotaATicket() throws Exception{
-        cerrar.cerrar(agregarNotaATicket);
-        abrir.abrirVentana("AgregarNota.fxml");
+        operaciones.cerrar(agregarNotaATicket);
+        operaciones.abrirVentana("AgregarNota.fxml");
     }
     
     public void adjuntarDocumentacion() throws Exception{
-        cerrar.cerrar(adjuntarDocumentacion);
-        abrir.abrirVentana("TicketsPendientes.fxml");
+        operaciones.cerrar(adjuntarDocumentacion);
+        operaciones.abrirVentana("TicketsPendientes.fxml");
     }
     
     public void gestionarSolicitudDeTicket() throws Exception{
-        cerrar.cerrar(gestionarSolicitudDeTicket);
-        abrir.abrirVentana("TicketsPendientes.fxml");
+        operaciones.cerrar(gestionarSolicitudDeTicket);
+        operaciones.abrirVentana("TicketsPendientes.fxml");
     }
     
     @Override

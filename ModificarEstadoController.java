@@ -23,19 +23,18 @@ public class ModificarEstadoController implements Initializable {
     public javafx.scene.control.Button atras;
     public javafx.scene.control.Button modificar;
     
-    AbrirVentana abrir = new AbrirVentana();
-    CerrarVentana cerrar = new CerrarVentana();
+    OperacionesVentana operaciones = new OperacionesVentana();
     
     public void atras() throws Exception{
-        cerrar.cerrar(atras);
-        abrir.abrirVentana("GestionarTicket.fxml");
+        operaciones.cerrar(atras);
+        operaciones.abrirVentana("GestionarTicket.fxml");
     }
     
     public void modificar() throws Exception{
         JOptionPane.showMessageDialog(null, "Se modificó el estado exitosamente");
-        cerrar.cerrar(modificar);
-        abrir.abrirVentana("GestionarTicket.fxml");
-        abrir.abrirVentana("TicketsPendientes.fxml");
+        operaciones.cerrar(modificar);
+        operaciones.abrirVentana("GestionarTicket.fxml");
+        operaciones.abrirVentana("TicketsPendientes.fxml");
     }
     
     @Override

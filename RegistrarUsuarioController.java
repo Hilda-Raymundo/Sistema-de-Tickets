@@ -23,20 +23,19 @@ public class RegistrarUsuarioController implements Initializable {
     public javafx.scene.control.Button cancelar;
     public javafx.scene.control.Button crear;
     
-    AbrirVentana abrir = new AbrirVentana();
-    CerrarVentana cerrar = new CerrarVentana();
+    OperacionesVentana operaciones = new OperacionesVentana();
     
     @FXML
     private void cancelar() throws Exception{
-        abrir.abrirVentana("GestionUsuarios.fxml");
-        cerrar.cerrar(cancelar);
+        operaciones.abrirVentana("GestionUsuarios.fxml");
+        operaciones.cerrar(cancelar);
     }
     
     @FXML
     private void crearUsuario() throws Exception{
         JOptionPane.showMessageDialog(null, "Se creó el usuario exitosamente");
-        abrir.abrirVentana("GestionUsuarios.fxml");
-        cerrar.cerrar(crear);
+        operaciones.abrirVentana("GestionUsuarios.fxml");
+        operaciones.cerrar(crear);
     }
     
     @Override

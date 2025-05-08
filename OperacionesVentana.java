@@ -32,4 +32,8 @@ public class OperacionesVentana {
        formulario.close();
     }
     
+    public void usuarioQueIngreso(int idUsuario){
+        System.out.println(idUsuario);
+    }
+    
 }

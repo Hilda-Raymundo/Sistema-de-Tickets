@@ -59,7 +59,7 @@
                         <Cursor fx:constant="CLOSED_HAND" />
                      </cursor>
                   </Spinner>
-                  <Label layoutX="325.0" layoutY="413.0" prefHeight="17.0" prefWidth="184.0" text="Niveles Prioridad" />
+                  <Label layoutX="561.0" layoutY="415.0" prefHeight="17.0" prefWidth="184.0" text="Nueva configuración" />
                   <Button fx:id="guardar" layoutX="653.0" layoutY="638.0" mnemonicParsing="false" onAction="#guardar" style="-fx-background-color: orange; -fx-background-radius: 50;" text="Guardar Configuración" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="12.0" />
@@ -76,10 +76,16 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <TableView layoutX="325.0" layoutY="441.0" prefHeight="185.0" prefWidth="454.0">
+                  <TableView fx:id="tablaPrioridades" layoutX="559.0" layoutY="445.0" prefHeight="185.0" prefWidth="239.0">
                     <columns>
-                      <TableColumn prefWidth="75.0" text="C1" />
-                      <TableColumn prefWidth="75.0" text="C2" />
+                      <TableColumn fx:id="nombrePrioridad" minWidth="0.0" prefWidth="169.5999755859375" text="nombrePrioridad" />
+                      <TableColumn fx:id="estadoPrioridad" prefWidth="70.4000244140625" text="estado" />
+                    </columns>
+                  </TableView>
+                  <Label layoutX="325.0" layoutY="415.0" prefHeight="17.0" prefWidth="184.0" text="Configuración previa" />
+                  <TableView fx:id="tablaPrioridadesPrevias" layoutX="322.0" layoutY="445.0" prefHeight="185.0" prefWidth="211.0">
+                    <columns>
+                      <TableColumn fx:id="nombrePrioridadPrevia" prefWidth="209.60003662109375" text=" prioridades actuales seleccionadas" />
                     </columns>
                   </TableView>
                </children>

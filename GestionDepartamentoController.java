@@ -19,8 +19,7 @@ public class GestionDepartamentoController implements Initializable {
     /**
      * Initializes the controller class.
      */
-    AbrirVentana abrir = new AbrirVentana();
-    CerrarVentana cerrar = new CerrarVentana();
+    OperacionesVentana operaciones = new OperacionesVentana();
     
     public javafx.scene.control.Button crearDepartamento;
     public javafx.scene.control.Button modificarDepartamento;
@@ -29,26 +28,26 @@ public class GestionDepartamentoController implements Initializable {
     
     @FXML
     public void crearDepartamento() throws Exception{
-        cerrar.cerrar(crearDepartamento);
-        abrir.abrirVentana("CrearDepartamento.fxml");
+        operaciones.cerrar(crearDepartamento);
+        operaciones.abrirVentana("CrearDepartamento.fxml");
     }
     
     @FXML
     public void modificarDepartamento() throws Exception{
-        cerrar.cerrar(modificarDepartamento);
-        abrir.abrirVentana("ModificarDepartamento.fxml");
+        operaciones.cerrar(modificarDepartamento);
+        operaciones.abrirVentana("ModificarDepartamento.fxml");
     }
     
     @FXML
     public void eliminarDepartamento() throws Exception{
-        cerrar.cerrar(eliminarDepartamento);
-        abrir.abrirVentana("EliminarDepartamento.fxml");
+        operaciones.cerrar(eliminarDepartamento);
+        operaciones.abrirVentana("EliminarDepartamento.fxml");
     }
     
     @FXML
     public void atras() throws Exception{
-        cerrar.cerrar(atras);
-        abrir.abrirVentana("Admin.fxml");
+        operaciones.cerrar(atras);
+        operaciones.abrirVentana("Admin.fxml");
     }
     
     @Override

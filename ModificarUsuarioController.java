@@ -24,20 +24,19 @@ public class ModificarUsuarioController implements Initializable {
     public javafx.scene.control.Button cancelar;
     public javafx.scene.control.Button modificarUsuario;
     
-    AbrirVentana abrir = new AbrirVentana();
-    CerrarVentana cerrar = new CerrarVentana();
+    OperacionesVentana operaciones = new OperacionesVentana();
     
     @FXML
     private void cancelar() throws Exception{
-        abrir.abrirVentana("GestionUsuarios.fxml");
-        cerrar.cerrar(cancelar);
+        operaciones.abrirVentana("GestionUsuarios.fxml");
+        operaciones.cerrar(cancelar);
     }
     
     @FXML
     private void modificarUsuario() throws Exception{
         JOptionPane.showMessageDialog(null, "Se modificó el usuario exitosamente");
-        abrir.abrirVentana("GestionUsuarios.fxml");
-        cerrar.cerrar(modificarUsuario);
+        operaciones.abrirVentana("GestionUsuarios.fxml");
+        operaciones.cerrar(modificarUsuario);
     }
     
     @Override

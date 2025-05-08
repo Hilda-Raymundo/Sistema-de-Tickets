@@ -22,8 +22,7 @@ public class SolicitudCancelacionTicketController implements Initializable {
      * Initializes the controller class.
      */
     
-    AbrirVentana abrir = new AbrirVentana();
-    CerrarVentana cerrar = new CerrarVentana();
+    OperacionesVentana operaciones = new OperacionesVentana();
     
     public javafx.scene.control.Button solicitarCancelacion;
     public javafx.scene.control.Button atras;
@@ -31,14 +30,14 @@ public class SolicitudCancelacionTicketController implements Initializable {
     @FXML
     private void solicitarCancelacion() throws IOException{
         JOptionPane.showMessageDialog(null, "Se envió la solicitud");
-        abrir.abrirVentana("Usuario.fxml");
-        cerrar.cerrar(solicitarCancelacion);
+        operaciones.abrirVentana("Usuario.fxml");
+        operaciones.cerrar(solicitarCancelacion);
     }
     
     @FXML
     private void atras() throws IOException{
-        abrir.abrirVentana("Usuario.fxml");
-        cerrar.cerrar(atras);
+        operaciones.abrirVentana("Usuario.fxml");
+        operaciones.cerrar(atras);
     }
     
     @Override

@@ -24,20 +24,19 @@ public class CrearEstadoController implements Initializable {
     public javafx.scene.control.Button cancelar;
     public javafx.scene.control.Button crearEstado;
     
-    AbrirVentana abrir = new AbrirVentana();
-    CerrarVentana cerrar = new CerrarVentana();
+    OperacionesVentana operaciones = new OperacionesVentana();
     
     @FXML
     private void cancelar() throws Exception{
-        abrir.abrirVentana("GestionEstadosTicket.fxml");
-        cerrar.cerrar(cancelar);
+        operaciones.abrirVentana("GestionEstadosTicket.fxml");
+        operaciones.cerrar(cancelar);
     }
     
     @FXML
     private void crearEstado() throws Exception{
         JOptionPane.showMessageDialog(null, "Se creó el estado exitosamente");
-        abrir.abrirVentana("GestionEstadosTicket.fxml");
-        cerrar.cerrar(crearEstado);
+        operaciones.abrirVentana("GestionEstadosTicket.fxml");
+        operaciones.cerrar(crearEstado);
     }
     
     @Override

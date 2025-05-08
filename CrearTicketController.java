@@ -22,20 +22,19 @@ public class CrearTicketController implements Initializable {
     public javafx.scene.control.Button cancelar;
     public javafx.scene.control.Button crear;
     
-    AbrirVentana abrir = new AbrirVentana();
-    CerrarVentana cerrar = new CerrarVentana();
+    OperacionesVentana operaciones = new OperacionesVentana();
     
     public void cancelar() throws Exception{
-        cerrar.cerrar(cancelar);
-        abrir.abrirVentana("GestionarTicket.fxml");
-        abrir.abrirVentana("Usuario.fxml");
+        operaciones.cerrar(cancelar);
+        operaciones.abrirVentana("GestionarTicket.fxml");
+        operaciones.abrirVentana("Usuario.fxml");
     }
     
     public void crear() throws Exception{
         JOptionPane.showMessageDialog(null, "Se creó el ticket exitosamente");
-        cerrar.cerrar(crear);
-        abrir.abrirVentana("GestionarTicket.fxml");
-        abrir.abrirVentana("Usuario.fxml");
+        operaciones.cerrar(crear);
+        operaciones.abrirVentana("GestionarTicket.fxml");
+        operaciones.abrirVentana("Usuario.fxml");
     }
     
     @Override

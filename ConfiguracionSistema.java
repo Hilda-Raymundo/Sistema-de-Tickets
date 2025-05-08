@@ -14,8 +14,7 @@ import javax.swing.JOptionPane;
  */
 public class ConfiguracionSistema {
     
-    AbrirVentana abrir = new AbrirVentana();
-    CerrarVentana cerrar = new CerrarVentana();
+    OperacionesVentana operaciones = new OperacionesVentana();
         
     private String nombreEmpresa;
     private Image logo;

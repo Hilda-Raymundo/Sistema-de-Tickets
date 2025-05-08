@@ -25,8 +25,7 @@ public class PrincipalController implements Initializable {
     public TextField password;
     //Datos temporales
 
-    AbrirVentana abrir = new AbrirVentana();
-    CerrarVentana cerrar = new CerrarVentana();
+    OperacionesVentana operaciones = new OperacionesVentana();
     
     public Button loguearse;
     
@@ -34,7 +33,7 @@ public class PrincipalController implements Initializable {
     
     public void login() throws IOException, SQLException{
         conectarse.loguearse(usuario.getText(), password.getText());
-        cerrar.cerrar(loguearse);
+        operaciones.cerrar(loguearse);
     }
     
     /**

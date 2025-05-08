@@ -24,20 +24,19 @@ public class CrearNuevoFlujoController implements Initializable {
     public javafx.scene.control.Button cancelar;
     public javafx.scene.control.Button crearFlujoTrabajo;
     
-    AbrirVentana abrir = new AbrirVentana();
-    CerrarVentana cerrar = new CerrarVentana();
+    OperacionesVentana operaciones = new OperacionesVentana();
     
     @FXML
     private void cancelar() throws Exception{
-        abrir.abrirVentana("GestionFlujosDeTrabajo.fxml");
-        cerrar.cerrar(cancelar);
+        operaciones.abrirVentana("GestionFlujosDeTrabajo.fxml");
+        operaciones.cerrar(cancelar);
     }
     
     @FXML
     private void crearFlujoTrabajo() throws Exception{
         JOptionPane.showMessageDialog(null, "Se creó el flujo de trabajo exitosamente");
-        abrir.abrirVentana("GestionFlujosDeTrabajo.fxml");
-        cerrar.cerrar(crearFlujoTrabajo);
+        operaciones.abrirVentana("GestionFlujosDeTrabajo.fxml");
+        operaciones.cerrar(crearFlujoTrabajo);
     }
     
     @Override

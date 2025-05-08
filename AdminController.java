@@ -20,8 +20,7 @@ public class AdminController implements Initializable {
     /**
      * Initializes the controller class.
      */
-    AbrirVentana abrir = new AbrirVentana();
-    CerrarVentana cerrar = new CerrarVentana();
+    OperacionesVentana operacion = new OperacionesVentana();
     
     public javafx.scene.control.Button configuracionDelSistema;
     public javafx.scene.control.Button gestionRolesPermisos;
@@ -33,44 +32,44 @@ public class AdminController implements Initializable {
             
     @FXML
     private void configuracionDelSistema() throws IOException{
-        abrir.abrirVentana("ConfiguracionDelSistema.fxml");
-        cerrar.cerrar(configuracionDelSistema);
+        operacion.abrirVentana("ConfiguracionDelSistema.fxml");
+        operacion.cerrar(configuracionDelSistema);
     }
     
     @FXML
     private void gestionRolesPermisos() throws IOException{
-        abrir.abrirVentana("GestionRolesPermisos.fxml");
-        cerrar.cerrar(gestionRolesPermisos);
+        operacion.abrirVentana("GestionRolesPermisos.fxml");
+        operacion.cerrar(gestionRolesPermisos);
     }
     
     @FXML
     private void gestionDepartamentos() throws IOException{
-        abrir.abrirVentana("GestionDepartamento.fxml");
-        cerrar.cerrar(gestionDepartamentos);
+        operacion.abrirVentana("GestionDepartamento.fxml");
+        operacion.cerrar(gestionDepartamentos);
     }
     
     @FXML
     private void gestionUsuarios() throws IOException{
-        abrir.abrirVentana("GestionUsuarios.fxml");
-        cerrar.cerrar(gestionUsuarios);
+        operacion.abrirVentana("GestionUsuarios.fxml");
+        operacion.cerrar(gestionUsuarios);
     }
     
     @FXML
     private void gestionEstadosTicket() throws IOException{
-        abrir.abrirVentana("GestionEstadosTicket.fxml");
-        cerrar.cerrar(gestionEstadosTicket);
+        operacion.abrirVentana("GestionEstadosTicket.fxml");
+        operacion.cerrar(gestionEstadosTicket);
     }
     
     @FXML
     private void gestionFlujosTrabajo() throws IOException{
-        abrir.abrirVentana("GestionFlujosDeTrabajo.fxml");
-        cerrar.cerrar(gestionFlujosTrabajo);
+        operacion.abrirVentana("GestionFlujosDeTrabajo.fxml");
+        operacion.cerrar(gestionFlujosTrabajo);
     }
     
     @FXML
     private void gestionTickets() throws IOException{
-        abrir.abrirVentana("GestionarTicket.fxml");
-        cerrar.cerrar(gestionTickets);
+        operacion.abrirVentana("GestionarTicket.fxml");
+        operacion.cerrar(gestionTickets);
     }
     
     @Override

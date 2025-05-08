@@ -28,44 +28,43 @@ public class GestionarTicketController implements Initializable {
     public javafx.scene.control.Button reasignarTicket;
     public javafx.scene.control.Button verReporte;
     
-    AbrirVentana abrir = new AbrirVentana();
-    CerrarVentana cerrar = new CerrarVentana();
+    OperacionesVentana operaciones = new OperacionesVentana();
     
     public void crearNuevoTicket() throws Exception{
-        cerrar.cerrar(crearNuevoTicket);
-        abrir.abrirVentana("CrearTicket.fxml");
+        operaciones.cerrar(crearNuevoTicket);
+        operaciones.abrirVentana("CrearTicket.fxml");
     }
     
     public void atras() throws Exception{
-        cerrar.cerrar(atras);
-        abrir.abrirVentana("Admin.fxml");
+        operaciones.cerrar(atras);
+        operaciones.abrirVentana("Admin.fxml");
     }
     
     public void cambiarEstado() throws Exception{
-        cerrar.cerrar(cambiarEstado);
-        abrir.abrirVentana("ModificarEstado.fxml");
+        operaciones.cerrar(cambiarEstado);
+        operaciones.abrirVentana("ModificarEstado.fxml");
     }
     
     public void agregarNota() throws Exception{
-        cerrar.cerrar(agregarNota);
-        abrir.abrirVentana("AgregarNota.fxml");
+        operaciones.cerrar(agregarNota);
+        operaciones.abrirVentana("AgregarNota.fxml");
     }
     
     public void adjuntarDocumentacion() throws Exception{
         JOptionPane.showMessageDialog(null, "Se guardaron los cambios exitosamente");
-        cerrar.cerrar(atras);
-        abrir.abrirVentana("Admin.fxml");
+        operaciones.cerrar(atras);
+        operaciones.abrirVentana("Admin.fxml");
     }
     
     public void reasignarTicket() throws Exception{
         JOptionPane.showMessageDialog(null, "Se guardaron los cambios exitosamente");
-        cerrar.cerrar(reasignarTicket);
-        abrir.abrirVentana("Admin.fxml");
+        operaciones.cerrar(reasignarTicket);
+        operaciones.abrirVentana("Admin.fxml");
     }
     
     public void verReporte() throws Exception{
-        cerrar.cerrar(verReporte);
-        abrir.abrirVentana("Admin.fxml");
+        operaciones.cerrar(verReporte);
+        operaciones.abrirVentana("Admin.fxml");
     }
     
     @Override

@@ -25,33 +25,32 @@ public class GestionEstadosTicketController implements Initializable {
     public javafx.scene.control.Button eliminarEstado;
     public javafx.scene.control.Button atras;
     
-    AbrirVentana abrir = new AbrirVentana();
-    CerrarVentana cerrar = new CerrarVentana();
+    OperacionesVentana operaciones = new OperacionesVentana();
     
     @FXML
     private void crearEstado() throws Exception{
-        abrir.abrirVentana("CrearEstado.fxml");
-        cerrar.cerrar(crearEstado);
+        operaciones.abrirVentana("CrearEstado.fxml");
+        operaciones.cerrar(crearEstado);
     }
     
     @FXML
     private void modificarEstado() throws Exception{
         JOptionPane.showMessageDialog(null, "Se modificó el estado exitosamente");
-        abrir.abrirVentana("Admin.fxml");
-        cerrar.cerrar(modificarEstado);
+        operaciones.abrirVentana("Admin.fxml");
+        operaciones.cerrar(modificarEstado);
     }
     
     @FXML
     private void eliminarEstado() throws Exception{
         JOptionPane.showMessageDialog(null, "Se eliminó el estado exitosamente");
-        abrir.abrirVentana("Admin.fxml");
-        cerrar.cerrar(eliminarEstado);
+        operaciones.abrirVentana("Admin.fxml");
+        operaciones.cerrar(eliminarEstado);
     }
     
     @FXML
     private void atras() throws Exception{
-        abrir.abrirVentana("Admin.fxml");
-        cerrar.cerrar(atras);
+        operaciones.abrirVentana("Admin.fxml");
+        operaciones.cerrar(atras);
     }
     
     @Override

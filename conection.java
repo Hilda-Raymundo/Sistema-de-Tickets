@@ -8,13 +8,15 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author hraym
  */
-public class conection {
+public class conection extends OperacionesVentana{
     
     Connection connect = null;
     ConfiguracionDelSistemaController configuracion = new ConfiguracionDelSistemaController();
@@ -23,10 +25,7 @@ public class conection {
     private String zonaHoraria;
     private int tiempoVencimientoTicketsInactivos;
     private String nivelesPrioridad;
-    
-    AbrirVentana abrir = new AbrirVentana();
-    CerrarVentana cerrar = new CerrarVentana();
-
+    private String dato;
     public String getIdioma() {
         return idioma;
     }
@@ -166,15 +165,15 @@ public class conection {
                         if(rs2.next()){
                              JOptionPane.showMessageDialog(null, "BIENVENIDO " + rs2.getString("nombre_rol"));
                              if(rs2.getString("nombre_rol").equals("administrador")){
-                                 abrir.abrirVentana("Admin.fxml");
+                                 abrirVentana("Admin.fxml");
                              }
                              if(rs2.getString("nombre_rol").equals("tecnico")){
-                                 abrir.abrirVentana("Tecnico.fxml");
+                                 abrirVentana("Tecnico.fxml");
                              }
                              if(rs2.getString("nombre_rol").equals("usuario")){
-                                 abrir.abrirVentana("Usuario.fxml");
+                                 abrirVentana("Usuario.fxml");
                              }
-                             abrir.usuarioQueIngreso(rs.getInt("id_usuario"));
+                                 usuarioQueIngreso(rs.getInt("id_usuario"));
                         }
                     }else{
                         System.out.println("contrasenia incorrecta");
@@ -188,4 +187,26 @@ public class conection {
             connect.close();
         }
     }
+
+    public ObservableList<DatosTableView> obtenerListado(String sql, String parametroEspecifico) throws SQLException{
+        ObservableList<DatosTableView> listado = FXCollections.observableArrayList();
+        connect = null;
+        PreparedStatement ps=null;
+        conectar();
+            try {
+                ps = connect.prepareStatement(sql);
+                ResultSet rs = ps.executeQuery();
+                while(rs.next()){
+                   String dato = rs.getString(parametroEspecifico);
+                   listado.add(new DatosTableView(dato));
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(conection.class.getName()).log(Level.SEVERE, null, ex);
+            }finally{
+                conectar().close();
+            }
+            
+        return listado;
+    }
+    
 }

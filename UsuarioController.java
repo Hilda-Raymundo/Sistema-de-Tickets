@@ -21,8 +21,7 @@ public class UsuarioController implements Initializable {
      * Initializes the controller class.
      */
     
-    AbrirVentana abrir = new AbrirVentana();
-    CerrarVentana cerrar = new CerrarVentana();
+    OperacionesVentana operaciones = new OperacionesVentana();
     
     public javafx.scene.control.Button crearTicket;
     public javafx.scene.control.Button consultarTicket;
@@ -32,32 +31,32 @@ public class UsuarioController implements Initializable {
         
     @FXML
     private void crearTicket() throws IOException{
-        abrir.abrirVentana("CrearTicket.fxml");
-        cerrar.cerrar(crearTicket);
+        operaciones.abrirVentana("CrearTicket.fxml");
+        operaciones.cerrar(crearTicket);
     }
     
     @FXML
     private void consultarTicket() throws IOException{
-        abrir.abrirVentana("MisTickets.fxml");
-        cerrar.cerrar(consultarTicket);
+        operaciones.abrirVentana("MisTickets.fxml");
+        operaciones.cerrar(consultarTicket);
     }
     
     @FXML
     private void agregarNota() throws IOException{
-        abrir.abrirVentana("Notas.fxml");
-        cerrar.cerrar(agregarNota);
+        operaciones.abrirVentana("Notas.fxml");
+        operaciones.cerrar(agregarNota);
     }
     
     @FXML
     private void cancelarTicket() throws IOException{
-        abrir.abrirVentana("SolicitudCancelacionTicket.fxml");
-        cerrar.cerrar(cancelarTicket);
+        operaciones.abrirVentana("SolicitudCancelacionTicket.fxml");
+        operaciones.cerrar(cancelarTicket);
     }
     
     @FXML
     private void atras() throws IOException{
-        abrir.abrirVentana("Principal.fxml");
-        cerrar.cerrar(atras);
+        operaciones.abrirVentana("Principal.fxml");
+        operaciones.cerrar(atras);
     }
     
     @Override
