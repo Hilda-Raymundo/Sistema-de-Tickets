@@ -4,6 +4,7 @@
  */
 package sistemadetickets;
 
+import java.awt.Image;
 import java.sql.ResultSet;
 import java.sql.PreparedStatement;
 import java.awt.image.BufferedImage;
@@ -11,18 +12,17 @@ import java.beans.Statement;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.CheckBoxTableCell;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
-import javafx.scene.image.WritableImage;
+import javafx.scene.image.*;
 import javafx.stage.FileChooser;
 import javafx.util.Callback;
 import javax.imageio.ImageIO;
@@ -64,14 +64,32 @@ public class ConfiguracionDelSistemaController implements Initializable {
     
     @FXML
     public void cargarLogo() throws IOException{
-        FileChooser cargar = new FileChooser();
-        FileChooser.ExtensionFilter filtroJPG = new FileChooser.ExtensionFilter("JPG files(*.jpg)", "*.JPG");
-        FileChooser.ExtensionFilter filtroPNG = new FileChooser.ExtensionFilter("PNG files(*.png)", "*.PNG");
-        cargar.getExtensionFilters().addAll(filtroJPG, filtroPNG);
-        File file = cargar.showOpenDialog(null);
-        BufferedImage bi = ImageIO.read(file);
-        WritableImage img = SwingFXUtils.toFXImage(bi, null);
-        logo.setImage(img);
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Seleccionar imagen");
+        fileChooser.getExtensionFilters().add(
+            new FileChooser.ExtensionFilter("Imágenes", "*.png", "*.jpg", "*.jpeg")
+        );
+        File archivo = fileChooser.showOpenDialog(null);
+
+        if (archivo != null) {
+            BufferedImage bi = ImageIO.read(archivo);
+            WritableImage img = SwingFXUtils.toFXImage(bi, null);
+            logo.setImage(img);
+
+            File carpetaDestino = new File("C:\\Users\\hraym\\OneDrive\\Documentos\\NetBeansProjects\\SistemaDeTickets\\src\\sistemadetickets\\imagenes");
+            if (!carpetaDestino.exists()) {
+                carpetaDestino.mkdirs();
+            }
+
+            File destino = new File(carpetaDestino, archivo.getName());
+
+            try {
+                Files.copy(archivo.toPath(), destino.toPath(), StandardCopyOption.REPLACE_EXISTING);
+                parametro.setLogo(archivo.getName());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
     
     @FXML
@@ -86,25 +104,13 @@ public class ConfiguracionDelSistemaController implements Initializable {
     
     @FXML
     public void guardar() throws IOException{
-        if(nombreEmpresa.getText().equals("") || diasVencimiento.getValue().equals("") || idiomas.getSelectionModel().getSelectedItem().toString().equals("") || zonaHoraria.getSelectionModel().getSelectedItem().toString().equals("")){
-            JOptionPane.showMessageDialog(null, "Hay campos vacíos");
-        }else{
-            parametro.setNombreEmpresa(nombreEmpresa.getText());
-            parametro.setTiempoVencimientoTicketsInactivos(diasVencimiento.getValue());
-            parametro.setIdioma(idiomas.getSelectionModel().getSelectedItem().toString());
-            parametro.setZonaHoraria(zonaHoraria.getSelectionModel().getSelectedItem().toString());
-            
-            if(indice>2){
-                parametro.guardarConfiguracion();
-                operaciones.abrirVentana("Admin.fxml");
-                operaciones.cerrar(guardar);
-            }else{
-                JOptionPane.showMessageDialog(null, "Se requieren al menos 3 niveles de prioridad");
-                indice = 0;
-            }
-        }        
+        parametro.setNombreEmpresa(nombreEmpresa.getText());
+        parametro.setIdioma(idiomas.getValue());
+        parametro.setZonaHoraria(zonaHoraria.getValue());
+        parametro.setTiempoVencimientoTicketsInactivos(diasVencimiento.getValue());
+        
     }
-    
+   
     @FXML
     public void comboBoxIdiomas() throws IOException{        
     }
@@ -141,7 +147,7 @@ public class ConfiguracionDelSistemaController implements Initializable {
             }
             nombrePrioridad.setCellValueFactory(cellData->cellData.getValue().dato1());
             estadoPrioridad.setCellValueFactory(cellData->cellData.getValue().checkbox());
-            estadoPrioridad.setCellFactory(CheckBoxTableCell.forTableColumn(estadoPrioridad));
+            estadoPrioridad.setCellFactory(CheckBoxTableCell.forTableColumn(estadoPrioridad));  
             estadoPrioridad.setEditable(true);
             tablaPrioridades.setEditable(true);
             tablaPrioridades.setItems(conectado.obtenerListado("SELECT nombre_prioridad FROM prioridades", "nombre_prioridad"));

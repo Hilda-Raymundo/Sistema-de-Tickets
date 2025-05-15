@@ -19,13 +19,14 @@ import javax.swing.JOptionPane;
 public class conection extends OperacionesVentana{
     
     Connection connect = null;
-    ConfiguracionDelSistemaController configuracion = new ConfiguracionDelSistemaController();
+    ConfiguracionSistema configuracion = new ConfiguracionSistema();
     private String idioma;
     private String nombreEmpresa;
     private String zonaHoraria;
     private int tiempoVencimientoTicketsInactivos;
     private String nivelesPrioridad;
     private String dato;
+    
     public String getIdioma() {
         return idioma;
     }
@@ -160,21 +161,16 @@ public class conection extends OperacionesVentana{
             while(rs.next()){
                 if(usuario.equals(rs.getString("nombre_usuario"))){
                     if(contrasenia.equals(rs.getString("contrasenia"))){
-                        ps2 = connect.prepareStatement("SELECT nombre_rol FROM roles INNER JOIN usuarios ON roles.id_rol = '"+ rs.getString("id_rol") +"' ");
-                        ResultSet rs2 = ps2.executeQuery();
-                        if(rs2.next()){
-                             JOptionPane.showMessageDialog(null, "BIENVENIDO " + rs2.getString("nombre_rol"));
-                             if(rs2.getString("nombre_rol").equals("administrador")){
-                                 abrirVentana("Admin.fxml");
-                             }
-                             if(rs2.getString("nombre_rol").equals("tecnico")){
-                                 abrirVentana("Tecnico.fxml");
-                             }
-                             if(rs2.getString("nombre_rol").equals("usuario")){
-                                 abrirVentana("Usuario.fxml");
-                             }
-                                 usuarioQueIngreso(rs.getInt("id_usuario"));
+                        if(rs.getString("id_usuario").equals("1")){
+                            abrirVentana("Admin.fxml");
                         }
+                        if(rs.getString("id_usuario").equals("2")){
+                            abrirVentana("Tecnico.fxml");
+                        }
+                        if(rs.getString("id_usuario").equals("3")){
+                            abrirVentana("Usuario.fxml");
+                        }
+                        setIdUsuario(rs.getInt("id_usuario"));
                     }else{
                         System.out.println("contrasenia incorrecta");
                     }

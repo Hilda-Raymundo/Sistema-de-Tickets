@@ -32,8 +32,8 @@ public class AdminController implements Initializable {
             
     @FXML
     private void configuracionDelSistema() throws IOException{
-        operacion.abrirVentana("ConfiguracionDelSistema.fxml");
-        operacion.cerrar(configuracionDelSistema);
+         operacion.abrirVentana("ConfiguracionDelSistema.fxml");
+         operacion.cerrar(configuracionDelSistema);
     }
     
     @FXML

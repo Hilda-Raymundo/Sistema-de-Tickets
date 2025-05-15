@@ -17,7 +17,7 @@ public class ConfiguracionSistema {
     OperacionesVentana operaciones = new OperacionesVentana();
         
     private String nombreEmpresa;
-    private Image logo;
+    private String logo;
     private String idioma;
     private String zonaHoraria;
     private int tiempoVencimientoTicketsInactivos;
@@ -36,14 +36,16 @@ public class ConfiguracionSistema {
         }
     }
 
-    public Image getLogo() {
+    public String getLogo() {
         return logo;
     }
 
-    public void setLogo(Image logo) {
+    public void setLogo(String logo) {
         this.logo = logo;
     }
 
+    
+    
     public String getIdioma() {
         return idioma;
     }
@@ -90,13 +92,7 @@ public class ConfiguracionSistema {
     }
     
     public void guardarConfiguracion() throws IOException{
-            JOptionPane.showMessageDialog(null, "Se guardaron los parametros: \n"
-                        + "Nombre de la empresa: " + this.nombreEmpresa + "\n"
-                        + "Logo de la empresa: " + this.logo + "\n"
-                        + "Idioma: " + this.idioma + "\n"
-                        + "Zona horaria: " + this.zonaHoraria + "\n"
-                        + "Tiempo días vencimiento: " + this.tiempoVencimientoTicketsInactivos + "\n"
-                        + "Catidad de Niveles Prioridad: " + this.cantidadNivelesPrioridad);
+            
     }
     
     public void cancelarConfiguracion(){

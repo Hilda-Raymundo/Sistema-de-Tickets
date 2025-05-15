@@ -17,6 +17,18 @@ import javafx.stage.Stage;
  */
 public class OperacionesVentana {
     
+    private int idUsuario; 
+
+    public int getIdUsuario() {
+        System.out.println(idUsuario);
+        return idUsuario;
+    }
+
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
+        System.out.println(this.idUsuario);
+    }
+        
     @FXML
     public void abrirVentana(String direccion) throws IOException{
         Stage formulario = new Stage();
@@ -31,9 +43,4 @@ public class OperacionesVentana {
        Stage formulario = (Stage) volver.getScene().getWindow();
        formulario.close();
     }
-    
-    public void usuarioQueIngreso(int idUsuario){
-        System.out.println(idUsuario);
-    }
-    
 }
