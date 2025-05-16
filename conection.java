@@ -184,25 +184,66 @@ public class conection extends OperacionesVentana{
         }
     }
 
-    public ObservableList<DatosTableView> obtenerListado(String sql, String parametroEspecifico) throws SQLException{
+    public ObservableList<DatosTableView> obtenerListado(String sql, String parametro1, String parametro2) throws SQLException{
         ObservableList<DatosTableView> listado = FXCollections.observableArrayList();
+        listado.clear();
+        
         connect = null;
-        PreparedStatement ps=null;
+        PreparedStatement ps = null;
         conectar();
-            try {
-                ps = connect.prepareStatement(sql);
-                ResultSet rs = ps.executeQuery();
-                while(rs.next()){
-                   String dato = rs.getString(parametroEspecifico);
-                   listado.add(new DatosTableView(dato));
+        boolean check = false;
+        
+        try {
+            ps = connect.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){      
+                String nombre = rs.getString(parametro1); 
+                int id = rs.getInt(parametro2);
+                if(id > 0){
+                    check = true;
+                }else {
+                    check = false;
                 }
-            } catch (SQLException ex) {
-                Logger.getLogger(conection.class.getName()).log(Level.SEVERE, null, ex);
-            }finally{
-                conectar().close();
+                listado.add(new DatosTableView(check, nombre));
             }
+        } catch (Exception e) {
+            // Si hay un error en la conexión
+            JOptionPane.showMessageDialog(null, "ERRORES:" + e.toString());
+        }finally{
+            connect.close();
+        }
             
         return listado;
     }
     
+    public void insertarDatos(String consulta) throws SQLException{
+        connect = null;
+        PreparedStatement ps = null;
+        conectar();
+        
+        try {
+            ps = connect.prepareStatement(consulta);
+            ps.executeQuery();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "ERRORES:" + e.toString());
+        }finally{
+            connect.close();
+        }
+    }
+    
+    public void actualizarDatos(String consulta) throws SQLException{
+        connect = null;
+        PreparedStatement ps = null;
+        conectar();
+        
+        try {
+            ps = connect.prepareStatement(consulta);
+            ps.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Operacion exitosa");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "ERRORES:" + e.toString());
+        }finally{
+            connect.close();
+        }
+    }
 }

@@ -4,8 +4,8 @@
  */
 package sistemadetickets;
 
-import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.*;
 
 /**
  *
@@ -13,33 +13,28 @@ import javafx.beans.property.SimpleStringProperty;
  */
 public class DatosTableView {
     
-    public final SimpleStringProperty dato1;
-    public final SimpleBooleanProperty checkbox;
+    private final BooleanProperty checkbox;
+    private final StringProperty nombre;
 
-    public DatosTableView(String dato1) {
-        this.dato1 = new SimpleStringProperty(dato1);
-        this.checkbox = new SimpleBooleanProperty();
+    public DatosTableView(Boolean checkbox, String nombre) {
+        this.checkbox = new SimpleBooleanProperty(checkbox);
+        this.nombre = new SimpleStringProperty(nombre);
     }
     
-    public String getDato1(){
-        return dato1.get();
-    }
-    
-    public boolean seleccionCheckbox(){
+    public boolean getCheckbox(){
         return checkbox.get();
-    }
-    
-    public SimpleStringProperty dato1() {
-        return dato1;
-    }
-    
-    public SimpleBooleanProperty checkbox(){
-        return checkbox;
     }
     
     public void setCheckbox(boolean checkbox){
         this.checkbox.set(checkbox);
-        
     }
     
+    public BooleanProperty checkboxProperty(){
+        return checkbox;
+    }
+    
+    public String getNombre(){
+        return nombre.get();
+    }
+
 }

@@ -4,18 +4,18 @@
  */
 package sistemadetickets;
 
-import java.awt.Image;
-import java.sql.ResultSet;
-import java.sql.PreparedStatement;
 import java.awt.image.BufferedImage;
-import java.beans.Statement;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -24,7 +24,6 @@ import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.*;
 import javafx.stage.FileChooser;
-import javafx.util.Callback;
 import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
 
@@ -57,38 +56,38 @@ public class ConfiguracionDelSistemaController implements Initializable {
     public TableColumn<DatosTableView, String> nombrePrioridad;
     @FXML
     public TableColumn<DatosTableView, Boolean> estadoPrioridad;
-    @FXML
-    public TableView<DatosTableView> tablaPrioridadesPrevias;
-    @FXML
-    public TableColumn<DatosTableView, String> nombrePrioridadPrevia;
     
     @FXML
     public void cargarLogo() throws IOException{
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Seleccionar imagen");
-        fileChooser.getExtensionFilters().add(
-            new FileChooser.ExtensionFilter("Imágenes", "*.png", "*.jpg", "*.jpeg")
-        );
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Imágenes", "*.png", "*.jpg", "*.jpeg"));
         File archivo = fileChooser.showOpenDialog(null);
 
-        if (archivo != null) {
-            BufferedImage bi = ImageIO.read(archivo);
-            WritableImage img = SwingFXUtils.toFXImage(bi, null);
-            logo.setImage(img);
+            if (archivo != null) {
 
-            File carpetaDestino = new File("C:\\Users\\hraym\\OneDrive\\Documentos\\NetBeansProjects\\SistemaDeTickets\\src\\sistemadetickets\\imagenes");
-            if (!carpetaDestino.exists()) {
-                carpetaDestino.mkdirs();
-            }
+                long pesoImagen = archivo.length();
+                if(pesoImagen<= 2097152){
+                    BufferedImage bi = ImageIO.read(archivo);
+                WritableImage img = SwingFXUtils.toFXImage(bi, null);
+                logo.setImage(img);
 
-            File destino = new File(carpetaDestino, archivo.getName());
+                File carpetaDestino = new File("C:\\Users\\hraym\\OneDrive\\Documentos\\NetBeansProjects\\SistemaDeTickets\\src\\sistemadetickets\\imagenes");
+                if (!carpetaDestino.exists()) {
+                    carpetaDestino.mkdirs();
+                }
 
-            try {
-                Files.copy(archivo.toPath(), destino.toPath(), StandardCopyOption.REPLACE_EXISTING);
-                parametro.setLogo(archivo.getName());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+                File destino = new File(carpetaDestino, archivo.getName());
+
+                try {
+                    Files.copy(archivo.toPath(), destino.toPath(), StandardCopyOption.REPLACE_EXISTING);
+                    parametro.setLogo(archivo.getName());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }else{
+            JOptionPane.showMessageDialog(null, "La imagen pesa más de 2MB");
+            }            
         }
     }
     
@@ -109,6 +108,23 @@ public class ConfiguracionDelSistemaController implements Initializable {
         parametro.setZonaHoraria(zonaHoraria.getValue());
         parametro.setTiempoVencimientoTicketsInactivos(diasVencimiento.getValue());
         
+        ObservableList<DatosTableView> prioridades = tablaPrioridades.getItems();
+        ArrayList<String> prioridadesSeleccionadas = new ArrayList<>();
+
+        for (DatosTableView prioridad : prioridades) {
+            if (prioridad.getCheckbox()) {
+                prioridadesSeleccionadas.add(prioridad.getNombre());
+            }
+        }
+        
+        if(parametro.getLogo()==(null)){
+            parametro.setLogo("");
+        }
+        
+        parametro.setNivelesPrioridad(prioridadesSeleccionadas);
+        parametro.guardarConfiguracion();
+        operaciones.abrirVentana("Admin.fxml");
+        operaciones.cerrar(guardar);
     }
    
     @FXML
@@ -145,15 +161,14 @@ public class ConfiguracionDelSistemaController implements Initializable {
             for(int i = 0; i<listado2.size(); i++){
                 zonaHoraria.getItems().add(listado2.get(i));
             }
-            nombrePrioridad.setCellValueFactory(cellData->cellData.getValue().dato1());
-            estadoPrioridad.setCellValueFactory(cellData->cellData.getValue().checkbox());
-            estadoPrioridad.setCellFactory(CheckBoxTableCell.forTableColumn(estadoPrioridad));  
-            estadoPrioridad.setEditable(true);
+            
+            estadoPrioridad.setCellValueFactory(cellData -> cellData.getValue().checkboxProperty());
+            estadoPrioridad.setCellFactory(CheckBoxTableCell.forTableColumn(estadoPrioridad));
+            nombrePrioridad.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getNombre()));
+            
+            tablaPrioridades.setItems(conectado.obtenerListado("SELECT u.nombre_prioridad, (SELECT id_prioridad FROM prioridades_configuracion_sistema t WHERE t.id_prioridad = u.id_prioridad) FROM prioridades u;", "nombre_prioridad" , "id_prioridad"));
             tablaPrioridades.setEditable(true);
-            tablaPrioridades.setItems(conectado.obtenerListado("SELECT nombre_prioridad FROM prioridades", "nombre_prioridad"));
-            nombrePrioridadPrevia.setCellValueFactory(cellData->cellData.getValue().dato1());
-            tablaPrioridadesPrevias.setItems(conectado.obtenerListado("select nombre_prioridad from prioridades inner join prioridades_configuracion_sistema on prioridades.id_prioridad = prioridades_configuracion_sistema.id_prioridad inner join configuracion_sistema on prioridades_configuracion_sistema.id_configuracion_sistema = configuracion_sistema.id_configuracion_sistema and configuracion_sistema.seleccionada = 'si'", "nombre_prioridad"));
-        }catch(Exception e){
+            }catch(Exception e){
             JOptionPane.showMessageDialog(null, "Erroresss: " + e.toString());
         }
         

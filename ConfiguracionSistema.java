@@ -4,8 +4,11 @@
  */
 package sistemadetickets;
 
-import java.awt.Image;
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -21,8 +24,7 @@ public class ConfiguracionSistema {
     private String idioma;
     private String zonaHoraria;
     private int tiempoVencimientoTicketsInactivos;
-    private String[] nivelesPrioridad = new String[6];
-    private int cantidadNivelesPrioridad = 0;
+    private ArrayList<String> nivelesPrioridad;
 
     public String getNombreEmpresa() {
         return nombreEmpresa;
@@ -30,9 +32,15 @@ public class ConfiguracionSistema {
 
     public void setNombreEmpresa(String nombreEmpresa) {
         if(nombreEmpresa.equals("")){
-            System.out.println("El campo -Nombre de la empresa- está vacío");
+            this.nombreEmpresa = "";
+            JOptionPane.showMessageDialog(null, "El campo -Nombre de la empresa- está vacío");
         }else{
-            this.nombreEmpresa = nombreEmpresa;
+            if(nombreEmpresa.length()>=3 && nombreEmpresa.length()<=100){
+                this.nombreEmpresa = nombreEmpresa;
+            }else{
+                this.nombreEmpresa = "";
+                JOptionPane.showMessageDialog(null, "El nombre de la empresa no cumple con la cantidad de caracteres necesarios");
+            }
         }
     }
 
@@ -41,10 +49,13 @@ public class ConfiguracionSistema {
     }
 
     public void setLogo(String logo) {
-        this.logo = logo;
+        if(logo.equals("")){
+            this.logo = "";
+            JOptionPane.showMessageDialog(null, "el logo no fue seleccionado");
+        }else{
+            this.logo = logo;
+        }
     }
-
-    
     
     public String getIdioma() {
         return idioma;
@@ -52,6 +63,7 @@ public class ConfiguracionSistema {
 
     public void setIdioma(String idioma) {
         if(idioma.equals("")){
+            this.idioma = "";
             JOptionPane.showMessageDialog(null, "El camp IDIOMA está vacío");
         }else{
             this.idioma = idioma;
@@ -78,30 +90,41 @@ public class ConfiguracionSistema {
         if(tiempoVencimientoTicketsInactivos>=1 && tiempoVencimientoTicketsInactivos<=365){
             this.tiempoVencimientoTicketsInactivos = tiempoVencimientoTicketsInactivos;
         }else{
-            System.out.println("El tiempo de vencimiento ingresado no se encuentra dentro del rango permitido");
+            this.tiempoVencimientoTicketsInactivos = 0;
+            JOptionPane.showMessageDialog(null, "El tiempo de vencimiento ingresado no se encuentra dentro del rango permitido");
         }
     }
 
-    public String[] getNivelesPrioridad() {
+    public ArrayList<String> getNivelesPrioridad() {
         return nivelesPrioridad;
     }
 
-    public void setNivelesPrioridad(String nivelesPrioridad, int indice) {
-       this.nivelesPrioridad[indice] = nivelesPrioridad; 
-       this.cantidadNivelesPrioridad = indice + 1;
+    public void setNivelesPrioridad(ArrayList<String> nivelesPrioridad) {
+        if(nivelesPrioridad.size() > 2 ){
+            this.nivelesPrioridad = nivelesPrioridad;
+        }else{
+            JOptionPane.showMessageDialog(null, "Se deben configurar al menos 3 niveles de prioridad");
+        }
     }
     
     public void guardarConfiguracion() throws IOException{
-            
+        conection conectar = new conection();
+        
+        if(!this.nombreEmpresa.equals("") && !this.idioma.equals("") && !this.zonaHoraria.equals("") && this.tiempoVencimientoTicketsInactivos >0 && !this.logo.equals("") && this.nivelesPrioridad != null){
+            try {
+                conectar.actualizarDatos("UPDATE configuracion_sistema SET nombre_empresa = '"+ this.nombreEmpresa +"', idioma = (SELECT id_idioma FROM idiomas WHERE nombre_idioma = '"+ this.idioma +"'), zona_horaria = (SELECT id_zona_horaria FROM zonas_horarias WHERE nombre_zona_horaria = '"+ this.zonaHoraria +"'), tiempo_vencimiento_tickets_inactivos = "+ this.tiempoVencimientoTicketsInactivos +", logo_empresa = '"+ this.logo +"' WHERE id_configuracion_sistema = 1");
+                
+            } catch (SQLException ex) {
+                Logger.getLogger(ConfiguracionSistema.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
     
     public void cancelarConfiguracion(){
         this.nombreEmpresa = "";
         this.idioma = "";
         this.zonaHoraria = "";
-        for(int i=0;i<nivelesPrioridad.length;i++){
-            this.nivelesPrioridad[i] = "";
-        }
+        
     }
     
     public void enviarNotificaciones(){
