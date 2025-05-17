@@ -4,7 +4,9 @@
  */
 package sistemadetickets;
 
-import java.util.Date;
+import java.sql.SQLException;
+import java.time.LocalDate;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -12,8 +14,16 @@ import java.util.Date;
  */
 public class HistorialConfiguracionesSistema extends Historial{
     
-    public HistorialConfiguracionesSistema(int numeroModificacion, Date fechaModificacion, String usuario, String descripcion) {
-        super(numeroModificacion, fechaModificacion, usuario, descripcion);
+    public HistorialConfiguracionesSistema(LocalDate fechaModificacion, String descripcion, String usuario) throws SQLException {
+        super(fechaModificacion, descripcion, usuario);
+        
+        try{
+            conection conectado = new conection();
+            conectado.insertarDatos("INSERT INTO historial(fecha_accion, descripcion, id_usuario) VALUES('"+ fechaModificacion +"', '"+ descripcion +"', '"+ usuario +"')");
+
+        }catch(SQLException e){
+            JOptionPane.showMessageDialog(null, "ha habido un error en la conexion");
+        }
     }
     
     @Override

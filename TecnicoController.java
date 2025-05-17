@@ -5,8 +5,14 @@
 package sistemadetickets;
 
 import java.net.URL;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.fxml.Initializable;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javax.swing.JOptionPane;
 
 /**
@@ -26,6 +32,7 @@ public class TecnicoController implements Initializable {
     public javafx.scene.control.Button agregarNotaATicket;
     public javafx.scene.control.Button adjuntarDocumentacion;
     public javafx.scene.control.Button gestionarSolicitudDeTicket;
+    public ImageView logo;
     
     OperacionesVentana operaciones = new OperacionesVentana();
     
@@ -62,6 +69,15 @@ public class TecnicoController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        ArrayList<String> listado = new ArrayList<>();
+        try {
+            conection conectado = new conection();
+            listado = conectado.consultaListados("SELECT * FROM configuracion_sistema", "logo_empresa");
+            Image image = new Image("file:/C:/Users/hraym/OneDrive/Documentos/NetBeansProjects/SistemaDeTickets/src/sistemadetickets/imagenes/"+listado.get(0));
+            logo.setImage(image);
+        } catch (SQLException ex) {
+            Logger.getLogger(UsuarioController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }    
     
 }

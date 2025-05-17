@@ -4,7 +4,8 @@
  */
 package sistemadetickets;
 
-import java.util.Date;
+import java.sql.SQLException;
+import java.time.LocalDate;
 import javax.swing.JOptionPane;
 
 /**
@@ -13,35 +14,21 @@ import javax.swing.JOptionPane;
  */
 abstract class Historial {
     
-    private int numeroModificacion;
-    private Date fechaModificacion;
+    private LocalDate fechaModificacion;
     private String usuario;
     private String descripcion;
 
-    public Historial(int numeroModificacion, Date fechaModificacion, String usuario, String descripcion) {
-        this.numeroModificacion = numeroModificacion;
+    public Historial(LocalDate fechaModificacion, String descripcion, String usuario) throws SQLException {
         this.fechaModificacion = fechaModificacion;
         this.usuario = usuario;
         this.descripcion = descripcion;
     }
 
-    public int getNumeroModificacion() {
-        return numeroModificacion;
-    }
-
-    public void setNumeroModificacion(int numeroModificacion) {
-        if(numeroModificacion<0){
-            System.out.println("El numero de modificacion es inválido");
-        }else{
-            this.numeroModificacion = numeroModificacion;
-        }
-    }
-
-    public Date getFechaModificacion() {
+    public LocalDate getFechaModificacion() {
         return fechaModificacion;
     }
 
-    public void setFechaModificacion(Date fechaModificacion) {
+    public void setFechaModificacion(LocalDate fechaModificacion) {
         this.fechaModificacion = fechaModificacion;
     }
 

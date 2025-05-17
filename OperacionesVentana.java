@@ -16,18 +16,6 @@ import javafx.stage.Stage;
  * @author hraym
  */
 public class OperacionesVentana {
-    
-    private int idUsuario; 
-
-    public int getIdUsuario() {
-        System.out.println(idUsuario);
-        return idUsuario;
-    }
-
-    public void setIdUsuario(int idUsuario) {
-        this.idUsuario = idUsuario;
-        System.out.println(this.idUsuario);
-    }
         
     @FXML
     public void abrirVentana(String direccion) throws IOException{

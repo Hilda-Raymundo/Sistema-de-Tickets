@@ -4,7 +4,8 @@
  */
 package sistemadetickets;
 
-import java.util.Date;
+import java.sql.SQLException;
+import java.time.LocalDate;
 
 /**
  *
@@ -12,8 +13,8 @@ import java.util.Date;
  */
 public class HistorialEstados extends Historial{
     
-    public HistorialEstados(int numeroModificacion, Date fechaModificacion, String usuario, String descripcion) {
-        super(numeroModificacion, fechaModificacion, usuario, descripcion);
+    public HistorialEstados(LocalDate fechaModificacion, String descripcion, String usuario) throws SQLException {
+        super(fechaModificacion, descripcion, usuario);
     }
     
     @Override

@@ -4,8 +4,9 @@
  */
 package sistemadetickets;
 
+import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.Date;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -27,8 +28,8 @@ public class HistorialTickets extends Historial{
         }
     }    
 
-    public HistorialTickets(int numeroTicket, int numeroModificacion, Date fechaModificacion, String usuario, String descripcion) {
-        super(numeroModificacion, fechaModificacion, usuario, descripcion);
+    public HistorialTickets(int numeroTicket, LocalDate fechaModificacion, String usuario, String descripcion) throws SQLException {
+        super(fechaModificacion, usuario, descripcion);
         this.numeroTicket = numeroTicket;
     }   
     

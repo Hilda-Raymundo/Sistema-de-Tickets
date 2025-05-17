@@ -83,11 +83,7 @@
             </Pane>
          </children>
       </Pane>
-      <ImageView fitHeight="176.0" fitWidth="223.0" layoutX="411.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@imagenes/usuario.png" />
-         </image>
-      </ImageView>
+      <ImageView fx:id="logo" fitHeight="176.0" fitWidth="223.0" layoutX="411.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true" />
       <Label layoutX="344.0" layoutY="46.0" text="Bienvenido !">
          <font>
             <Font name="Segoe UI Black" size="50.0" />

@@ -10,11 +10,10 @@ import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
+import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
@@ -47,7 +46,6 @@ public class ConfiguracionDelSistemaController implements Initializable {
     public ComboBox<String> idiomas;
     public ComboBox<String> zonaHoraria;
     public Spinner<Integer> diasVencimiento;
-    private int indice = 0;
     public ImageView logo; 
     ConfiguracionSistema parametro = new ConfiguracionSistema();
     @FXML
@@ -102,7 +100,7 @@ public class ConfiguracionDelSistemaController implements Initializable {
     }
     
     @FXML
-    public void guardar() throws IOException{
+    public void guardar() throws IOException, SQLException{
         parametro.setNombreEmpresa(nombreEmpresa.getText());
         parametro.setIdioma(idiomas.getValue());
         parametro.setZonaHoraria(zonaHoraria.getValue());
@@ -117,14 +115,8 @@ public class ConfiguracionDelSistemaController implements Initializable {
             }
         }
         
-        if(parametro.getLogo()==(null)){
-            parametro.setLogo("");
-        }
-        
         parametro.setNivelesPrioridad(prioridadesSeleccionadas);
-        parametro.guardarConfiguracion();
-        operaciones.abrirVentana("Admin.fxml");
-        operaciones.cerrar(guardar);
+        parametro.guardarConfiguracion();                    
     }
    
     @FXML
@@ -138,6 +130,7 @@ public class ConfiguracionDelSistemaController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        ArrayList<String> imagen = new ArrayList<>();
         SpinnerValueFactory<Integer> listaDiasVencimiento = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 365);
         listaDiasVencimiento.setValue(1);
         diasVencimiento.setValueFactory(listaDiasVencimiento);
@@ -148,6 +141,10 @@ public class ConfiguracionDelSistemaController implements Initializable {
         try{
             conectado.consulta(sql);
             nombreEmpresa.setText(conectado.getNombreEmpresa());
+            imagen = conectado.consultaListados("SELECT * FROM configuracion_sistema", "logo_empresa");
+            Image image = new Image("file:/C:/Users/hraym/OneDrive/Documentos/NetBeansProjects/SistemaDeTickets/src/sistemadetickets/imagenes/"+imagen.get(0));
+            logo.setImage(image);
+            parametro.setLogo(imagen.get(0));
             idiomas.setValue(conectado.getIdioma());
             zonaHoraria.setValue(conectado.getZonaHoraria());
             diasVencimiento.getValueFactory().setValue(conectado.getTiempoVencimientoTicketsInactivos());

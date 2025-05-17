@@ -6,6 +6,7 @@ package sistemadetickets;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -113,7 +114,9 @@ public class ConfiguracionSistema {
         if(!this.nombreEmpresa.equals("") && !this.idioma.equals("") && !this.zonaHoraria.equals("") && this.tiempoVencimientoTicketsInactivos >0 && !this.logo.equals("") && this.nivelesPrioridad != null){
             try {
                 conectar.actualizarDatos("UPDATE configuracion_sistema SET nombre_empresa = '"+ this.nombreEmpresa +"', idioma = (SELECT id_idioma FROM idiomas WHERE nombre_idioma = '"+ this.idioma +"'), zona_horaria = (SELECT id_zona_horaria FROM zonas_horarias WHERE nombre_zona_horaria = '"+ this.zonaHoraria +"'), tiempo_vencimiento_tickets_inactivos = "+ this.tiempoVencimientoTicketsInactivos +", logo_empresa = '"+ this.logo +"' WHERE id_configuracion_sistema = 1");
-                
+                LocalDate fecha = LocalDate.now();
+                int id= conectar.getIdUsuario();
+                HistorialConfiguracionesSistema historial = new HistorialConfiguracionesSistema(fecha, "El usuario con id: " + id + " guardo los datos; nombre de la empresa: " + this.nombreEmpresa + ", idioma: " + this.idioma + ", zona horaria: " + this.zonaHoraria + "tiempo tickets: " + this.tiempoVencimientoTicketsInactivos + ", logo: " + this.logo, " "+ id + " ");
             } catch (SQLException ex) {
                 Logger.getLogger(ConfiguracionSistema.class.getName()).log(Level.SEVERE, null, ex);
             }
