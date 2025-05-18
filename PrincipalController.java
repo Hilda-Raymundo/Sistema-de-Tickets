@@ -30,8 +30,7 @@ public class PrincipalController implements Initializable {
     conection conectarse = new conection();
     
     public void login() throws IOException, SQLException{
-        conectarse.loguearse(usuario.getText(), password.getText());
-        operaciones.cerrar(loguearse);
+        conectarse.loguearse(usuario.getText(), password.getText(), loguearse);
     }
     
     /**

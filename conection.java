@@ -9,6 +9,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Button;
 import javax.swing.JOptionPane;
 
 /**
@@ -129,36 +130,51 @@ public class conection extends OperacionesVentana{
         }
     }
     
-    public void loguearse(String usuario, String contrasenia) throws SQLException{        
-        try (Connection conn = conectar();
-            PreparedStatement ps = conn.prepareStatement("SELECT * FROM usuarios");
-            ResultSet rs = ps.executeQuery()){
-            
-            while(rs.next()){
-                if(usuario.equals(rs.getString("nombre_usuario"))){
-                    if(contrasenia.equals(rs.getString("contrasenia"))){
-                        if(rs.getString("id_usuario").equals("1")){
-                            abrirVentana("Admin.fxml");
+    public void loguearse(String usuario, String contrasenia, Button boton) throws SQLException{
+        boolean usuarioEncontrado = false;
+        
+        if(!usuario.equals("") && !contrasenia.equals("")){
+            try (Connection conn = conectar();
+                PreparedStatement ps = conn.prepareStatement("SELECT * FROM usuarios");
+                ResultSet rs = ps.executeQuery()){
+
+                while(rs.next()){
+                    if(usuario.equals(rs.getString("nombre_usuario"))){
+                        if(contrasenia.equals(rs.getString("contrasenia"))){
+                            if(rs.getString("id_usuario").equals("1")){
+                                abrirVentana("Admin.fxml");
+                            }
+                            if(rs.getString("id_usuario").equals("2")){
+                                abrirVentana("Tecnico.fxml");
+                            }
+                            if(rs.getString("id_usuario").equals("3")){
+                                abrirVentana("Usuario.fxml");
+                            }
+                            usuarioEncontrado = true;
+                            cerrar(boton);
+                            LocalDate fecha = LocalDate.now();
+                            HistorialConfiguracionesSistema historial = new HistorialConfiguracionesSistema(fecha, "El usuario " + rs.getString("nombre_usuario") + " ingreso al sistema " + rs.getString("id_usuario"), rs.getString("id_usuario"));
+                            ConfiguracionDelSistemaController configuracion = new ConfiguracionDelSistemaController();
+                            setIdUsuario(rs.getInt("id_usuario"));
+                        }else{
+                            usuarioEncontrado = true;
+                            JOptionPane.showMessageDialog(null,"contrasenia incorrecta");
                         }
-                        if(rs.getString("id_usuario").equals("2")){
-                            abrirVentana("Tecnico.fxml");
-                        }
-                        if(rs.getString("id_usuario").equals("3")){
-                            abrirVentana("Usuario.fxml");
-                        }
-                        LocalDate fecha = LocalDate.now();
-                        HistorialConfiguracionesSistema historial = new HistorialConfiguracionesSistema(fecha, "El usuario " + rs.getString("nombre_usuario") + " ingreso al sistema " + rs.getString("id_usuario"), rs.getString("id_usuario"));
-                        ConfiguracionDelSistemaController configuracion = new ConfiguracionDelSistemaController();
-                        setIdUsuario(rs.getInt("id_usuario"));
-                    }else{
-                        System.out.println("contrasenia incorrecta");
-                    }
-                }         
-            }            
-        } catch (Exception e) {
-            // Si hay un error en la conexión
-            JOptionPane.showMessageDialog(null, "ERROR:" + e.getMessage());
+                    }       
+                }  
+                
+                if(usuarioEncontrado == false){
+                    JOptionPane.showMessageDialog(null, "No se encontró al usuario");
+                }
+            } catch (Exception e) {
+                // Si hay un error en la conexión
+                JOptionPane.showMessageDialog(null, "ERROR:" + e.getMessage());
+            }
+        }else{
+            JOptionPane.showMessageDialog(null, "Llene todos los campos");
         }
+        
+        
     }
 
     public ObservableList<DatosTableView> obtenerListado(String sql, String parametro1, String parametro2) throws SQLException{
@@ -172,13 +188,13 @@ public class conection extends OperacionesVentana{
             ResultSet rs = ps.executeQuery()) {
             while(rs.next()){      
                 String nombre = rs.getString(parametro1); 
-                int id = rs.getInt(parametro2);
-                if(id > 0){
-                    check = true;
-                }else{
-                    check = false;
-                }
-                listado.add(new DatosTableView(check, nombre));
+                    int id = rs.getInt(parametro2);
+                        if(id > 0){
+                            check = true;
+                        }else{
+                            check = false;
+                        }
+                        listado.add(new DatosTableView(check, nombre));
             }
         } catch (Exception e) {
             // Si hay un error en la conexión
@@ -187,7 +203,36 @@ public class conection extends OperacionesVentana{
         return listado;
     }
     
+    public ArrayList<String> obtenerLista(String sql, String parametroEspecifico){
+        ArrayList<String> lista = new ArrayList<>();
+        
+        try (Connection conn = conectar();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery()) {
+            while(rs.next()){      
+                String dato = rs.getString(parametroEspecifico); 
+                lista.add(dato);
+            }
+        } catch (Exception e) {
+            // Si hay un error en la conexión
+            JOptionPane.showMessageDialog(null, "ERRORES:" + e.getMessage());
+        }
+        
+        return lista;
+    }
+    
     public void insertarDatos(String consulta) throws SQLException{
+        try (Connection conn = conectar();
+            PreparedStatement ps = conn.prepareStatement(consulta)){
+            
+            ps.executeUpdate();
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "ERRORES:" + e.getMessage());
+        }
+    }
+    
+    public void eliminarDatos(String consulta) throws SQLException{
         try (Connection conn = conectar();
             PreparedStatement ps = conn.prepareStatement(consulta)){
             

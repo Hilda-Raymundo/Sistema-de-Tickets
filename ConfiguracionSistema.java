@@ -10,6 +10,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.scene.control.Button;
 import javax.swing.JOptionPane;
 
 /**
@@ -108,7 +109,8 @@ public class ConfiguracionSistema {
         }
     }
     
-    public void guardarConfiguracion() throws IOException{
+    public void guardarConfiguracion(Button boton) throws IOException{
+        ConfiguracionDelSistemaController configuracion = new ConfiguracionDelSistemaController();
         conection conectar = new conection();
         
         if(!this.nombreEmpresa.equals("") && !this.idioma.equals("") && !this.zonaHoraria.equals("") && this.tiempoVencimientoTicketsInactivos >0 && !this.logo.equals("") && this.nivelesPrioridad != null){
@@ -116,7 +118,13 @@ public class ConfiguracionSistema {
                 conectar.actualizarDatos("UPDATE configuracion_sistema SET nombre_empresa = '"+ this.nombreEmpresa +"', idioma = (SELECT id_idioma FROM idiomas WHERE nombre_idioma = '"+ this.idioma +"'), zona_horaria = (SELECT id_zona_horaria FROM zonas_horarias WHERE nombre_zona_horaria = '"+ this.zonaHoraria +"'), tiempo_vencimiento_tickets_inactivos = "+ this.tiempoVencimientoTicketsInactivos +", logo_empresa = '"+ this.logo +"' WHERE id_configuracion_sistema = 1");
                 LocalDate fecha = LocalDate.now();
                 int id= conectar.getIdUsuario();
-                HistorialConfiguracionesSistema historial = new HistorialConfiguracionesSistema(fecha, "El usuario con id: " + id + " guardo los datos; nombre de la empresa: " + this.nombreEmpresa + ", idioma: " + this.idioma + ", zona horaria: " + this.zonaHoraria + "tiempo tickets: " + this.tiempoVencimientoTicketsInactivos + ", logo: " + this.logo, " "+ id + " ");
+                HistorialConfiguracionesSistema historial = new HistorialConfiguracionesSistema(fecha, "El usuario con id: " + id + " guardo los datos; nombre de la empresa: " + this.nombreEmpresa + ", idioma: " + this.idioma + ", zona horaria: " + this.zonaHoraria + "tiempo tickets: " + this.tiempoVencimientoTicketsInactivos + ", logo: " + this.logo, " "+ id + " ");                
+                operaciones.abrirVentana("Admin.fxml");
+                operaciones.cerrar(boton);
+                conectar.eliminarDatos("TRUNCATE TABLE prioridades_configuracion_sistema");
+                for(String prioridades : this.nivelesPrioridad){
+                    conectar.insertarDatos("INSERT INTO prioridades_configuracion_sistema(id_configuracion_sistema, id_prioridad) VALUES(1, (SELECT id_prioridad FROM prioridades WHERE nombre_prioridad = '"+ prioridades +"'))");
+                }
             } catch (SQLException ex) {
                 Logger.getLogger(ConfiguracionSistema.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -127,7 +135,8 @@ public class ConfiguracionSistema {
         this.nombreEmpresa = "";
         this.idioma = "";
         this.zonaHoraria = "";
-        
+        this.logo = "";
+        this.tiempoVencimientoTicketsInactivos = 0;        
     }
     
     public void enviarNotificaciones(){

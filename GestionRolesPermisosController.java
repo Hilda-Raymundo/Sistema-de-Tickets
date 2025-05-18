@@ -5,11 +5,19 @@
 package sistemadetickets;
 
 import java.net.URL;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javax.swing.JOptionPane;
 
 /**
  * FXML Controller class
@@ -21,51 +29,24 @@ public class GestionRolesPermisosController implements Initializable {
     /**
      * Initializes the controller class.
      */
-    private String[][] roles;
-    private String[][] permisos;
     
     public javafx.scene.control.Button crearRol;
     public javafx.scene.control.Button modificarRol;
     public javafx.scene.control.Button eliminarRol;
     public javafx.scene.control.Button gestionarPermiso;    
     public javafx.scene.control.Button atras;
-    public TableView tablaRoles;
+    @FXML
+    public TableView<String> tablaRoles;
+    @FXML
+    public TableColumn<String, String> nombreRol;
+    @FXML
+    public TableView<String> tablaPermisos;
+    @FXML
+    public TableColumn<String, String> nombrePermiso;
+    
     
     OperacionesVentana operaciones = new OperacionesVentana();
-    
-    public GestionRolesPermisosController(/*String[][] roles, String[][] permisos*/){
-//        this.roles = new String[roles.length][2];
-//        for(int i=0; i<this.roles.length; i++){
-//            for(int e=0; e<2; e++){
-//                this.roles[i][e] = roles[i][e];
-//            }
-//        }
-//        this.permisos = new String[permisos.length][2];
-//        for(int i=0; i<this.permisos.length; i++){
-//            for(int e=0; e<2; e++){
-//                this.permisos[i][e] = permisos[i][e];
-//            };
-//        }
-    }
-
-    public String[][] getRoles() {
-        return roles;
-    }
-
-    public void setRoles(String[][] roles) {
-        this.roles = roles;
-    }
-
-    public String[][] getPermisos() {
-        return permisos;
-    }
-
-    public void setPermisos(String[][] permisos) {
-        this.permisos = permisos;
-    }
-    
-    
-    
+        
     @FXML
     private void crearRol() throws Exception{
         operaciones.abrirVentana("CrearRol.fxml");
@@ -98,9 +79,9 @@ public class GestionRolesPermisosController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-//        tablaRoles = new TableView<String>();
-//        tablaRoles.getItems().add("hola");
+        Administrador admin = new Administrador("", "", "", "", "", "");
+        admin.consultarRoles();
+        admin.consultarPermisos();
     }    
     
 }

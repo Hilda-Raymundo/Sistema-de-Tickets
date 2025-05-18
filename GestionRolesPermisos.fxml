@@ -35,9 +35,9 @@
                   <Image url="@imagenes/admin.jpg" />
                </image>
             </ImageView>
-            <TableView layoutX="254.0" layoutY="139.0" prefHeight="146.0" prefWidth="282.0">
+            <TableView fx:id="tablaRoles" layoutX="254.0" layoutY="139.0" prefHeight="146.0" prefWidth="282.0">
               <columns>
-                <TableColumn prefWidth="75.0" text="Nombre" />
+                <TableColumn fx:id="nombreRol" prefWidth="75.0" text="Nombre" />
                 <TableColumn prefWidth="75.0" text="Descripcion" />
               </columns>
             </TableView>

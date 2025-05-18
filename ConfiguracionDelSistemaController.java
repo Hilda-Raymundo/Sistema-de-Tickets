@@ -47,6 +47,7 @@ public class ConfiguracionDelSistemaController implements Initializable {
     public ComboBox<String> zonaHoraria;
     public Spinner<Integer> diasVencimiento;
     public ImageView logo; 
+    
     ConfiguracionSistema parametro = new ConfiguracionSistema();
     @FXML
     public TableView<DatosTableView> tablaPrioridades;
@@ -54,7 +55,7 @@ public class ConfiguracionDelSistemaController implements Initializable {
     public TableColumn<DatosTableView, String> nombrePrioridad;
     @FXML
     public TableColumn<DatosTableView, Boolean> estadoPrioridad;
-    
+
     @FXML
     public void cargarLogo() throws IOException{
         FileChooser fileChooser = new FileChooser();
@@ -116,7 +117,7 @@ public class ConfiguracionDelSistemaController implements Initializable {
         }
         
         parametro.setNivelesPrioridad(prioridadesSeleccionadas);
-        parametro.guardarConfiguracion();                    
+        parametro.guardarConfiguracion(guardar);
     }
    
     @FXML

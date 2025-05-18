@@ -6,6 +6,8 @@ package sistemadetickets;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -21,6 +23,7 @@ public class AdminController implements Initializable {
      * Initializes the controller class.
      */
     OperacionesVentana operacion = new OperacionesVentana();
+    conection conectar = new conection();
     
     public javafx.scene.control.Button configuracionDelSistema;
     public javafx.scene.control.Button gestionRolesPermisos;
@@ -29,6 +32,7 @@ public class AdminController implements Initializable {
     public javafx.scene.control.Button gestionEstadosTicket;
     public javafx.scene.control.Button gestionFlujosTrabajo;
     public javafx.scene.control.Button gestionTickets;
+    public javafx.scene.control.Button salir;
             
     @FXML
     private void configuracionDelSistema() throws IOException{
@@ -70,6 +74,16 @@ public class AdminController implements Initializable {
     private void gestionTickets() throws IOException{
         operacion.abrirVentana("GestionarTicket.fxml");
         operacion.cerrar(gestionTickets);
+    }
+    
+    @FXML
+    private void salir() throws IOException, SQLException{
+         operacion.abrirVentana("Principal.fxml");
+         operacion.cerrar(salir);
+         LocalDate fecha = LocalDate.now();
+         
+         int id= conectar.getIdUsuario();
+         HistorialConfiguracionesSistema historial = new HistorialConfiguracionesSistema(fecha, "El usuario con id: " + id + " salio del sistema ", ""+ id +"");                
     }
     
     @Override
