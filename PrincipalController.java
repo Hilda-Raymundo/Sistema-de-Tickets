@@ -21,9 +21,6 @@ public class PrincipalController implements Initializable {
 
     public TextField usuario;
     public TextField password;
-    //Datos temporales
-
-    OperacionesVentana operaciones = new OperacionesVentana();
     
     public Button loguearse;
     
@@ -38,9 +35,7 @@ public class PrincipalController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-        //Informacion temporal
-        
+       
     }    
     
 }

@@ -67,8 +67,8 @@ public class Departamentos extends ParametrosSistema{
         }
     }
     
-    public Departamentos(String identificador, String nombre, String descripcion) {
-        super(identificador, nombre, descripcion);
+    public Departamentos(String nombre, String descripcion) {
+        super(nombre, descripcion);
     }
     
     public void crearColaAtencion(){

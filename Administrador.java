@@ -5,7 +5,15 @@
 package sistemadetickets;
 
 import java.io.IOException;
+import java.sql.SQLException;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javax.swing.JOptionPane;
 
 /**
@@ -14,7 +22,8 @@ import javax.swing.JOptionPane;
  */
 public class Administrador extends Persona{
     
-    private Roles parametros = new Roles("", "", "");
+    private Roles parametros = new Roles("", "");
+    conection conectar = new conection();
     
     public Administrador(String nombreCompleto, String correo, String nombreUsuario, String contrasenia, String rol, String estado) {
         super(nombreCompleto, correo, nombreUsuario, contrasenia, rol, estado);
@@ -28,24 +37,52 @@ public class Administrador extends Persona{
     
     }
     
-    public void crearRoles(Button cerrar, String nombre, String descripcion) throws IOException{
-        parametros.setNombre(nombre);
-        parametros.setDescripcion(descripcion);
-        if(nombre.equals("") || descripcion.equals("")){
+    public void crearRoles(Button cerrar, String nombre, String descripcion, ArrayList<String> permisos) throws IOException{
+        if(nombre.equals("") || descripcion.equals("") || permisos.size()<1){
+            parametros.setNombre(nombre);
+            parametros.setDescripcion(descripcion);
+            parametros.setPermisosAsignados(permisos);
         }else{
-        JOptionPane.showMessageDialog(null, "¡Creación exitosa!");
-        cerrar(cerrar);
-        abrirVentana("GestionRolesPermisos.fxml");
+            parametros.setNombre(nombre);
+            parametros.setDescripcion(descripcion);
+            try {
+                conectar.insertarDatos("INSERT INTO roles(nombre_rol, descripcion_rol) VALUES( '"+ parametros.getNombre() +"', '"+ parametros.getDescripcion() +"' )");
+                for(String permiso : permisos){
+                    conectar.insertarDatos("INSERT INTO roles_permisos(id_rol, id_permiso) VALUES((SELECT MAX(id_rol) FROM roles), (SELECT id_permiso FROM permisos WHERE nombre_permiso= '"+ permiso +"'));");
+                }
+                JOptionPane.showMessageDialog(null, "Operacion exitosa!");
+                cerrar(cerrar);
+                abrirVentana("GestionRolesPermisos.fxml");
+                LocalDate fecha = LocalDate.now();
+                int id= conectar.getIdUsuario();
+                HistorialConfiguracionesSistema historial = new HistorialConfiguracionesSistema(fecha, "Se guardo el rol(nombre = "+ parametros.getNombre() +", descripcion = "+ parametros.getDescripcion() +", permisos asignados = "+ permisos +") ", "" + id);
+            } catch (SQLException ex) {
+                Logger.getLogger(Administrador.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
     
-    public void modificarRoles(Button modificar, String descripcion) throws IOException{
-        parametros.setDescripcion(descripcion);
-        if(descripcion.equals("")){
+    public void modificarRoles(Button modificar, String nombre, String descripcion, ArrayList<String> permisos) throws IOException{
+        if(!descripcion.equals("") && !nombre.equals("")){
+            parametros.setDescripcion(descripcion);
+            parametros.setPermisosAsignados(permisos);
+            try {
+                conectar.actualizarDatos("update roles set descripcion_rol = '"+ parametros.getDescripcion() +"' where id_rol = (select id_rol from roles where nombre_rol = '"+ nombre + "')");
+//                conectar.eliminarDatos("DELETE FROM roles_permisos WHERE id_rol IN (SELECT id_rol from roles where nombre_rol = '"+ nombre +"' ) ");
+                for(String permiso : permisos){
+                    conectar.insertarDatos("insert into roles_permisos(id_rol, id_permiso) VALUES((select id_rol from roles where nombre_rol = '"+ nombre +"'), (select id_permiso from permisos where nombre_permiso = '"+ permiso +"'))");
+                }
+                cerrar(modificar);
+                abrirVentana("GestionRolesPermisos.fxml");
+                LocalDate fecha = LocalDate.now();
+                int id= conectar.getIdUsuario();
+                HistorialConfiguracionesSistema historial = new HistorialConfiguracionesSistema(fecha, "Se modifico el rol(nombre = "+ nombre +", nueva descripcion = "+ parametros.getDescripcion() +", nuevos permisos = "+ permisos +") ", "" + id);
+            } catch (SQLException ex) {
+                Logger.getLogger(Administrador.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }else{
-        JOptionPane.showMessageDialog(null, "¡Modificación exitosa!");
-        cerrar(modificar);
-        abrirVentana("GestionRolesPermisos.fxml");
+            parametros.setDescripcion("");
+            parametros.setNombre(nombre);
         }
     }
     
@@ -59,8 +96,15 @@ public class Administrador extends Persona{
         }
     }
     
-    public void consultarRoles(){
-        
+    public void consultarRoles(TableView<DatosTableViewSinCheckbox> tabla, TableColumn<DatosTableViewSinCheckbox, String> columna1, TableColumn<DatosTableViewSinCheckbox, String> columna2){
+        try {
+            columna1.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDato1()));
+            columna2.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDato2()));
+            tabla.setItems(conectar.obtenerListado("SELECT * FROM roles;", "nombre_rol" , "descripcion_rol"));
+            tabla.setEditable(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(GestionRolesPermisosController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     public void asignarRoles(){
@@ -102,8 +146,14 @@ public class Administrador extends Persona{
     
     }
     
-    public void consultarPermisos(){
-    
+    public void consultarPermisos(TableView<DatosTableViewSinCheckbox> tabla, TableColumn<DatosTableViewSinCheckbox, String> columna1, TableColumn<DatosTableViewSinCheckbox, String> columna2){
+        try {            
+            columna1.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDato1()));
+            columna2.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDato2()));
+            tabla.setItems(conectar.obtenerListado("SELECT * FROM permisos;", "nombre_permiso", "descripcion_permiso"));
+        } catch (SQLException ex) {
+            Logger.getLogger(GestionRolesPermisosController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     public void crearTickets(){

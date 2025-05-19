@@ -41,8 +41,8 @@ public class Permisos extends ParametrosSistema{
         }
     }
     
-    public Permisos(String identificador, String nombre, String descripcion) {
-        super(identificador, nombre, descripcion);
+    public Permisos(String nombre, String descripcion) {
+        super(nombre, descripcion);
     }
     
     public void asignarRoles(){

@@ -35,20 +35,20 @@
                   <Image url="@imagenes/admin.jpg" />
                </image>
             </ImageView>
-            <TableView fx:id="tablaRoles" layoutX="254.0" layoutY="139.0" prefHeight="146.0" prefWidth="282.0">
+            <TableView fx:id="tablaRoles" layoutX="254.0" layoutY="95.0" prefHeight="211.0" prefWidth="282.0">
               <columns>
-                <TableColumn fx:id="nombreRol" prefWidth="75.0" text="Nombre" />
-                <TableColumn prefWidth="75.0" text="Descripcion" />
+                <TableColumn fx:id="nombreRol" prefWidth="141.60003662109375" text="Nombre" />
+                  <TableColumn fx:id="descripcionRol" prefWidth="160.79998779296875" text="Descripcion" />
               </columns>
             </TableView>
-            <TableView layoutX="557.0" layoutY="139.0" prefHeight="146.0" prefWidth="264.0">
+            <TableView fx:id="tablaPermisos" layoutX="557.0" layoutY="95.0" prefHeight="211.0" prefWidth="273.0">
               <columns>
-                <TableColumn prefWidth="75.0" text="Nombre" />
-                <TableColumn prefWidth="75.0" text="Descripcion" />
+                <TableColumn fx:id="nombrePermiso" prefWidth="140.0" text="Nombre" />
+                  <TableColumn fx:id="descripcionPermiso" prefWidth="124.79986572265625" text="Descripcion" />
               </columns>
             </TableView>
-            <Label layoutX="254.0" layoutY="116.0" text="Roles existentes:" />
-            <Label layoutX="557.0" layoutY="116.0" text="Permisos existentes:" />
+            <Label layoutX="254.0" layoutY="76.0" text="Roles existentes:" />
+            <Label layoutX="557.0" layoutY="76.0" text="Permisos existentes:" />
             <Button fx:id="crearRol" layoutX="254.0" layoutY="340.0" mnemonicParsing="false" onAction="#crearRol" prefHeight="60.0" prefWidth="365.0" style="-fx-background-color: #96C549; -fx-background-radius: 50;" text="Crear Rol">
                <font>
                   <Font name="Rockwell" size="22.0" />

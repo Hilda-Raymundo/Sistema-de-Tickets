@@ -4,8 +4,7 @@
  */
 package sistemadetickets;
 
-import java.io.IOException;
-import javafx.scene.control.Button;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /**
@@ -14,37 +13,24 @@ import javax.swing.JOptionPane;
  */
 public class Roles extends ParametrosSistema{
     
-    private String[] permisosAsignados;
-    private boolean vacio = true;
+    private ArrayList<String> permisosAsignados;
 
-    public String[] getPermisosAsignados() {
+    public ArrayList<String> getPermisosAsignados() {
         return permisosAsignados;
     }
 
-    public void setPermisosAsignados(String[] permisosAsignados) {
-        for(int i=0; i<= permisosAsignados.length; i++){
-            if(vacio==true){
-                if(permisosAsignados[i].equals("")){
-                    vacio = true;
-                }else{
-                    vacio = false;
-                }
-            }
-            this.permisosAsignados[i] = permisosAsignados[i];
-        }
-        
-        if(vacio==true){
-            JOptionPane.showMessageDialog(null, "El campo ROLES ASIGNADOS está vacío");
-            for(int i = 0; i<permisosAsignados.length;i++){
-                this.permisosAsignados[i] =  "";
-            }
+    public void setPermisosAsignados(ArrayList<String> permisosAsignados) {
+        if(permisosAsignados.size()<1){
+            JOptionPane.showMessageDialog(null, "Seleccione permisos a asignar");
         }else{
-            vacio = true;
+            this.permisosAsignados = permisosAsignados;
         }
     }
     
-    public Roles(String identificador, String nombre, String descripcion) {
-        super(identificador, nombre, descripcion);
+    
+    
+    public Roles(String nombre, String descripcion) {
+        super(nombre, descripcion);
     }
     
     public void asignarUsuario(){

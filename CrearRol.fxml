@@ -22,24 +22,24 @@
             </Label>
          </children>
       </Pane>
-      <Pane layoutY="140.0" prefHeight="454.0" prefWidth="812.0" style="-fx-background-color: white; -fx-background-radius: 50;">
+      <Pane layoutY="108.0" prefHeight="502.0" prefWidth="812.0" style="-fx-background-color: white; -fx-background-radius: 50;">
          <children>
             <Label layoutX="47.0" layoutY="26.0" text="Lista Roles existentes" />
-            <TableView layoutX="41.0" layoutY="55.0" prefHeight="170.0" prefWidth="311.0">
+            <TableView fx:id="tablaRoles" layoutX="41.0" layoutY="55.0" prefHeight="374.0" prefWidth="355.0">
               <columns>
-                <TableColumn prefWidth="75.0" text="Nombre" />
-                <TableColumn prefWidth="75.0" text="Descripcion" />
+                <TableColumn fx:id="nombre_rol" prefWidth="181.5999984741211" text="Nombre" />
+                <TableColumn fx:id="descripcion_rol" prefWidth="158.4000244140625" text="Descripcion" />
               </columns>
             </TableView>
-            <Label layoutX="441.0" layoutY="55.0" text="Nombre:" />
-            <TextField fx:id="nombreRol" layoutX="441.0" layoutY="79.0" prefHeight="31.0" prefWidth="297.0">
+            <Label layoutX="441.0" layoutY="26.0" text="Nombre:" />
+            <TextField fx:id="nombreRol" layoutX="441.0" layoutY="43.0" prefHeight="31.0" prefWidth="297.0">
                <font>
                   <Font size="15.0" />
                </font>
             </TextField>
-            <Label layoutX="441.0" layoutY="123.0" text="Descripción:" />
-            <TextArea fx:id="descripcionRol" layoutX="441.0" layoutY="140.0" prefHeight="107.0" prefWidth="297.0" />
-            <Button fx:id="crear" layoutX="612.0" layoutY="345.0" mnemonicParsing="false" onAction="#crearRol" prefHeight="30.0" prefWidth="126.0" style="-fx-background-color: orange; -fx-background-radius: 50;" text="Crear">
+            <Label layoutX="441.0" layoutY="84.0" text="Descripción:" />
+            <TextArea fx:id="descripcionRol" layoutX="441.0" layoutY="101.0" prefHeight="107.0" prefWidth="297.0" />
+            <Button fx:id="crear" layoutX="672.0" layoutY="458.0" mnemonicParsing="false" onAction="#crearRol" prefHeight="30.0" prefWidth="126.0" style="-fx-background-color: orange; -fx-background-radius: 50;" text="Crear">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
@@ -47,6 +47,21 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
+            <Button fx:id="cancelar" layoutX="535.0" layoutY="458.0" mnemonicParsing="false" onAction="#cancelar" prefHeight="30.0" prefWidth="126.0" style="-fx-background-color: red; -fx-background-radius: 50;" text="cancelar" textFill="#f7f7f7">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Label layoutX="441.0" layoutY="219.0" text="Asignar permisos:" />
+            <TableView fx:id="tablaPermisos" layoutX="441.0" layoutY="239.0" prefHeight="187.0" prefWidth="297.0">
+              <columns>
+                <TableColumn fx:id="nombrePermiso" prefWidth="189.60000610351562" text="Nombre" />
+                  <TableColumn fx:id="asignacionPermiso" prefWidth="96.79998779296875" text="Asignar(si/no)" />
+              </columns>
+            </TableView>
          </children>
       </Pane>
    </children>

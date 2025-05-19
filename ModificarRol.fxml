@@ -24,21 +24,21 @@
       </Pane>
       <Pane layoutY="106.0" prefHeight="498.0" prefWidth="900.0" style="-fx-background-color: white; -fx-background-radius: 50;">
          <children>
-            <Label layoutX="47.0" layoutY="26.0" text="Modificar rol:" />
-            <TableView layoutX="41.0" layoutY="72.0" prefHeight="170.0" prefWidth="311.0">
+            <Label layoutX="41.0" layoutY="14.0" text="Seleccionar Rol:" />
+            <TableView fx:id="tablaRoles" layoutX="41.0" layoutY="38.0" prefHeight="368.0" prefWidth="311.0">
                <columns>
-                  <TableColumn prefWidth="75.0" text="Nombre" />
-                  <TableColumn prefWidth="75.0" text="Descripcion" />
+                  <TableColumn fx:id="nombre_rol" onEditStart="#seleccionarRol" prefWidth="156.80001068115234" text="Nombre" />
+                  <TableColumn fx:id="descripcion_rol" prefWidth="141.5999755859375" text="Descripcion" />
                </columns>
             </TableView>
-            <Label layoutX="400.0" layoutY="53.0" text="Nombre:" />
-            <TextField fx:id="nombreRol" layoutX="400.0" layoutY="79.0" prefHeight="31.0" prefWidth="297.0">
+            <Label layoutX="398.0" layoutY="14.0" text="Nombre:" />
+            <TextField fx:id="nombreRol" editable="false" layoutX="400.0" layoutY="38.0" prefHeight="31.0" prefWidth="297.0">
                <font>
                   <Font size="15.0" />
                </font>
             </TextField>
-            <Label layoutX="398.0" layoutY="123.0" text="Descripción:" />
-            <TextArea fx:id="descripcionRol" layoutX="400.0" layoutY="140.0" prefHeight="107.0" prefWidth="297.0">
+            <Label layoutX="399.0" layoutY="78.0" text="Descripción:" />
+            <TextArea fx:id="descripcionRol" layoutX="400.0" layoutY="95.0" prefHeight="107.0" prefWidth="297.0">
                <font>
                   <Font size="15.0" />
                </font>
@@ -51,36 +51,16 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <TextField fx:id="rolSeleccionado" layoutX="122.0" layoutY="22.0" prefHeight="25.0" prefWidth="230.0">
-               <font>
-                  <Font size="15.0" />
-               </font>
-            </TextField>
-            <TableView fx:id="permisos" layoutX="639.0" layoutY="292.0" prefHeight="107.0" prefWidth="170.0">
+            <TableView fx:id="tablaPermisos" layoutX="400.0" layoutY="237.0" prefHeight="170.0" prefWidth="481.0">
               <columns>
-                <TableColumn prefWidth="75.0" text="Nombre" />
-                <TableColumn prefWidth="75.0" text="Descripcion" />
+                <TableColumn fx:id="nombrePermiso" prefWidth="334.3999938964844" text="Nombre" />
+                  <TableColumn fx:id="asignacionPermiso" prefWidth="136.79998779296875" text="Seleccionado(si/no)" />
               </columns>
             </TableView>
-            <TableView layoutX="400.0" layoutY="292.0" prefHeight="107.0" prefWidth="170.0">
-              <columns>
-                <TableColumn prefWidth="75.0" text="Nombre" />
-                <TableColumn prefWidth="75.0" text="Descripcion" />
-              </columns>
-            </TableView>
-            <Label layoutX="398.0" layoutY="271.0" text="Otros Permisos:" />
-            <Button layoutX="577.0" layoutY="292.0" mnemonicParsing="false" style="-fx-background-color: #96C549; -fx-background-radius: 50;" text="Añadir">
+            <Label layoutX="403.0" layoutY="214.0" text="Asignar permisos:" />
+            <Button fx:id="cancelar" layoutX="583.0" layoutY="454.0" mnemonicParsing="false" onAction="#cancelar" prefHeight="30.0" prefWidth="96.0" style="-fx-background-color: red; -fx-background-radius: 50;" text="Cancelar" textFill="WHITE">
                <font>
-                  <Font name="System Bold" size="12.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-            <Label layoutX="639.0" layoutY="271.0" text="Permisos actuales:" />
-            <Button layoutX="823.0" layoutY="292.0" mnemonicParsing="false" style="-fx-background-color: yellow; -fx-background-radius: 50;" text="Quitar">
-               <font>
-                  <Font name="System Bold" size="12.0" />
+                  <Font name="System Bold" size="14.0" />
                </font>
                <cursor>
                   <Cursor fx:constant="HAND" />

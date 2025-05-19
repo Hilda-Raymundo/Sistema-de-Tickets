@@ -54,8 +54,8 @@ public class Estados extends ParametrosSistema{
         }
     }    
 
-    public Estados(String identificador, String nombre, String descripcion) {
-        super(identificador, nombre, descripcion);
+    public Estados(String nombre, String descripcion) {
+        super(nombre, descripcion);
     }
     
     @Override

@@ -177,7 +177,7 @@ public class conection extends OperacionesVentana{
         
     }
 
-    public ObservableList<DatosTableView> obtenerListado(String sql, String parametro1, String parametro2) throws SQLException{
+    public ObservableList<DatosTableView> obtenerListadoYAsignarCheckbox(String sql, String parametro1, String parametro2) throws SQLException{
         ObservableList<DatosTableView> listado = FXCollections.observableArrayList();
         listado.clear();
 
@@ -187,7 +187,10 @@ public class conection extends OperacionesVentana{
             PreparedStatement ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery()) {
             while(rs.next()){      
-                String nombre = rs.getString(parametro1); 
+                String nombre = rs.getString(parametro1);
+                if(parametro2.equals("")){
+                    listado.add(new DatosTableView(false, nombre));
+                }else{
                     int id = rs.getInt(parametro2);
                         if(id > 0){
                             check = true;
@@ -195,39 +198,37 @@ public class conection extends OperacionesVentana{
                             check = false;
                         }
                         listado.add(new DatosTableView(check, nombre));
+                }
             }
         } catch (Exception e) {
             // Si hay un error en la conexión
             JOptionPane.showMessageDialog(null, "ERRORES:" + e.getMessage());
         }
         return listado;
-    }
+    }  
     
-    public ArrayList<String> obtenerLista(String sql, String parametroEspecifico){
-        ArrayList<String> lista = new ArrayList<>();
+    public ObservableList<DatosTableViewSinCheckbox> obtenerListado(String sql, String parametro1, String parametro2) throws SQLException{
+        ObservableList<DatosTableViewSinCheckbox> listado = FXCollections.observableArrayList();
+        listado.clear();
         
         try (Connection conn = conectar();
             PreparedStatement ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery()) {
             while(rs.next()){      
-                String dato = rs.getString(parametroEspecifico); 
-                lista.add(dato);
+                listado.add(new DatosTableViewSinCheckbox(rs.getString(parametro1), rs.getString(parametro2)));
             }
         } catch (Exception e) {
             // Si hay un error en la conexión
             JOptionPane.showMessageDialog(null, "ERRORES:" + e.getMessage());
         }
-        
-        return lista;
-    }
+        return listado;
+    }  
     
     public void insertarDatos(String consulta) throws SQLException{
         try (Connection conn = conectar();
             PreparedStatement ps = conn.prepareStatement(consulta)){
-            
             ps.executeUpdate();
-            
-        } catch (Exception e) {
+            } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "ERRORES:" + e.getMessage());
         }
     }

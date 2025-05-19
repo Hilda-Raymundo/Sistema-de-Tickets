@@ -10,8 +10,8 @@ package sistemadetickets;
  */
 public class EstadosTicket extends ParametrosSistema {
     
-    public EstadosTicket(String identificador, String nombre, String descripcion) {
-        super(identificador, nombre, descripcion);
+    public EstadosTicket(String nombre, String descripcion) {
+        super(nombre, descripcion);
     }
     
     @Override

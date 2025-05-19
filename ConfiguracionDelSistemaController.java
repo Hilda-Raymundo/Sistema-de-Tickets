@@ -164,7 +164,7 @@ public class ConfiguracionDelSistemaController implements Initializable {
             estadoPrioridad.setCellFactory(CheckBoxTableCell.forTableColumn(estadoPrioridad));
             nombrePrioridad.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getNombre()));
             
-            tablaPrioridades.setItems(conectado.obtenerListado("SELECT u.nombre_prioridad, (SELECT id_prioridad FROM prioridades_configuracion_sistema t WHERE t.id_prioridad = u.id_prioridad) FROM prioridades u;", "nombre_prioridad" , "id_prioridad"));
+            tablaPrioridades.setItems(conectado.obtenerListadoYAsignarCheckbox  ("SELECT u.nombre_prioridad, (SELECT id_prioridad FROM prioridades_configuracion_sistema t WHERE t.id_prioridad = u.id_prioridad) FROM prioridades u;", "nombre_prioridad" , "id_prioridad"));
             tablaPrioridades.setEditable(true);
             }catch(Exception e){
             JOptionPane.showMessageDialog(null, "Erroresss: " + e.toString());

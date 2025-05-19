@@ -12,26 +12,12 @@ import javax.swing.JOptionPane;
  */
 abstract class ParametrosSistema extends OperacionesVentana{
     
-    private String identificador;
     private String nombre;
     private String descripcion;
 
-    public ParametrosSistema(String identificador, String nombre, String descripcion) {
-        this.identificador = identificador;
+    public ParametrosSistema(String nombre, String descripcion) {
         this.nombre = nombre;
         this.descripcion = descripcion;
-    }
-
-    public String getIdentificador() {
-        return identificador;
-    }
-
-    public void setIdentificador(String identificador) {
-        if(identificador.equals("")){
-            System.out.println("El identificador es invalido");
-        }else{
-            this.identificador = identificador;
-        }
     }
 
     public String getNombre() {

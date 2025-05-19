@@ -5,19 +5,10 @@
 package sistemadetickets;
 
 import java.net.URL;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javax.swing.JOptionPane;
 
 /**
  * FXML Controller class
@@ -36,15 +27,19 @@ public class GestionRolesPermisosController implements Initializable {
     public javafx.scene.control.Button gestionarPermiso;    
     public javafx.scene.control.Button atras;
     @FXML
-    public TableView<String> tablaRoles;
+    public TableView<DatosTableViewSinCheckbox> tablaRoles;
     @FXML
-    public TableColumn<String, String> nombreRol;
+    public TableColumn<DatosTableViewSinCheckbox, String> nombreRol;
     @FXML
-    public TableView<String> tablaPermisos;
+    public TableColumn<DatosTableViewSinCheckbox, String> descripcionRol;
     @FXML
-    public TableColumn<String, String> nombrePermiso;
+    public TableView<DatosTableViewSinCheckbox> tablaPermisos;
+    @FXML
+    public TableColumn<DatosTableViewSinCheckbox, String> nombrePermiso;
+     @FXML
+    public TableColumn<DatosTableViewSinCheckbox, String> descripcionPermiso;
     
-    
+    conection conectar = new conection();
     OperacionesVentana operaciones = new OperacionesVentana();
         
     @FXML
@@ -80,8 +75,8 @@ public class GestionRolesPermisosController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         Administrador admin = new Administrador("", "", "", "", "", "");
-        admin.consultarRoles();
-        admin.consultarPermisos();
+        admin.consultarRoles(tablaRoles, nombreRol, descripcionRol);
+        admin.consultarPermisos(tablaPermisos, nombrePermiso, descripcionPermiso);
     }    
     
 }
