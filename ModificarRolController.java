@@ -60,16 +60,26 @@ public class ModificarRolController implements Initializable {
                 permisosSeleccionados.add(permiso.getNombre());
             }
         }
-        
         admin.modificarRoles(modificar, nombreRol.getText(), descripcionRol.getText(), permisosSeleccionados);
     }
     
     @FXML
     public void seleccionarRol(){
-        DatosTableViewSinCheckbox dato = tablaRoles.getSelectionModel().getSelectedItem();
-        if(dato!= null){
-            nombreRol.setText(dato.getDato1());
-            descripcionRol.setText(dato.getDato2());
+        try {
+            DatosTableViewSinCheckbox dato = tablaRoles.getSelectionModel().getSelectedItem();
+            conection conectado = new conection();
+            if(dato!= null){
+                nombreRol.setText(dato.getDato1());
+                descripcionRol.setText(dato.getDato2());
+            }
+            asignacionPermiso.setCellValueFactory(cellData -> cellData.getValue().checkboxProperty());
+            asignacionPermiso.setCellFactory(CheckBoxTableCell.forTableColumn(asignacionPermiso));
+            nombrePermiso.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getNombre()));
+            
+            tablaPermisos.setItems(conectado.obtenerListadoYAsignarCheckbox  ("SELECT p.nombre_permiso, rp.id_permiso FROM permisos p LEFT JOIN roles_permisos rp ON rp.id_permiso = p.id_permiso AND rp.id_rol = (select id_rol from roles where nombre_rol = '"+nombreRol.getText()+"' and descripcion_rol = '"+ descripcionRol.getText() +"');", "nombre_permiso" , "id_permiso"));
+            tablaPermisos.setEditable(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(ModificarRolController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
@@ -98,5 +108,4 @@ public class ModificarRolController implements Initializable {
             Logger.getLogger(CrearRolController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }    
-    
 }

@@ -255,4 +255,20 @@ public class conection extends OperacionesVentana{
             JOptionPane.showMessageDialog(null, "ERRORES:" + e.getMessage());
         }
     }
+    
+    public int buscar(String consulta)throws SQLException{
+        int datoEncontrado = 0;
+        try (Connection conn = conectar();
+            PreparedStatement ps = conn.prepareStatement(consulta)){
+            ResultSet rs = ps.executeQuery();
+            
+            if(rs.next()){
+                datoEncontrado++;
+            }
+            
+            } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "ERRORES:" + e.getMessage());
+        }
+        return datoEncontrado;
+    }
 }

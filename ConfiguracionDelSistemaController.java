@@ -115,7 +115,6 @@ public class ConfiguracionDelSistemaController implements Initializable {
                 prioridadesSeleccionadas.add(prioridad.getNombre());
             }
         }
-        
         parametro.setNivelesPrioridad(prioridadesSeleccionadas);
         parametro.guardarConfiguracion(guardar);
     }
