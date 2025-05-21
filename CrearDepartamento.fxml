@@ -25,11 +25,11 @@
       <Pane layoutY="148.0" prefHeight="481.0" prefWidth="951.0" style="-fx-background-color: white; -fx-background-radius: 50;">
          <children>
             <Label layoutX="47.0" layoutY="26.0" text="Lista Departamentos Existentes" />
-            <TableView layoutX="41.0" layoutY="55.0" prefHeight="170.0" prefWidth="311.0">
+            <TableView fx:id="tablaDepartamentos" layoutX="41.0" layoutY="55.0" prefHeight="366.0" prefWidth="311.0">
                <columns>
-                  <TableColumn prefWidth="75.0" text="Nombre" />
-                  <TableColumn prefWidth="75.0" text="Descripcion" />
-                  <TableColumn prefWidth="75.0" text="Tecnicos" />
+                  <TableColumn fx:id="nombre_Departamento" prefWidth="97.60000228881836" text="Nombre" />
+                  <TableColumn fx:id="descripcion_Departamento" prefWidth="108.79998779296875" text="Descripcion" />
+                  <TableColumn fx:id="tecnicos_asignados" prefWidth="98.40000915527344" text="Tecnicos" />
                </columns>
             </TableView>
             <Label layoutX="389.0" layoutY="26.0" text="Nombre:" />
@@ -49,12 +49,20 @@
                </cursor>
             </Button>
             <Label layoutX="389.0" layoutY="237.0" text="Tecnicos disponibles:" />
-            <TableView layoutX="389.0" layoutY="254.0" prefHeight="170.0" prefWidth="494.0">
+            <TableView fx:id="tablaTecnicos" layoutX="389.0" layoutY="254.0" prefHeight="170.0" prefWidth="494.0">
               <columns>
-                <TableColumn prefWidth="265.5999755859375" text="Nombre" />
-                <TableColumn prefWidth="219.2000732421875" text="Correo" />
+                <TableColumn fx:id="nombre_tecnico" prefWidth="265.5999755859375" text="Nombre" />
+                <TableColumn fx:id="seleccion" prefWidth="219.2000732421875" text="Selecionado" />
               </columns>
             </TableView>
+            <Button fx:id="cancelar" layoutX="677.0" layoutY="438.0" mnemonicParsing="false" onAction="#cancelar" prefHeight="30.0" prefWidth="126.0" style="-fx-background-color: red; -fx-background-radius: 50;" text="cancelar" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
          </children>
       </Pane>
    </children>

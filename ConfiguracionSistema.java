@@ -115,15 +115,15 @@ public class ConfiguracionSistema {
         
         if(!this.nombreEmpresa.equals("") && !this.idioma.equals("") && !this.zonaHoraria.equals("") && this.tiempoVencimientoTicketsInactivos >0 && !this.logo.equals("") && this.nivelesPrioridad != null){
             try {
-                conectar.actualizarDatos("UPDATE configuracion_sistema SET nombre_empresa = '"+ this.nombreEmpresa +"', idioma = (SELECT id_idioma FROM idiomas WHERE nombre_idioma = '"+ this.idioma +"'), zona_horaria = (SELECT id_zona_horaria FROM zonas_horarias WHERE nombre_zona_horaria = '"+ this.zonaHoraria +"'), tiempo_vencimiento_tickets_inactivos = "+ this.tiempoVencimientoTicketsInactivos +", logo_empresa = '"+ this.logo +"' WHERE id_configuracion_sistema = 1");
+                conectar.consultaDML("UPDATE configuracion_sistema SET nombre_empresa = '"+ this.nombreEmpresa +"', idioma = (SELECT id_idioma FROM idiomas WHERE nombre_idioma = '"+ this.idioma +"'), zona_horaria = (SELECT id_zona_horaria FROM zonas_horarias WHERE nombre_zona_horaria = '"+ this.zonaHoraria +"'), tiempo_vencimiento_tickets_inactivos = "+ this.tiempoVencimientoTicketsInactivos +", logo_empresa = '"+ this.logo +"' WHERE id_configuracion_sistema = 1");
                 LocalDate fecha = LocalDate.now();
                 int id= conectar.getIdUsuario();
                 HistorialConfiguracionesSistema historial = new HistorialConfiguracionesSistema(fecha, "El usuario con id: " + id + " guardo los datos; nombre de la empresa: " + this.nombreEmpresa + ", idioma: " + this.idioma + ", zona horaria: " + this.zonaHoraria + "tiempo tickets: " + this.tiempoVencimientoTicketsInactivos + ", logo: " + this.logo, " "+ id + " ");                
                 operaciones.abrirVentana("Admin.fxml");
                 operaciones.cerrar(boton);
-                conectar.eliminarDatos("TRUNCATE TABLE prioridades_configuracion_sistema");
+                conectar.consultaDML("TRUNCATE TABLE prioridades_configuracion_sistema");
                 for(String prioridades : this.nivelesPrioridad){
-                    conectar.insertarDatos("INSERT INTO prioridades_configuracion_sistema(id_configuracion_sistema, id_prioridad) VALUES(1, (SELECT id_prioridad FROM prioridades WHERE nombre_prioridad = '"+ prioridades +"'))");
+                    conectar.consultaDML("INSERT INTO prioridades_configuracion_sistema(id_configuracion_sistema, id_prioridad) VALUES(1, (SELECT id_prioridad FROM prioridades WHERE nombre_prioridad = '"+ prioridades +"'))");
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(ConfiguracionSistema.class.getName()).log(Level.SEVERE, null, ex);

@@ -207,7 +207,7 @@ public class conection extends OperacionesVentana{
         return listado;
     }  
     
-    public ObservableList<DatosTableViewSinCheckbox> obtenerListado(String sql, String parametro1, String parametro2) throws SQLException{
+    public ObservableList<DatosTableViewSinCheckbox> obtenerListado(String sql, String parametro1, String parametro2, String parametro3, String parametro4) throws SQLException{
         ObservableList<DatosTableViewSinCheckbox> listado = FXCollections.observableArrayList();
         listado.clear();
         
@@ -215,7 +215,13 @@ public class conection extends OperacionesVentana{
             PreparedStatement ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery()) {
             while(rs.next()){      
-                listado.add(new DatosTableViewSinCheckbox(rs.getString(parametro1), rs.getString(parametro2)));
+                if(parametro3.equals("")){
+                    listado.add(new DatosTableViewSinCheckbox(rs.getString(parametro1), rs.getString(parametro2), ""));
+                }else{
+                    ArrayList<String> lista = consultaListados("select nombre_usuario from usuarios where id_rol = (select id_rol from roles where nombre_rol = 'tecnico' and id_departamento = (SELECT id_departamento FROM departamentos WHERE nombre_departamento = '"+ rs.getString(parametro1) +"'));", parametro4);
+                    String dato = lista.toString();
+                    listado.add(new DatosTableViewSinCheckbox(rs.getString(parametro1), rs.getString(parametro2), dato));
+                }
             }
         } catch (Exception e) {
             // Si hay un error en la conexión
@@ -224,36 +230,28 @@ public class conection extends OperacionesVentana{
         return listado;
     }  
     
-    public void insertarDatos(String consulta) throws SQLException{
+    public void consultaDML(String consulta) throws SQLException{
         try (Connection conn = conectar();
             PreparedStatement ps = conn.prepareStatement(consulta)){
             ps.executeUpdate();
             } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "ERRORES:" + e.getMessage());
+            JOptionPane.showMessageDialog(null, "ERRORES al ejecutar la consulta:" + e.getMessage());
         }
     }
     
-    public void eliminarDatos(String consulta) throws SQLException{
+    public void consultaDDL(String consulta) throws SQLException{
+    
         try (Connection conn = conectar();
-            PreparedStatement ps = conn.prepareStatement(consulta)){
+            Statement ps = conn.createStatement()) {
             
-            ps.executeUpdate();
+            ps.execute(consulta);
             
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "ERRORES:" + e.getMessage());
+        } catch (SQLException e) {
+             e.printStackTrace();
+            System.err.println("Error de consulta: " + e.getMessage());
         }
-    }
+
         
-    public void actualizarDatos(String consulta) throws SQLException{        
-        try(Connection conn = conectar();
-            PreparedStatement ps = conn.prepareStatement(consulta)) {
-            
-            ps.executeUpdate();
-            
-            JOptionPane.showMessageDialog(null, "Operacion exitosa");
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "ERRORES:" + e.getMessage());
-        }
     }
     
     public int buscar(String consulta)throws SQLException{
@@ -264,6 +262,22 @@ public class conection extends OperacionesVentana{
             
             if(rs.next()){
                 datoEncontrado++;
+            }
+            
+            } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "ERRORES:" + e.getMessage());
+        }
+        return datoEncontrado;
+    }
+    
+    public int buscarId(String consulta)throws SQLException{
+        int datoEncontrado = 0;
+        try (Connection conn = conectar();
+            PreparedStatement ps = conn.prepareStatement(consulta)){
+            ResultSet rs = ps.executeQuery();
+            
+            while(rs.next()){
+                datoEncontrado = rs.getInt("id_departamento");
             }
             
             } catch (Exception e) {

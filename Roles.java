@@ -26,9 +26,7 @@ public class Roles extends ParametrosSistema{
             this.permisosAsignados = permisosAsignados;
         }
     }
-    
-    
-    
+        
     public Roles(String nombre, String descripcion) {
         super(nombre, descripcion);
     }

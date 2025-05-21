@@ -19,7 +19,7 @@ public class HistorialConfiguracionesSistema extends Historial{
         
         try{
             conection conectado = new conection();
-            conectado.insertarDatos("INSERT INTO historial(fecha_accion, descripcion, id_usuario) VALUES('"+ fechaModificacion +"', '"+ descripcion +"', '"+ usuario +"')");
+            conectado.consultaDML("INSERT INTO historial(fecha_accion, descripcion, id_usuario) VALUES('"+ fechaModificacion +"', '"+ descripcion +"', '"+ usuario +"')");
 
         }catch(SQLException e){
             JOptionPane.showMessageDialog(null, "ha habido un error en la conexion");

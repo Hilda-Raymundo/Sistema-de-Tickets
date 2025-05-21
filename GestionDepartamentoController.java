@@ -61,7 +61,7 @@ public class GestionDepartamentoController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         Administrador admin = new Administrador("", "", "", "", "", "");
-        admin.consultarDepartamentos(tablaDepartamento, nombreDepartamento, descripcionDepartamento);
+        admin.consultarDepartamentos(tablaDepartamento, nombreDepartamento, descripcionDepartamento, descripcionDepartamento);
     }    
     
 }

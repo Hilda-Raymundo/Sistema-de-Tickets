@@ -22,24 +22,22 @@
             </Label>
          </children>
       </Pane>
-      <Pane layoutX="1.0" layoutY="158.0" prefHeight="349.0" prefWidth="755.0" style="-fx-background-color: white; -fx-background-radius: 50;">
+      <Pane layoutX="1.0" layoutY="119.0" prefHeight="389.0" prefWidth="755.0" style="-fx-background-color: white; -fx-background-radius: 50;">
          <children>
-            <Label layoutX="47.0" layoutY="26.0" text="Departamento:" />
-            <TableView layoutX="39.0" layoutY="71.0" prefHeight="170.0" prefWidth="311.0">
+            <TableView fx:id="tablaDepartamentos" layoutX="39.0" layoutY="59.0" onKeyPressed="#seleccionarDepartamento" prefHeight="300.0" prefWidth="323.0">
                <columns>
-                  <TableColumn prefWidth="75.0" text="Nombre" />
-                  <TableColumn prefWidth="75.0" text="Descripcion" />
-                  <TableColumn prefWidth="145.60003662109375" text="Tecnicos" />
+                  <TableColumn fx:id="nombre_departamento" onEditStart="#seleccionarDepartamento" prefWidth="148.7999496459961" text="Nombre" />
+                  <TableColumn fx:id="descripcion_departamento" onEditStart="#seleccionarDepartamento" prefWidth="168.800048828125" text="Descripcion" />
                </columns>
             </TableView>
             <Label layoutX="389.0" layoutY="26.0" text="Nombre:" />
-            <TextField fx:id="nombreDepartamento" layoutX="389.0" layoutY="55.0" prefHeight="31.0" prefWidth="297.0">
+            <TextField fx:id="nombreDepartamento" editable="false" layoutX="389.0" layoutY="55.0" prefHeight="31.0" prefWidth="297.0">
                <font>
                   <Font size="15.0" />
                </font>
             </TextField>
             <Label layoutX="389.0" layoutY="97.0" text="Descripción:" />
-            <TextArea fx:id="descripcionDepartamento" layoutX="389.0" layoutY="120.0" prefHeight="107.0" prefWidth="297.0" />
+            <TextArea fx:id="descripcionDepartamento" editable="false" layoutX="389.0" layoutY="120.0" prefHeight="107.0" prefWidth="297.0" />
             <Button fx:id="eliminarDepartamento" layoutX="560.0" layoutY="286.0" mnemonicParsing="false" onAction="#eliminarDepartamento" prefHeight="30.0" prefWidth="126.0" style="-fx-background-color: red; -fx-background-radius: 50;" text="Eliminar">
                <font>
                   <Font name="System Bold" size="14.0" />
@@ -48,11 +46,15 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <TextField fx:id="departamentoSeleccionado" layoutX="136.0" layoutY="22.0">
+            <Button fx:id="cancelar" layoutX="560.0" layoutY="334.0" mnemonicParsing="false" onAction="#cancelar" prefHeight="30.0" prefWidth="126.0" style="-fx-background-color: orange; -fx-background-radius: 50;" text="cancelar" textFill="WHITE">
                <font>
-                  <Font size="15.0" />
+                  <Font name="System Bold" size="14.0" />
                </font>
-            </TextField>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Label layoutX="39.0" layoutY="26.0" text="Seleccionar departamento:" />
          </children>
       </Pane>
    </children>

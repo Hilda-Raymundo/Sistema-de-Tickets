@@ -24,14 +24,7 @@
       </Pane>
       <Pane layoutX="-3.0" layoutY="158.0" prefHeight="481.0" prefWidth="951.0" style="-fx-background-color: white; -fx-background-radius: 50;">
          <children>
-            <Label layoutX="47.0" layoutY="26.0" text="Departamento:" />
-            <TableView layoutX="38.0" layoutY="71.0" prefHeight="170.0" prefWidth="311.0">
-               <columns>
-                  <TableColumn prefWidth="75.0" text="Nombre" />
-                  <TableColumn prefWidth="75.0" text="Descripcion" />
-                  <TableColumn prefWidth="138.40003967285156" text="Tecnicos" />
-               </columns>
-            </TableView>
+            <Label layoutX="47.0" layoutY="26.0" text="Departamentos existentes:" />
             <Label layoutX="389.0" layoutY="26.0" text="Nombre:" />
             <TextField fx:id="nombreDepartamento" layoutX="389.0" layoutY="55.0" prefHeight="31.0" prefWidth="297.0">
                <font>
@@ -40,7 +33,7 @@
             </TextField>
             <Label layoutX="389.0" layoutY="97.0" text="Descripción:" />
             <TextArea fx:id="descripcionDepartamento" layoutX="389.0" layoutY="120.0" prefHeight="107.0" prefWidth="297.0" />
-            <Button fx:id="modificarDepartamento" layoutX="809.0" layoutY="438.0" mnemonicParsing="false" onAction="#modificarDepartamento" prefHeight="30.0" prefWidth="126.0" style="-fx-background-color: orange; -fx-background-radius: 50;" text="Modificar">
+            <Button fx:id="modificarDepartamento" layoutX="799.0" layoutY="377.0" mnemonicParsing="false" onAction="#modificarDepartamento" prefHeight="30.0" prefWidth="126.0" style="-fx-background-color: orange; -fx-background-radius: 50;" text="Modificar">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
@@ -49,40 +42,26 @@
                </cursor>
             </Button>
             <Label layoutX="389.0" layoutY="237.0" text="Tecnicos disponibles:" />
-            <Label layoutX="672.0" layoutY="237.0" text="Tecnicos asignados:" />
-            <TableView layoutX="389.0" layoutY="254.0" prefHeight="120.0" prefWidth="196.0">
+            <TableView fx:id="tablaTecnicos" layoutX="389.0" layoutY="254.0" prefHeight="211.0" prefWidth="391.0">
                <columns>
-                  <TableColumn prefWidth="75.0" text="Nombre" />
-                  <TableColumn prefWidth="75.0" text="Correo" />
+                  <TableColumn fx:id="nombre_tecnico" prefWidth="190.4000244140625" text="Nombre" />
+                  <TableColumn fx:id="seleccion" prefWidth="192.800048828125" text="seleccionado" />
                </columns>
             </TableView>
-            <TableView layoutX="672.0" layoutY="254.0" prefHeight="120.0" prefWidth="200.0">
-               <columns>
-                  <TableColumn prefWidth="75.0" text="Nombre" />
-                  <TableColumn prefWidth="75.0" text="Correo" />
-               </columns>
-            </TableView>
-            <Button layoutX="591.0" layoutY="254.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="71.0" style="-fx-background-color: #96C549; -fx-background-radius: 50;" text="Añadir">
+            <Button fx:id="cancelar" layoutX="799.0" layoutY="423.0" mnemonicParsing="false" onAction="#cancelar" prefHeight="30.0" prefWidth="126.0" style="-fx-background-color: red; -fx-background-radius: 50;" text="cancelar" textFill="WHITE">
                <font>
-                  <Font name="System Bold" size="12.0" />
+                  <Font name="System Bold" size="14.0" />
                </font>
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button layoutX="872.0" layoutY="254.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="71.0" style="-fx-background-color: yellow; -fx-background-radius: 50;" text="Quitar">
-               <font>
-                  <Font name="System Bold" size="12.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-            <TextField fx:id="departamentoSeleccionado" layoutX="135.0" layoutY="19.0">
-               <font>
-                  <Font size="15.0" />
-               </font>
-            </TextField>
+            <TableView fx:id="tablaDepartamentos" layoutX="32.0" layoutY="55.0" onKeyPressed="#seleccionarDepartamento" onMouseClicked="#seleccionarDepartamento" prefHeight="411.0" prefWidth="325.0">
+              <columns>
+                <TableColumn fx:id="nombre_Departamento" onEditStart="#seleccionarDepartamento" prefWidth="166.3999900817871" text="Nombre" />
+                <TableColumn fx:id="descripcion_Departamento" onEditStart="#seleccionarDepartamento" prefWidth="148.00001525878906" text="Descripcion" />
+              </columns>
+            </TableView>
          </children>
       </Pane>
    </children>
