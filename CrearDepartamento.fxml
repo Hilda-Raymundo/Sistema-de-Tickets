@@ -49,35 +49,12 @@
                </cursor>
             </Button>
             <Label layoutX="389.0" layoutY="237.0" text="Tecnicos disponibles:" />
-            <Label layoutX="672.0" layoutY="237.0" text="Tecnicos asignados:" />
-            <TableView layoutX="389.0" layoutY="254.0" prefHeight="120.0" prefWidth="196.0">
+            <TableView layoutX="389.0" layoutY="254.0" prefHeight="170.0" prefWidth="494.0">
               <columns>
-                <TableColumn prefWidth="75.0" text="Nombre" />
-                <TableColumn prefWidth="75.0" text="Correo" />
+                <TableColumn prefWidth="265.5999755859375" text="Nombre" />
+                <TableColumn prefWidth="219.2000732421875" text="Correo" />
               </columns>
             </TableView>
-            <TableView layoutX="672.0" layoutY="254.0" prefHeight="120.0" prefWidth="200.0">
-              <columns>
-                <TableColumn prefWidth="75.0" text="Nombre" />
-                <TableColumn prefWidth="75.0" text="Correo" />
-              </columns>
-            </TableView>
-            <Button layoutX="591.0" layoutY="254.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="71.0" style="-fx-background-color: #96C549; -fx-background-radius: 50;" text="Añadir">
-               <font>
-                  <Font name="System Bold" size="12.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-            <Button layoutX="872.0" layoutY="254.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="71.0" style="-fx-background-color: yellow; -fx-background-radius: 50;" text="Quitar">
-               <font>
-                  <Font name="System Bold" size="12.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
          </children>
       </Pane>
    </children>

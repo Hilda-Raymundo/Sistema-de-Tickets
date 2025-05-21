@@ -34,14 +34,13 @@
          </image>
       </ImageView>
       <Label layoutX="264.0" layoutY="86.0" text="Departamentos existentes:" />
-      <TableView layoutX="263.0" layoutY="117.0" prefHeight="146.0" prefWidth="450.0">
+      <TableView fx:id="tablaDepartamento" layoutX="263.0" layoutY="117.0" prefHeight="328.0" prefWidth="450.0">
          <columns>
-            <TableColumn prefWidth="75.0" text="Nombre" />
-            <TableColumn prefWidth="75.0" text="Descripcion" />
-            <TableColumn prefWidth="157.60003662109375" text="TecnicosAsignados" />
+            <TableColumn fx:id="nombreDepartamento" prefWidth="201.60003662109375" text="Nombre" />
+            <TableColumn fx:id="descripcionDepartamento" prefWidth="236.0" text="Descripcion" />
          </columns>
       </TableView>
-      <Button fx:id="crearDepartamento" layoutX="264.0" layoutY="350.0" mnemonicParsing="false" onAction="#crearDepartamento" prefHeight="60.0" prefWidth="365.0" style="-fx-background-color: #96C549; -fx-background-radius: 50;" text="Crear Departamento">
+      <Button fx:id="crearDepartamento" layoutX="566.0" layoutY="500.0" mnemonicParsing="false" onAction="#crearDepartamento" prefHeight="54.0" prefWidth="310.0" style="-fx-background-color: #96C549; -fx-background-radius: 50;" text="Crear Departamento">
          <font>
             <Font name="Rockwell" size="22.0" />
          </font>
@@ -49,7 +48,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="modificarDepartamento" layoutX="264.0" layoutY="442.0" mnemonicParsing="false" onAction="#modificarDepartamento" prefHeight="60.0" prefWidth="365.0" style="-fx-background-color: orange; -fx-background-radius: 50;" text="Modificar Departamento">
+      <Button fx:id="modificarDepartamento" layoutX="566.0" layoutY="566.0" mnemonicParsing="false" onAction="#modificarDepartamento" prefHeight="54.0" prefWidth="310.0" style="-fx-background-color: orange; -fx-background-radius: 50;" text="Modificar Departamento">
          <font>
             <Font name="Rockwell" size="22.0" />
          </font>
@@ -57,7 +56,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="eliminarDepartamento" layoutX="264.0" layoutY="543.0" mnemonicParsing="false" onAction="#eliminarDepartamento" prefHeight="60.0" prefWidth="365.0" style="-fx-background-color: red; -fx-background-radius: 50;" text="Eliminar Departamento">
+      <Button fx:id="eliminarDepartamento" layoutX="566.0" layoutY="632.0" mnemonicParsing="false" onAction="#eliminarDepartamento" prefHeight="53.0" prefWidth="310.0" style="-fx-background-color: red; -fx-background-radius: 50;" text="Eliminar Departamento">
          <font>
             <Font name="Rockwell" size="22.0" />
          </font>

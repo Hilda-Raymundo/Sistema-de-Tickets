@@ -89,10 +89,16 @@ public class Administrador extends Persona{
             JOptionPane.showMessageDialog(null, "El campo Nombre está vacío");
         }else{
             try {
-                conectar.eliminarDatos("DELETE FROM roles WHERE nombre_rol = '"+ rolSeleccionado +"' AND descripcion_rol = '"+ descripcion +"' ");
-                conectar.eliminarDatos("delete from roles_permisos where id_rol = (select id_rol from roles where nombre_rol = '"+ rolSeleccionado +"' and descripcion_rol = '"+ descripcion +"' );");
-                JOptionPane.showMessageDialog(null, "¡Eliminación exitosa!");
-                HistorialConfiguracionesSistema historial = new HistorialConfiguracionesSistema(fecha, "Se eliminó el rol(nombre = "+ rolSeleccionado +", descripcion = "+ descripcion +") ", "" + id);
+                int rol = conectar.buscar("select * from usuarios where id_rol = (select id_rol from roles where nombre_rol = '"+ rolSeleccionado +"');");
+                
+                if(rol>0){
+                    JOptionPane.showMessageDialog(null, "Existen usuarios con este rol, ¡modifique el rol de los usuarios antes de eliminar el rol!");
+                }else{
+                    conectar.eliminarDatos("DELETE FROM roles WHERE nombre_rol = '"+ rolSeleccionado +"' AND descripcion_rol = '"+ descripcion +"' ");
+                    conectar.eliminarDatos("delete from roles_permisos where id_rol = (select id_rol from roles where nombre_rol = '"+ rolSeleccionado +"' and descripcion_rol = '"+ descripcion +"' );");
+                    JOptionPane.showMessageDialog(null, "¡Eliminación exitosa!");
+                    HistorialConfiguracionesSistema historial = new HistorialConfiguracionesSistema(fecha, "Se eliminó el rol(nombre = "+ rolSeleccionado +", descripcion = "+ descripcion +") ", "" + id);
+                }
                 cerrar(eliminar);
                 abrirVentana("GestionRolesPermisos.fxml");
             } catch (SQLException ex) {
@@ -111,11 +117,7 @@ public class Administrador extends Persona{
             Logger.getLogger(GestionRolesPermisosController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    public void asignarRoles(){
-    
-    }
-    
+        
     public void crearPermisos(Button cerrar, String nombrePermiso, String descripcionPermiso) throws IOException{
         if(nombrePermiso.equals("") || descripcionPermiso.equals("")){
             parametros.setNombre(nombrePermiso);
@@ -274,8 +276,14 @@ public class Administrador extends Persona{
         }        
     }
     
-    public void consultarDepartamentos(){
-    
+    public void consultarDepartamentos(TableView<DatosTableViewSinCheckbox> tabla, TableColumn<DatosTableViewSinCheckbox, String> columna1, TableColumn<DatosTableViewSinCheckbox, String> columna2){
+        try {            
+            columna1.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDato1()));
+            columna2.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDato2()));
+            tabla.setItems(conectar.obtenerListado("SELECT * FROM departamentos;", "nombre_departamento", "descripcion_departamento"));
+        } catch (SQLException ex) {
+            Logger.getLogger(GestionRolesPermisosController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     public void asignarTecnicos(){
