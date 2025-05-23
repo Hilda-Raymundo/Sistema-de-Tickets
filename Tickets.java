@@ -5,6 +5,7 @@
 package sistemadetickets;
 
 import java.io.File;
+import java.time.LocalDate;
 import java.util.Date;
 import javax.swing.JOptionPane;
 
@@ -18,8 +19,9 @@ public class Tickets {
     private String descripcion;
     private String departamento;
     private String prioridad;
+    private String solicitud;
     private File[] documentos;
-    private Date fechaCreacion;
+    private LocalDate fechaCreacion;
     private String estado;
     private String[] notas;
     private String tecnicoAsignado;
@@ -28,6 +30,21 @@ public class Tickets {
     private File[] documentacion;
     private boolean vacio = true;
 
+    public String getSolicitud() {
+        return solicitud;
+    }
+
+    public void setSolicitud(String solicitud) {
+        if(solicitud.equals("")){
+            JOptionPane.showMessageDialog(null, "El campo SOLICITUD está vacío");
+        }else{
+            this.solicitud = solicitud;
+            
+        }
+    }
+
+    
+    
     public int getNumeroTicket() {
         return numeroTicket;
     }
@@ -111,11 +128,11 @@ public class Tickets {
         }
     }
 
-    public Date getFechaCreacion() {
+    public LocalDate getFechaCreacion() {
         return fechaCreacion;
     }
 
-    public void setFechaCreacion(Date fechaCreacion) {
+    public void setFechaCreacion(LocalDate fechaCreacion) {
         if(fechaCreacion.equals("")){
             System.out.println("Fecha creacion está vacío");;
         }else{

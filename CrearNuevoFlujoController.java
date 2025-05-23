@@ -68,8 +68,6 @@ public class CrearNuevoFlujoController implements Initializable {
                 estadoPrincipal.add(estado_principal.replace("0", ""));
             }
         }
-        System.out.println(estadosTransiciones);
-        System.out.println(estadoPrincipal);
         admin.crearFlujosTrabajo(crearFlujoTrabajo, nombreFlujo.getText(), estadoPrincipal, estadosTransiciones);
     }
     
@@ -100,19 +98,20 @@ public class CrearNuevoFlujoController implements Initializable {
     
     private void recorrerNodos(TreeItem<String> nodo, String prefijo, List<String> salida) {
         int contador = 0;
-    if (nodo != null) {
-        salida.add(prefijo + nodo.getValue());
-        for (TreeItem<String> hijo : nodo.getChildren()) {
-            recorrerNodos(hijo, prefijo + "" + contador , salida);
+        if (nodo != null) {
+            salida.add(prefijo + nodo.getValue());
+            for (TreeItem<String> hijo : nodo.getChildren()) {
+                recorrerNodos(hijo, prefijo + "" + contador , salida);
+            }
         }
     }
-}
     
     @FXML
     private void quitar(){
        TreeItem<String> itemSeleccionado = estados_seleccionados.getSelectionModel().getSelectedItem();
        TreeItem<String> itemAQuitar = itemSeleccionado.getParent();
        itemAQuitar.getChildren().remove(itemSeleccionado);
+       estadosDisponibles.getItems().add(itemSeleccionado.getValue());
     }
     
     @Override

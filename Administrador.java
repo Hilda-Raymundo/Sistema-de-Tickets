@@ -198,9 +198,6 @@ public class Administrador extends Persona{
         }
     }
     
-    public void crearTickets(){
-    
-    }
     
     public void editarTickets(){
     
@@ -457,24 +454,43 @@ public class Administrador extends Persona{
         try {
             if(!nombreFlujo.equals("") && estadoInicial.size()!=0){
                 flujo.setNombre(nombreFlujo);
-                conectar.consultaDML("INSERT INTO flujo_trabajo(nombre_flujo) VALUES('"+ flujo.getNombre() +"')");
-                for(String estado: estadoInicial){
-                    int datoa = conectar.buscar("SELECT id_estado FROM estados_ticket WHERE nombre_estado = '"+ flujo.getNombre() +"' AND estado_final = 1");
-                    for(String siguiente: estadoSiguiente){
-                        if(datoa==0){
-                            int dato = conectar.buscar("SELECT * FROM estados_transicion WHERE estado_siguiente = (SELECT id_estado FROM estados_ticket WHERE nombre_estado ='"+ siguiente +"') AND estado_inicial = (SELECT id_estado FROM estados_ticket WHERE nombre_estado = '"+ estado +"') LIMIT 1");
-                            if(dato>0){
-                                conectar.consultaDML("INSERT INTO estados_flujo(id_flujo, estado_actual, estado_siguiente) VALUES((SELECT MAX(id_flujo FROM flujo_trabajo), '"+ estado +"', '"+ siguiente +"')");
-                            }
-                        }else{
-                            conectar.consultaDML("INSERT INTO estados_flujo(id_flujo, estado_actual) VALUES((SELECT MAX(id_flujo FROM flujo_trabajo), estado))");
-                        }
-                    }                    
-                }
                 
-                JOptionPane.showMessageDialog(null, "Se creó el flujo de trabajo exitosamente");
-                abrirVentana("GestionFlujosDeTrabajo.fxml"); 
-                cerrar(cerrar);
+                int buscarNombre = conectar.buscar("SELECT * FROM flujo_trabajo WHERE nombre_flujo = '"+ flujo.getNombre() +"' ");
+                if(buscarNombre>0){
+                    JOptionPane.showMessageDialog(null, "El nombre de flujo ya esta registrado");
+                }else{
+                
+                    conectar.consultaDML("INSERT INTO flujo_trabajo(nombre_flujo) VALUES('"+ flujo.getNombre() +"')");
+
+                    int idEstado = conectar.buscar("SELECT * FROM estados_ticket WHERE nombre_estado = '"+ estadoInicial.get(0)+"' AND estado_final = 1");
+                    System.out.println(idEstado);
+                    if(idEstado == 0){
+                        for(String estado: estadoInicial){
+                            if(estadoSiguiente.size()>0){
+                                for(String siguiente: estadoSiguiente){
+                                        int dato = conectar.buscar("SELECT id_estado_transicion FROM estados_transicion WHERE estado_siguiente = (SELECT id_estado FROM estados_ticket WHERE nombre_estado ='"+ siguiente +"') AND estado_inicial = (SELECT id_estado FROM estados_ticket WHERE nombre_estado = '"+ estado +"') LIMIT 1");
+                                        System.out.println(dato);
+                                        if(dato>0){
+                                            conectar.consultaDML("INSERT INTO estados_flujo(id_flujo, estado_actual, estado_siguiente) VALUES((SELECT MAX(id_flujo) FROM flujo_trabajo), (SELECT id_estado FROM estados_ticket WHERE nombre_estado = '"+ estado +"' ), (SELECT id_estado FROM estados_ticket WHERE nombre_estado = '"+ siguiente +"') )");
+                                        }else{
+                                            System.out.println("El sistema descartara estados que no pueden transicionar entre si");
+                                        }
+                                    }
+                            }else{
+                                conectar.consultaDML("INSERT INTO estados_flujo(id_flujo, estado_actual) VALUES((SELECT MAX(id_flujo) FROM flujo_trabajo), (SELECT id_estado FROM estados_ticket WHERE nombre_estado = '"+ estado +"'))");
+                            }
+                        }
+                        JOptionPane.showMessageDialog(null, "Se creó el flujo de trabajo exitosamente");
+                        abrirVentana("GestionFlujosDeTrabajo.fxml"); 
+                        cerrar(cerrar);
+                    }else{
+                       conectar.consultaDML("INSERT INTO estados_flujo(id_flujo, estado_actual) VALUES((SELECT MAX(id_flujo) FROM flujo_trabajo), (SELECT id_estado FROM estados_ticket WHERE nombre_estado = '"+ estadoInicial.get(0) +"'))");
+                       JOptionPane.showMessageDialog(null, "Se creó");
+                        abrirVentana("GestionFlujosDeTrabajo.fxml"); 
+                        cerrar(cerrar);
+                    }
+                }
+                HistorialConfiguracionesSistema historial = new HistorialConfiguracionesSistema(fecha, "Se creo el flujo(nombre = "+ flujo.getNombre() +") ", "" + id);
             }else{
                 JOptionPane.showMessageDialog(null, "Revise los datos ingresaos");
             }
@@ -486,8 +502,29 @@ public class Administrador extends Persona{
         }
     }
     
-    public void modificarFlujosTrabajo(){
-    
+    public void modificarFlujosTrabajo(Button cerrar, String nombreFlujo, ArrayList<String> estadoInicial, ArrayList<String> estadoSiguiente){
+        try {
+            if(!nombreFlujo.equals("") && estadoInicial.size()!=0){
+                flujo.setNombre(nombreFlujo);
+                
+                for(String estado: estadoInicial){
+                            if(estadoSiguiente.size()>0){
+                                for(String siguiente: estadoSiguiente){
+                                        conectar.consultaDML("INSERT INTO estados_flujo(id_flujo, estado_actual, estado_siguiente) VALUES((SELECT id_flujo FROM flujo_trabajo WHERE nombre_flujo = '"+ flujo.getNombre() +"'), (SELECT id_estado FROM estados_ticket WHERE nombre_estado = '"+ estado +"' ), (SELECT id_estado FROM estados_ticket WHERE nombre_estado = '"+ siguiente +"') )");
+                                    }
+                            }else{
+                                conectar.consultaDML("INSERT INTO estados_flujo(id_flujo, estado_actual) VALUES((SELECT MAX(id_flujo) FROM flujo_trabajo), (SELECT id_estado FROM estados_ticket WHERE nombre_estado = '"+ estado +"'))");
+                            }
+                        }
+                JOptionPane.showMessageDialog(null, "modificacion exitosa!");
+                HistorialConfiguracionesSistema historial = new HistorialConfiguracionesSistema(fecha, "Se modifico el flujo(nombre = "+ flujo.getNombre() +") ", "" + id);
+            }else{
+                JOptionPane.showMessageDialog(null, "Revise los datos ingresaos");
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(Administrador.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     public void eliminarFlujosTrabajo(){
