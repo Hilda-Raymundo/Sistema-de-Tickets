@@ -9,7 +9,7 @@ package sistemadetickets;
  * @author hraym
  */
 public class EstadosTicket extends ParametrosSistema {
-    
+        
     public EstadosTicket(String nombre, String descripcion) {
         super(nombre, descripcion);
     }

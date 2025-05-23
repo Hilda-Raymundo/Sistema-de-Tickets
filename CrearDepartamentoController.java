@@ -38,7 +38,7 @@ public class CrearDepartamentoController implements Initializable {
     public TableColumn<DatosTableViewSinCheckbox, String> descripcion_Departamento;
     @FXML
     public TableColumn<DatosTableViewSinCheckbox, String> tecnicos_asignados;
-     @FXML
+    @FXML
     public TableView<DatosTableView> tablaTecnicos;
     @FXML
     public TableColumn<DatosTableView, String> nombre_tecnico;

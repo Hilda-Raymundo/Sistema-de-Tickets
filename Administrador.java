@@ -27,6 +27,7 @@ public class Administrador extends Persona{
     private Roles parametros = new Roles("", "");
     private Departamentos parametrosDepartamento = new Departamentos("", "");
     private Tecnicos tecnico = new Tecnicos("", "", "", "","", "");
+    private EstadosTicket estadosTicket = new EstadosTicket("", "");
     conection conectar = new conection();
     LocalDate fecha = LocalDate.now();
     int id= conectar.getIdUsuario();
@@ -467,20 +468,88 @@ public class Administrador extends Persona{
     
     }
     
-    public void crearEstado(){
-    
+    public void crearEstado(Button cerrar, String nombre, String descripcion, int es_final, ArrayList<String> estadosSiguientes){
+        try {
+            if(nombre.length()>2 && nombre.length()<51){
+                estadosTicket.setNombre(nombre);
+                estadosTicket.setDescripcion(descripcion);
+                if(estadosTicket.getDatosValidos() == true){
+                    int dato = conectar.buscar("SELECT id_estado FROM estados_ticket WHERE nombre_estado = '"+ estadosTicket.getNombre() +"'");
+                    if(dato>0){
+                        JOptionPane.showMessageDialog(null, "Ya existe un estado con ese nombre");
+                    }else{
+                        conectar.consultaDML("INSERT INTO estados_ticket(nombre_estado, descripcion_estado, estado_final) VALUES('"+ estadosTicket.getNombre() +"', '"+ estadosTicket.getDescripcion() +"', "+ es_final +")");
+                            for(String estado: estadosSiguientes){
+                                conectar.consultaDML("INSERT INTO estados_transicion(estado_inicial, estado_siguiente) VALUES((SELECT MAX(id_estado) FROM estados_ticket), (SELECT id_estado FROM estados_ticket WHERE nombre_estado = '"+ estado +"' ))");
+                            }
+                        JOptionPane.showMessageDialog(null, "Se creó el estado exitosamente");
+                        abrirVentana("GestionEstadosTicket.fxml");
+                        cerrar(cerrar);
+                        HistorialConfiguracionesSistema historial = new HistorialConfiguracionesSistema(fecha, "Se creo el estado(nombre = "+ estadosTicket.getNombre() +", descripcion = "+ estadosTicket.getDescripcion() +") ", "" + id);
+                    }
+                }
+            }else{
+                JOptionPane.showMessageDialog(null, "Revise la cantidad de caracteres en NOMBRE");
+            }
+            
+            
+        } catch (IOException ex) {
+            Logger.getLogger(Administrador.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(Administrador.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
-    public void modificarEstado(){
-        
+    public void modificarEstado(Button cerrar, String nombre, String descripcion, int estadoFinal, ArrayList<String> estadosSiguientes, String idEstados){
+        try {
+                estadosTicket.setNombre(nombre);
+                estadosTicket.setDescripcion(descripcion);
+                if(!nombre.equals("") && !descripcion.equals("")){
+                    conectar.consultaDML("UPDATE estados_ticket SET nombre_estado = '"+ estadosTicket.getNombre() +"', descripcion_estado = '"+ estadosTicket.getDescripcion() +"', estado_final = "+ estadoFinal +" WHERE nombre_estado = '"+ idEstados +"' ");
+                    conectar.consultaDML("DELETE FROM estados_transicion WHERE estado_inicial = (SELECT id_estado FROM estados_TICKET WHERE nombre_estado = '"+ idEstados +"') ");
+
+                    if(estadoFinal>1){
+                        for(String estado: estadosSiguientes){
+                            conectar.consultaDML("INSERT INTO estados_transicion(estado_inicial, estado_siguiente) VALUES((SELECT id_estado FROM estados_ticket WHERE nombre_estado ='"+ idEstados +"' ), (SELECT id_estado FROM estados_ticket WHERE nombre_estado = '"+ estado +"' ))");
+                        }
+                    }
+                }
+                    JOptionPane.showMessageDialog(null, "Se modificó el estado exitosamente");
+                    abrirVentana("GestionEstadosTicket.fxml");
+                    cerrar(cerrar);            
+                    HistorialConfiguracionesSistema historial = new HistorialConfiguracionesSistema(fecha, "Se modifico el estado(nombre = "+ estadosTicket.getNombre() +", descripcion = "+ estadosTicket.getDescripcion() +") ", "" + id);
+        } catch (IOException ex) {
+            Logger.getLogger(Administrador.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(Administrador.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
-    public void eliminarEstado(){
-    
+    public void eliminarEstado(Button cerrar, String parametro){
+        try {
+            conectar.consultaDML("DELETE FROM estados_ticket WHERE nombre_estado = '"+ parametro +"'");
+            JOptionPane.showMessageDialog(null, "Se eliminó el estado exitosamente");
+            abrirVentana("GestionEstadosTicket.fxml");
+            cerrar(cerrar);
+            HistorialConfiguracionesSistema historial = new HistorialConfiguracionesSistema(fecha, "Se elimino el estado(nombre = "+ parametro +") ", "" + id);
+        } catch (IOException ex) {
+            Logger.getLogger(Administrador.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(Administrador.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
-    public void consultarEstado(){
-    
+    public void consultarEstado(TableView<DatosTableView> tabla, TableColumn<DatosTableView, String> columna1, TableColumn<DatosTableView, Boolean> columna2){
+        try {  
+            columna2.setCellValueFactory(cellData -> cellData.getValue().checkboxProperty());
+            columna2.setCellFactory(CheckBoxTableCell.forTableColumn(columna2));
+            columna1.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getNombre()));
+            
+            tabla.setItems(conectar.obtenerListadoYAsignarCheckbox("select * from estados_ticket;", "nombre_estado" , "", ""));
+            tabla.setEditable(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(GestionRolesPermisosController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     @Override

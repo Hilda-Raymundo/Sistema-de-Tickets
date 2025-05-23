@@ -3,7 +3,6 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
-<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -30,14 +29,14 @@
                <children>
                   <Label layoutX="30.0" layoutY="228.0" text="Estados siguientes:" />
                   <Label layoutX="34.0" layoutY="25.0" text="Nombre:" />
-                  <TextField layoutX="88.0" layoutY="10.0" prefHeight="31.0" prefWidth="297.0">
+                  <TextField fx:id="nombreEstado" layoutX="88.0" layoutY="10.0" prefHeight="31.0" prefWidth="297.0">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </TextField>
                   <Label layoutX="30.0" layoutY="54.0" text="Descripción:" />
-                  <TextArea layoutX="109.0" layoutY="54.0" prefHeight="107.0" prefWidth="277.0" />
-                  <Button fx:id="crearEstado" layoutX="672.0" layoutY="446.0" mnemonicParsing="false" onAction="#crearEstado" prefHeight="30.0" prefWidth="126.0" style="-fx-background-color: orange; -fx-background-radius: 50;" text="Crear">
+                  <TextArea fx:id="descripcionEstado" layoutX="109.0" layoutY="54.0" prefHeight="107.0" prefWidth="277.0" />
+                  <Button fx:id="crearEstado" layoutX="662.0" layoutY="382.0" mnemonicParsing="false" onAction="#crearEstado" prefHeight="30.0" prefWidth="126.0" style="-fx-background-color: orange; -fx-background-radius: 50;" text="Crear">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
@@ -45,7 +44,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Button fx:id="cancelar" layoutX="536.0" layoutY="446.0" mnemonicParsing="false" onAction="#cancelar" prefHeight="30.0" prefWidth="126.0" style="-fx-background-color: red; -fx-background-radius: 50;" text="Cancelar">
+                  <Button fx:id="cancelar" layoutX="662.0" layoutY="439.0" mnemonicParsing="false" onAction="#cancelar" prefHeight="30.0" prefWidth="126.0" style="-fx-background-color: red; -fx-background-radius: 50;" text="Cancelar" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
@@ -54,41 +53,17 @@
                      </cursor>
                   </Button>
                   <Label layoutX="30.0" layoutY="161.0" text="Estado final:" />
-                  <CheckBox layoutX="88.0" layoutY="184.0" mnemonicParsing="false" text="Resuelto">
+                  <CheckBox fx:id="es_final" layoutX="109.0" layoutY="189.0" mnemonicParsing="false" onAction="#seleccionarFinal" onInputMethodTextChanged="#seleccionarFinal" onKeyPressed="#seleccionarFinal" text="Final">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </CheckBox>
-                  <CheckBox layoutX="197.0" layoutY="184.0" mnemonicParsing="false" text="Cerrado">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </CheckBox>
-                  <Label layoutX="30.0" layoutY="252.0" text="Estados disponibles:" />
-                  <Label layoutX="211.0" layoutY="252.0" text="Estados seleccionados:" />
-                  <Button layoutX="109.0" layoutY="317.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="75.0" style="-fx-background-color: #96C549; -fx-background-radius: 50;" text="Añadir">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </Button>
-                  <TableView layoutX="211.0" layoutY="276.0" prefHeight="141.0" prefWidth="255.0">
+                  <TableView fx:id="tablaEstados" layoutX="29.0" layoutY="250.0" prefHeight="219.0" prefWidth="491.0">
                      <columns>
-                        <TableColumn prefWidth="136.79998779296875" text="Nombre" />
-                        <TableColumn prefWidth="108.79998779296875" text="Descripcion" />
+                        <TableColumn fx:id="nombre_estado" prefWidth="281.6000003814697" text="Nombre" />
+                        <TableColumn fx:id="seleccion" prefWidth="199.20001220703125" text="Seleccionado" />
                      </columns>
                   </TableView>
-                  <Button layoutX="475.0" layoutY="276.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="75.0" style="-fx-background-color: yellow; -fx-background-radius: 50;" text="Quitar">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </Button>
-                  <ComboBox layoutX="30.0" layoutY="276.0" prefWidth="150.0" />
                </children>
             </Pane>
          </children>

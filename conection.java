@@ -118,6 +118,20 @@ public class conection extends OperacionesVentana{
         return listado;
     }
     
+    public ArrayList obtenerEstados(String sql, String parametroEspecifico){
+        ArrayList<String> listado = new ArrayList<>();
+            try (Connection conn = conectar();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery()){
+            while(rs.next()){
+                listado.add(rs.getString(parametroEspecifico));
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "ERRORES:" + e.toString());
+        }
+        return listado;
+    }
+    
     public Connection conectar() {
         String url = "jdbc:postgresql://ep-summer-bar-a4h60bj0-pooler.us-east-1.aws.neon.tech/sistema_tickets?sslmode=require";
         String user = "sistema_tickets_owner";

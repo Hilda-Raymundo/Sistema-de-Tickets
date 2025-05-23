@@ -14,7 +14,19 @@ abstract class ParametrosSistema extends OperacionesVentana{
     
     private String nombre;
     private String descripcion;
+    private Boolean datosValidos = false;
+    private Boolean nombreValido;
+    private Boolean descripcionValida;
 
+    public Boolean getDatosValidos() {
+        if(nombreValido == true && descripcionValida == true){
+            datosValidos = true;
+        }else{
+            datosValidos = false;
+        }
+        return datosValidos;
+    }
+    
     public ParametrosSistema(String nombre, String descripcion) {
         this.nombre = nombre;
         this.descripcion = descripcion;
@@ -27,7 +39,9 @@ abstract class ParametrosSistema extends OperacionesVentana{
     public void setNombre(String nombre) {
         if(nombre.equals("")){
             JOptionPane.showMessageDialog(null, "El campo NOMBRE está vacío");
+            nombreValido = false;
         }else{
+            nombreValido = true;
             this.nombre = nombre;
         }
     }
@@ -39,8 +53,10 @@ abstract class ParametrosSistema extends OperacionesVentana{
     public void setDescripcion(String descripcion) {
         if(descripcion.equals("")){
             JOptionPane.showMessageDialog(null, "El campo DESCRIPCION está vacío");
+            descripcionValida = false;
         }else{
             this.descripcion = descripcion;
+            descripcionValida = true;
         }
     }
         
