@@ -4,13 +4,16 @@
  */
 package sistemadetickets;
 
+import java.io.IOException;
+
 /**
  *
  * @author hraym
  */
 public class Usuarios extends Persona{
+    
 
-    public Usuarios(String nombreCompleto, String correo, String nombreUsuario, String contrasenia, String rol, String estado) {
+    public Usuarios(String nombreCompleto, String correo, String nombreUsuario, String contrasenia, String rol, String estado) throws IOException {
         super(nombreCompleto, correo, nombreUsuario, contrasenia, rol, estado);
     }
     

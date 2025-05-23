@@ -141,7 +141,7 @@ public class ConfiguracionDelSistemaController implements Initializable {
         try{
             conectado.consulta(sql);
             nombreEmpresa.setText(conectado.getNombreEmpresa());
-            imagen = conectado.consultaListados("SELECT * FROM configuracion_sistema", "logo_empresa");
+            imagen = conectado.consultaListados("SELECT * FROM configuracion_sistema", "logo_empresa", "");
             Image image = new Image("file:/C:/Users/hraym/OneDrive/Documentos/NetBeansProjects/SistemaDeTickets/src/sistemadetickets/imagenes/"+imagen.get(0));
             logo.setImage(image);
             parametro.setLogo(imagen.get(0));
@@ -149,12 +149,12 @@ public class ConfiguracionDelSistemaController implements Initializable {
             zonaHoraria.setValue(conectado.getZonaHoraria());
             diasVencimiento.getValueFactory().setValue(conectado.getTiempoVencimientoTicketsInactivos());
             ArrayList<String> listado = new ArrayList<>();
-            listado = conectado.consultaListados("select nombre_idioma from idiomas order by nombre_idioma", "nombre_idioma");
+            listado = conectado.consultaListados("select nombre_idioma from idiomas order by nombre_idioma", "nombre_idioma", "");
             for(int i = 0; i<listado.size(); i++){
                 idiomas.getItems().add(listado.get(i));
             }
             ArrayList<String> listado2 = new ArrayList<>();
-            listado2 = conectado.consultaListados("select nombre_zona_horaria from zonas_horarias order by nombre_zona_horaria", "nombre_zona_horaria");
+            listado2 = conectado.consultaListados("select nombre_zona_horaria from zonas_horarias order by nombre_zona_horaria", "nombre_zona_horaria", "");
             for(int i = 0; i<listado2.size(); i++){
                 zonaHoraria.getItems().add(listado2.get(i));
             }
@@ -163,16 +163,12 @@ public class ConfiguracionDelSistemaController implements Initializable {
             estadoPrioridad.setCellFactory(CheckBoxTableCell.forTableColumn(estadoPrioridad));
             nombrePrioridad.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getNombre()));
             
-            tablaPrioridades.setItems(conectado.obtenerListadoYAsignarCheckbox  ("SELECT u.nombre_prioridad, (SELECT id_prioridad FROM prioridades_configuracion_sistema t WHERE t.id_prioridad = u.id_prioridad) FROM prioridades u;", "nombre_prioridad" , "id_prioridad"));
+            tablaPrioridades.setItems(conectado.obtenerListadoYAsignarCheckbox  ("SELECT u.nombre_prioridad, (SELECT id_prioridad FROM prioridades_configuracion_sistema t WHERE t.id_prioridad = u.id_prioridad) FROM prioridades u;", "nombre_prioridad" , "id_prioridad", ""));
             tablaPrioridades.setEditable(true);
             }catch(Exception e){
             JOptionPane.showMessageDialog(null, "Erroresss: " + e.toString());
         }
         
         
-    }
-    
-    
-    
-    
+    }    
 }

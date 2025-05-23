@@ -19,8 +19,8 @@ public class Tecnicos extends Persona{
     }
 
     public void setDepartamento(String departamento) {
-        if(departamento.equals("")){
-            JOptionPane.showMessageDialog(null, "El campo DEPARTAMENTO está vacío");
+        if(departamento == null || departamento.equals("")){
+            JOptionPane.showMessageDialog(null, "Revise el campo DEPARTAMENTO");
         }else{
             this.departamento = departamento;
         }

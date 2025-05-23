@@ -26,17 +26,13 @@
             </Pane>
             <Pane layoutX="-2.0" layoutY="148.0" prefHeight="364.0" prefWidth="742.0" style="-fx-background-color: white; -fx-background-radius: 50;">
                <children>
-                  <Label layoutX="47.0" layoutY="26.0" text="Usuario:" />
-                  <TableView layoutX="39.0" layoutY="63.0" prefHeight="170.0" prefWidth="481.0">
+                  <TableView fx:id="tablaUsuarios" layoutX="39.0" layoutY="42.0" prefHeight="296.0" prefWidth="364.0">
                      <columns>
-                        <TableColumn prefWidth="75.0" text="Nombre" />
-                        <TableColumn prefWidth="75.0" text="Correo" />
-                        <TableColumn prefWidth="75.0" text="Usuario" />
-                        <TableColumn prefWidth="75.0" text="Rol" />
-                        <TableColumn prefWidth="111.199951171875" text="Departamento" />
+                        <TableColumn fx:id="nombre_usuario" onEditStart="#seleccionarUsuario" prefWidth="235.19995880126953" text="Nombre" />
+                        <TableColumn fx:id="estado" prefWidth="122.4000244140625" text="Estado" />
                      </columns>
                   </TableView>
-                  <Button fx:id="guardar" layoutX="555.0" layoutY="288.0" mnemonicParsing="false" onAction="#guardar" prefHeight="30.0" prefWidth="126.0" style="-fx-background-color: orange; -fx-background-radius: 50;" text="Guardar">
+                  <Button fx:id="guardar" layoutX="573.0" layoutY="243.0" mnemonicParsing="false" onAction="#guardar" prefHeight="30.0" prefWidth="126.0" style="-fx-background-color: orange; -fx-background-radius: 50;" text="Guardar">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
@@ -44,7 +40,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Button fx:id="cancelar" layoutX="417.0" layoutY="288.0" mnemonicParsing="false" onAction="#cancelar" prefHeight="30.0" prefWidth="126.0" style="-fx-background-color: red; -fx-background-radius: 50;" text="Cancelar">
+                  <Button fx:id="cancelar" layoutX="573.0" layoutY="294.0" mnemonicParsing="false" onAction="#cancelar" prefHeight="30.0" prefWidth="126.0" style="-fx-background-color: red; -fx-background-radius: 50;" text="Cancelar" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
@@ -52,22 +48,9 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <TextField layoutX="97.0" layoutY="19.0" prefHeight="31.0" prefWidth="297.0">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </TextField>
-                  <Label layoutX="566.0" layoutY="63.0" text="Estado:" />
-                  <CheckBox layoutX="566.0" layoutY="80.0" mnemonicParsing="false" text="Activado">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </CheckBox>
-                  <CheckBox layoutX="564.0" layoutY="112.0" mnemonicParsing="false" text="Desactivado">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </CheckBox>
+                  <TextField fx:id="usuarioSeleccionado" editable="false" layoutX="470.0" layoutY="42.0" />
+                  <CheckBox fx:id="activado" layoutX="470.0" layoutY="74.0" mnemonicParsing="false" onAction="#activar" onInputMethodTextChanged="#activar" onKeyPressed="#activar" onMouseClicked="#activar" text="activar" />
+                  <CheckBox fx:id="desactivado" layoutX="470.0" layoutY="102.0" mnemonicParsing="false" onAction="#desactivar" onInputMethodTextChanged="#desactivar" onKeyPressed="#desactivar" onMouseClicked="#desactivar" text="desactivar" />
                </children>
             </Pane>
          </children>

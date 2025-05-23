@@ -4,7 +4,14 @@
  */
 package sistemadetickets;
 
-import javax.swing.JOptionPane;
+import com.sun.jdi.connect.*;
+import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.mail.*;
+import javax.mail.internet.*;
+import javax.swing.*;
+import javax.mail.Transport;
 
 /**
  *
@@ -12,12 +19,37 @@ import javax.swing.JOptionPane;
  */
 abstract class Persona extends OperacionesVentana{
     
+    private static String email = "hraymundod@miumg.edu.gt";
+    private static String pass = "brxp mdaf typi bnrd";
+    private String destino;
+    private String asunto;
+    private String contenido;
+    private Properties p;
+    private Session sesion;
+    private MimeMessage mensajeCorreo;
+    
     private String nombreCompleto;
     private String correo;
     private String nombreUsuario;
     private String contrasenia;
     private String rol;
     private String estado;
+    
+    private Boolean datosValidos;
+    private Boolean nombre_completo_valido = false;
+    private Boolean correo_valido = false;
+    private Boolean nombre_usuario_valido = false;
+    private Boolean contrasenia_valida = false;
+    private Boolean rol_valido= false;
+
+    public Boolean getDatosValidos() {
+        if(nombre_completo_valido == true && correo_valido == true && nombre_usuario_valido == true && contrasenia_valida == true && rol_valido == true){
+            datosValidos = true;
+        }else{
+            datosValidos = false;
+        }        
+        return datosValidos;
+    }
 
     public Persona(String nombreCompleto, String correo, String nombreUsuario, String contrasenia, String rol, String estado) {
         this.nombreCompleto = nombreCompleto;
@@ -34,9 +66,16 @@ abstract class Persona extends OperacionesVentana{
 
     public void setNombreCompleto(String nombreCompleto) {
         if(nombreCompleto.equals("")){
-            JOptionPane.showMessageDialog(null, "El campo NOMBRE está vacío");
+            JOptionPane.showMessageDialog(null, "Revise el campo NOMBRE");
+            nombre_completo_valido = false;
         }else{
-            this.nombreCompleto = nombreCompleto;
+            if(nombreCompleto.length()>2 && nombreCompleto.length()<101){
+                this.nombreCompleto = nombreCompleto;
+                nombre_completo_valido = true;
+            }else{
+                JOptionPane.showMessageDialog(null, "Ingrese una cantidad validaen NOMBRE");
+                nombre_completo_valido = false;
+            }
         }
     }
 
@@ -46,9 +85,16 @@ abstract class Persona extends OperacionesVentana{
 
     public void setCorreo(String correo) {
         if(correo.equals("")){
-            JOptionPane.showMessageDialog(null, "El campo correo está vacío");
+            JOptionPane.showMessageDialog(null, "Revise el campo CORREO");
+            correo_valido = false;
         }else{
-            this.correo = correo;
+            if(correo.contains("@") && (correo.contains("gmail") || correo.contains("miumg") || correo.contains(".com"))){
+                this.correo = correo;
+                correo_valido = true;
+            }else{
+                JOptionPane.showMessageDialog(null, "Ingrese un correo valido");
+                correo_valido = false;
+            }
         }
     }
 
@@ -58,9 +104,17 @@ abstract class Persona extends OperacionesVentana{
 
     public void setNombreUsuario(String nombreUsuario) {
         if(nombreUsuario.equals("")){
-            JOptionPane.showMessageDialog(null, "El campo NOMBRE USUARIO está vacío");
+            JOptionPane.showMessageDialog(null, "Revise el campo NOMBRE USUARIO");
+            nombre_usuario_valido = false;
         }else{
-            this.nombreUsuario = nombreUsuario;
+            if(nombreUsuario.length()>4 && nombreUsuario.length()<31){
+                this.nombreUsuario = nombreUsuario;
+                nombre_usuario_valido = true;
+            }else{
+                nombre_usuario_valido = false;
+                JOptionPane.showMessageDialog(null, "Revise la cantidad de caracteres en NOMBRE USUARIO");
+            }
+            
         }
     }
 
@@ -70,9 +124,16 @@ abstract class Persona extends OperacionesVentana{
 
     public void setContrasenia(String contrasenia) {
         if(contrasenia.equals("")){
-            JOptionPane.showMessageDialog(null, "El campo CONTRASEÑA está vacío");
+            JOptionPane.showMessageDialog(null, "Revise el campo CONTRASEÑA");
+            contrasenia_valida = false;
         }else{
-            this.contrasenia = contrasenia;
+            if(contrasenia.length()>7){
+                this.contrasenia = contrasenia;
+                contrasenia_valida = true;
+            }else{
+                JOptionPane.showMessageDialog(null, "Revise la cantidad de caracteres en CONTRASEÑA");
+                contrasenia_valida = false;
+            }
         }
     }
 
@@ -82,9 +143,11 @@ abstract class Persona extends OperacionesVentana{
 
     public void setRol(String rol) {
         if(rol.equals("")){
-            JOptionPane.showMessageDialog(null, "El campo ROL está vacío");
+            JOptionPane.showMessageDialog(null, "Revise el campo ROL");
+            rol_valido = false;
         }else{
-        this.rol = rol;
+            this.rol = rol;
+            rol_valido = true;
         }
     }
 
@@ -94,12 +157,46 @@ abstract class Persona extends OperacionesVentana{
 
     public void setEstado(String estado) {
         if(estado.equals("")){
-            JOptionPane.showMessageDialog(null, "El campo ESTADO está vacío");
+            JOptionPane.showMessageDialog(null, "Revise el campo ESTADO");
         }else{
             this.estado = estado;
         }
     }
         
+    public void enviarNotificaciones(String correoDestino, String nombre_usuario, String pass_usuario){
+        try {
+            p = new Properties();
+            destino = correoDestino;
+            asunto = "CREDENCIALES";
+            contenido = "Estas son sus credenciales: nombre de usuario: " + nombre_usuario + ", contraseña: " + pass_usuario;
+            
+            p.put("mail.smtp.host", "smtp.gmail.com");
+            p.put("mail.smtp.ssl.trust", "smtp.gmail.com");
+            p.setProperty("mail.smtp.starttls.enable", "true");
+            p.setProperty("mail.smtp.port", "587");
+            p.setProperty("mail.smtp.user", email);
+            p.setProperty("mail.smtp.ssl.protocols", "TLSv1.2");
+            p.setProperty("mail.smtp.auth", "true");
+            
+            sesion = Session.getDefaultInstance(p);
+            mensajeCorreo = new MimeMessage(sesion);
+            mensajeCorreo.setFrom(new InternetAddress(email));
+            mensajeCorreo.setRecipient(Message.RecipientType.TO, new InternetAddress(destino));
+            mensajeCorreo.setSubject(asunto);
+            mensajeCorreo.setText(contenido, "ISO-8859-1", "html");
+            
+            Transport enviar = (Transport) sesion.getTransport("smtp");
+            enviar.connect(email, pass);
+            enviar.sendMessage(mensajeCorreo, mensajeCorreo.getRecipients(Message.RecipientType.TO));
+            enviar.close();
+            JOptionPane.showMessageDialog(null, "Se enviaron las credenciales al correo: " + correoDestino);
+        } catch (AddressException ex) {
+            Logger.getLogger(Persona.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (MessagingException ex) {
+            Logger.getLogger(Persona.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     public abstract void consultarTickets();
     
     public void agregarNota(){

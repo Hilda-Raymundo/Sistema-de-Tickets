@@ -94,37 +94,38 @@ public class conection extends OperacionesVentana{
                 JOptionPane.showMessageDialog(null, "ERROR");
             }
         } catch (Exception e) {
-            // Si hay un error en la conexión
             JOptionPane.showMessageDialog(null, "ERRORES:" + e.getMessage());
         }
     }
     
-    public ArrayList consultaListados(String sql, String parametroEspecifico) throws SQLException{
+    public ArrayList consultaListados(String sql, String parametroEspecifico, String parametro2) throws SQLException{
         ArrayList<String> listado = new ArrayList<>();
             try (Connection conn = conectar();
             PreparedStatement ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery()){
             while(rs.next()){
                 listado.add(rs.getString(parametroEspecifico));
+                if(!parametro2.equals("")){
+                    String[] parametros = parametro2.split(",");
+                    for(int i=0; i<parametros.length; i++) {
+                        listado.add(rs.getString(parametros[i]));
+                    }
+                }
             }
         } catch (Exception e) {
-            // Si hay un error en la conexión
             JOptionPane.showMessageDialog(null, "ERRORES:" + e.toString());
         }
         return listado;
     }
     
     public Connection conectar() {
-        // Datos de conexión a Neon PostgreSQL
         String url = "jdbc:postgresql://ep-summer-bar-a4h60bj0-pooler.us-east-1.aws.neon.tech/sistema_tickets?sslmode=require";
         String user = "sistema_tickets_owner";
         String pass = "npg_sjqrm9zFRP0f";
 
         try {
             return DriverManager.getConnection(url, user, pass);
-            // Si la conexión es exitosa
         } catch (SQLException e) {
-            // Si hay un error en la conexión
             JOptionPane.showMessageDialog(null, "ERRO:" + e.getMessage());
             return null;
         }
@@ -177,7 +178,7 @@ public class conection extends OperacionesVentana{
         
     }
 
-    public ObservableList<DatosTableView> obtenerListadoYAsignarCheckbox(String sql, String parametro1, String parametro2) throws SQLException{
+    public ObservableList<DatosTableView> obtenerListadoYAsignarCheckbox(String sql, String parametro1, String parametro2, String condicion) throws SQLException{
         ObservableList<DatosTableView> listado = FXCollections.observableArrayList();
         listado.clear();
 
@@ -194,6 +195,11 @@ public class conection extends OperacionesVentana{
                     int id = rs.getInt(parametro2);
                         if(id > 0){
                             check = true;
+                            if(!condicion.equals("")){
+                                if(id>1){
+                                    check = false;
+                                }
+                            }
                         }else{
                             check = false;
                         }
@@ -218,7 +224,7 @@ public class conection extends OperacionesVentana{
                 if(parametro3.equals("")){
                     listado.add(new DatosTableViewSinCheckbox(rs.getString(parametro1), rs.getString(parametro2), ""));
                 }else{
-                    ArrayList<String> lista = consultaListados("select nombre_usuario from usuarios where id_rol = (select id_rol from roles where nombre_rol = 'tecnico' and id_departamento = (SELECT id_departamento FROM departamentos WHERE nombre_departamento = '"+ rs.getString(parametro1) +"'));", parametro4);
+                    ArrayList<String> lista = consultaListados("select nombre_usuario from usuarios where id_rol = (select id_rol from roles where nombre_rol = 'tecnico' and id_departamento = (SELECT id_departamento FROM departamentos WHERE nombre_departamento = '"+ rs.getString(parametro1) +"'));", parametro4, "");
                     String dato = lista.toString();
                     listado.add(new DatosTableViewSinCheckbox(rs.getString(parametro1), rs.getString(parametro2), dato));
                 }

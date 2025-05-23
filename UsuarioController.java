@@ -72,7 +72,7 @@ public class UsuarioController implements Initializable {
         try {
             // TODO
             conection conectado = new conection();
-            listado = conectado.consultaListados("SELECT * FROM configuracion_sistema", "logo_empresa");
+            listado = conectado.consultaListados("SELECT * FROM configuracion_sistema", "logo_empresa", "");
             Image image = new Image("file:/C:/Users/hraym/OneDrive/Documentos/NetBeansProjects/SistemaDeTickets/src/sistemadetickets/imagenes/"+listado.get(0));
             logo.setImage(image);
         } catch (SQLException ex) {

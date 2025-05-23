@@ -86,7 +86,7 @@ public class ModificarDepartamentoController implements Initializable {
             seleccion.setCellFactory(CheckBoxTableCell.forTableColumn(seleccion));
             nombre_tecnico.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getNombre()));
             
-            tablaTecnicos.setItems(conectado.obtenerListadoYAsignarCheckbox  ("SELECT nombre_usuario, id_usuario FROM usuarios WHERE id_departamento IS NULL OR id_departamento = (select id_departamento from departamentos where nombre_departamento = '"+ nombreDepartamento.getText() +"' and descripcion_departamento = '"+ descripcionDepartamento.getText() +"');", "nombre_usuario" , ""));
+            tablaTecnicos.setItems(conectado.obtenerListadoYAsignarCheckbox  ("SELECT nombre_usuario, id_usuario FROM usuarios WHERE id_departamento IS NULL OR id_departamento = (select id_departamento from departamentos where nombre_departamento = '"+ nombreDepartamento.getText() +"' and descripcion_departamento = '"+ descripcionDepartamento.getText() +"');", "nombre_usuario" , "", ""));
             tablaTecnicos.setEditable(true);
         } catch (SQLException ex) {
             Logger.getLogger(ModificarRolController.class.getName()).log(Level.SEVERE, null, ex);

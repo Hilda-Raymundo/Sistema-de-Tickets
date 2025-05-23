@@ -26,24 +26,21 @@
             </Pane>
             <Pane layoutX="-2.0" layoutY="148.0" prefHeight="452.0" prefWidth="891.0" style="-fx-background-color: white; -fx-background-radius: 50;">
                <children>
-                  <Label layoutX="47.0" layoutY="26.0" text="Usuario:" />
-                  <TableView layoutX="39.0" layoutY="63.0" prefHeight="170.0" prefWidth="429.0">
+                  <Label layoutX="47.0" layoutY="26.0" text="Seleccionar usuario:" />
+                  <TableView fx:id="tablaUsuarios" layoutX="39.0" layoutY="63.0" prefHeight="340.0" prefWidth="359.0">
                      <columns>
-                        <TableColumn prefWidth="75.0" text="Nombre" />
-                        <TableColumn prefWidth="75.0" text="Correo" />
-                        <TableColumn prefWidth="75.0" text="Usuario" />
-                        <TableColumn prefWidth="75.0" text="Rol" />
-                        <TableColumn prefWidth="111.199951171875" text="Departamento" />
+                        <TableColumn fx:id="nombre_usuario" onEditStart="#seleccionarUsuario" prefWidth="190.4000244140625" text="Nombre" />
+                        <TableColumn fx:id="correo_usuario" onEditStart="#seleccionarUsuario" prefWidth="160.79998779296875" text="Correo" />
                      </columns>
                   </TableView>
-                  <Label layoutX="512.0" layoutY="26.0" text="Nombre:" />
-                  <TextField layoutX="512.0" layoutY="43.0" prefHeight="31.0" prefWidth="297.0">
+                  <Label layoutX="446.0" layoutY="26.0" text="Nombre:" />
+                  <TextField fx:id="nombreCompletoUsuario" layoutX="446.0" layoutY="43.0" prefHeight="31.0" prefWidth="279.0">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </TextField>
-                  <Label layoutX="513.0" layoutY="85.0" text="Correo:" />
-                  <Button fx:id="modificarUsuario" layoutX="720.0" layoutY="369.0" mnemonicParsing="false" onAction="#modificarUsuario" prefHeight="30.0" prefWidth="126.0" style="-fx-background-color: orange; -fx-background-radius: 50;" text="Modificar">
+                  <Label layoutX="450.0" layoutY="85.0" text="Correo:" />
+                  <Button fx:id="modificarUsuario" layoutX="745.0" layoutY="403.0" mnemonicParsing="false" onAction="#modificarUsuario" prefHeight="30.0" prefWidth="126.0" style="-fx-background-color: orange; -fx-background-radius: 50;" text="Modificar">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
@@ -51,28 +48,28 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Label layoutX="512.0" layoutY="148.0" text="Nombre de Usuario:" />
-                  <Label layoutX="512.0" layoutY="208.0" text="Contraseña:" />
-                  <Label layoutX="513.0" layoutY="265.0" text="Rol:" />
-                  <Label layoutX="680.0" layoutY="265.0" text="Departamento:" />
-                  <TextField layoutX="512.0" layoutY="102.0" prefHeight="31.0" prefWidth="297.0">
+                  <Label layoutX="450.0" layoutY="148.0" text="Nombre de Usuario:" />
+                  <Label layoutX="450.0" layoutY="209.0" text="Contraseña:" />
+                  <Label layoutX="450.0" layoutY="275.0" text="Rol:" />
+                  <Label layoutX="452.0" layoutY="310.0" text="Departamento:" />
+                  <TextField fx:id="correoUsuario" layoutX="446.0" layoutY="102.0" prefHeight="31.0" prefWidth="279.0">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </TextField>
-                  <TextField layoutX="512.0" layoutY="165.0" prefHeight="31.0" prefWidth="297.0">
+                  <TextField fx:id="nombreUsuario" layoutX="446.0" layoutY="165.0" prefHeight="31.0" prefWidth="279.0">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </TextField>
-                  <TextField layoutX="512.0" layoutY="225.0" prefHeight="31.0" prefWidth="297.0">
+                  <TextField fx:id="contraseniaUsuario" layoutX="446.0" layoutY="226.0" prefHeight="31.0" prefWidth="279.0">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </TextField>
-                  <ComboBox layoutX="512.0" layoutY="290.0" prefWidth="150.0" />
-                  <ComboBox layoutX="680.0" layoutY="290.0" prefWidth="150.0" />
-                  <Button fx:id="cancelar" layoutX="587.0" layoutY="369.0" mnemonicParsing="false" onAction="#cancelar" prefHeight="30.0" prefWidth="126.0" style="-fx-background-color: red; -fx-background-radius: 50;" text="Cancelar">
+                  <ComboBox fx:id="roles" layoutX="536.0" layoutY="271.0" onAction="#seleccionarRol" onInputMethodTextChanged="#seleccionarRol" prefWidth="150.0" />
+                  <ComboBox fx:id="departamentos" layoutX="536.0" layoutY="306.0" prefWidth="150.0" />
+                  <Button fx:id="cancelar" layoutX="611.0" layoutY="403.0" mnemonicParsing="false" onAction="#cancelar" prefHeight="30.0" prefWidth="126.0" style="-fx-background-color: red; -fx-background-radius: 50;" text="Cancelar" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
@@ -80,11 +77,6 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <TextField layoutX="97.0" layoutY="19.0" prefHeight="31.0" prefWidth="297.0">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </TextField>
                </children>
             </Pane>
          </children>

@@ -83,7 +83,7 @@ public class CrearRolController implements Initializable {
             asignacionPermiso.setCellFactory(CheckBoxTableCell.forTableColumn(asignacionPermiso));
             nombrePermiso.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getNombre()));
             
-            tablaPermisos.setItems(conectado.obtenerListadoYAsignarCheckbox  ("SELECT nombre_permiso, id_permiso FROM permisos;", "nombre_permiso" , ""));
+            tablaPermisos.setItems(conectado.obtenerListadoYAsignarCheckbox  ("SELECT nombre_permiso, id_permiso FROM permisos;", "nombre_permiso" , "", ""));
             tablaPermisos.setEditable(true);
         } catch (SQLException ex) {
             Logger.getLogger(CrearRolController.class.getName()).log(Level.SEVERE, null, ex);

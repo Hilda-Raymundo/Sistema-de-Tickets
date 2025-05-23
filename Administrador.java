@@ -26,6 +26,7 @@ public class Administrador extends Persona{
     
     private Roles parametros = new Roles("", "");
     private Departamentos parametrosDepartamento = new Departamentos("", "");
+    private Tecnicos tecnico = new Tecnicos("", "", "", "","", "");
     conection conectar = new conection();
     LocalDate fecha = LocalDate.now();
     int id= conectar.getIdUsuario();
@@ -189,6 +190,7 @@ public class Administrador extends Persona{
             columna1.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDato1()));
             columna2.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDato2()));
             tabla.setItems(conectar.obtenerListado("SELECT * FROM permisos;", "nombre_permiso", "descripcion_permiso", "", ""));
+            tabla.setEditable(true);
         } catch (SQLException ex) {
             Logger.getLogger(GestionRolesPermisosController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -222,28 +224,108 @@ public class Administrador extends Persona{
     
     }
     
-    public void crearUsuarios(){
-    
+    public void crearUsuarios(Button cerrar, String nombre, String correo, String nombreUsuario, String contrasenia, String rol, String departamento) throws IOException{
+        tecnico.setNombreCompleto(nombre);
+        tecnico.setCorreo(correo);
+        tecnico.setNombreUsuario(nombreUsuario);
+        tecnico.setContrasenia(contrasenia);
+        tecnico.setRol(rol);
+        tecnico.setDepartamento(departamento);
+        
+        if(tecnico.getDatosValidos()==true) {  
+            try {                
+                int buscarCorreo = conectar.buscar("select * from usuarios where correo_usuario = '"+ tecnico.getCorreo() +"' LIMIT 1");
+                int buscarNombreUsuario = conectar.buscar("select * from usuarios where nombre_usuario = '"+ tecnico.getNombreUsuario() +"' LIMIT 1");
+                
+                if(buscarCorreo>0){
+                    JOptionPane.showMessageDialog(null, "El correo ya está registrado");
+                }else if(buscarNombreUsuario>0){
+                    JOptionPane.showMessageDialog(null, "El nombre de usuario ya está registrado");
+                }else{
+                    if(departamento.equals("") || departamento.equals("no aplica") || departamento.equals(null)){
+                        conectar.consultaDML("insert into usuarios(nombre_completo, correo_usuario, nombre_usuario, contrasenia, id_rol, id_estado) VALUES('"+ tecnico.getNombreCompleto()+"', '"+ tecnico.getCorreo() +"', '"+ tecnico.getNombreUsuario() +"', '"+ tecnico.getContrasenia() +"', (SELECT id_rol FROM roles WHERE nombre_rol = '"+ tecnico.getRol() +"'), 1)");
+                    }else{
+                        conectar.consultaDML("insert into usuarios(nombre_completo, correo_usuario, nombre_usuario, contrasenia, id_rol, id_estado, id_departamento) VALUES('"+ tecnico.getNombreCompleto()+"', '"+ tecnico.getCorreo() +"', '"+ tecnico.getNombreUsuario() +"', '"+ tecnico.getContrasenia() +"', (SELECT id_rol FROM roles WHERE nombre_rol = '"+ tecnico.getRol() +"'), 1, (SELECT id_departamento FROM departamentos WHERE nombre_departamento = '"+ tecnico.getDepartamento() +"'))");
+                    }
+                    JOptionPane.showMessageDialog(null, "Operación exitosa!");
+                    HistorialConfiguracionesSistema historial = new HistorialConfiguracionesSistema(fecha, "Se creó el usuario(nombre = "+ tecnico.getNombreUsuario()+", correo = "+ tecnico.getCorreo()+") ", "" + id);
+                    cerrar(cerrar);
+                    abrirVentana("GestionUsuarios.fxml");
+                    enviarNotificaciones(tecnico.getCorreo(), nombreUsuario, contrasenia);
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(Administrador.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
     
-    public void modificarUsuarios(){
-    
+    public void modificarUsuarios(Button cerrar, String nombreCompleto, String correo, String nombreUsuario, String contrasenia, String rol, String departamento, String id){
+        try {
+            tecnico.setNombreCompleto(nombreCompleto);
+            tecnico.setCorreo(correo);
+            tecnico.setNombreUsuario(nombreUsuario);
+            tecnico.setContrasenia(contrasenia);
+            tecnico.setRol(rol);
+            tecnico.setDepartamento(departamento);
+            
+            if(tecnico.getDatosValidos() == true){
+                int buscarCorreo = conectar.buscar("select * from usuarios where correo_usuario = '"+ tecnico.getCorreo()+"' LIMIT 1");
+                int buscarNombreUsuario = conectar.buscar("select * from usuarios where nombre_usuario = '"+ tecnico.getNombreUsuario() +"' LIMIT 1");
+                
+                if(buscarCorreo>0){
+                    JOptionPane.showMessageDialog(null, "El correo ya está registrado");
+                }else if(buscarNombreUsuario>0){
+                    JOptionPane.showMessageDialog(null, "El nombre de usuario ya está registrado");
+                }else{
+                    if(departamento.equals("") || departamento.equals("no aplica") || departamento == (null)){
+                        conectar.consultaDML("UPDATE usuarios SET nombre_completo = '"+ tecnico.getNombreCompleto()+"', correo_usuario = '"+ tecnico.getCorreo() +"', nombre_usuario = '"+ tecnico.getNombreUsuario() +"', contrasenia = '"+ tecnico.getContrasenia() +"', id_rol = (SELECT id_rol FROM roles WHERE nombre_rol ='"+ tecnico.getRol() +"'), id_departamento = null WHERE id_usuario = '"+ id +"'");
+                    }else{
+                        conectar.consultaDML("UPDATE usuarios SET nombre_completo = '"+ tecnico.getNombreCompleto()+"', correo_usuario = '"+ tecnico.getCorreo() +"', nombre_usuario = '"+ tecnico.getNombreUsuario() +"', contrasenia = '"+ tecnico.getContrasenia() +"', id_rol = (SELECT id_rol FROM roles WHERE nombre_rol ='"+ tecnico.getRol() +"'), id_departamento = (SELECT id_departamento FROM departamentos WHERE nombre_departamento ='"+ tecnico.getDepartamento()+"') WHERE id_usuario = '"+ id +"'");
+                    }
+                    JOptionPane.showMessageDialog(null, "Operación exitosa!");
+                    HistorialConfiguracionesSistema historial = new HistorialConfiguracionesSistema(fecha, "Se modificó el usuario(nombre = "+ tecnico.getNombreUsuario()+", correo = "+ tecnico.getCorreo()+") ", "" + id);
+                    cerrar(cerrar);
+                    abrirVentana("GestionUsuarios.fxml");
+                }                
+            }else{
+                System.out.println("error");
+            }
+            
+        } catch (IOException ex) {
+            Logger.getLogger(Administrador.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(Administrador.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     public void eliminarUsuarios(){
     
     }
     
-    public void consultarUsuarios(){
-    
+    public void consultarUsuarios(TableView<DatosTableViewSinCheckbox> tabla, TableColumn<DatosTableViewSinCheckbox, String> columna1, TableColumn<DatosTableViewSinCheckbox, String> columna2, TableColumn<DatosTableViewSinCheckbox, String> columna3){
+        try {            
+            columna1.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDato1()));
+            columna2.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDato2()));
+            tabla.setItems(conectar.obtenerListado("SELECT * FROM usuarios;", "nombre_usuario", "correo_usuario", "", ""));
+            tabla.setEditable(true);
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(GestionRolesPermisosController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
-    public void activarUsuario(){
-    
-    }
-    
-    public void desactivarUsuario(){
-    
+    public void activarDesactivarUsuario(Button cerrar, String nombreUsuario, int nuevoEstado){
+        try {
+            conectar.consultaDML("UPDATE usuarios SET id_estado = "+ nuevoEstado +" WHERE nombre_usuario = '"+ nombreUsuario +"' ");
+            HistorialConfiguracionesSistema historial = new HistorialConfiguracionesSistema(fecha, "Se modificó el usuario(nombre = "+ nombreUsuario +", estado = "+ nuevoEstado +") ", "" + id);
+            JOptionPane.showMessageDialog(null, "Operacion exitosa!");
+            cerrar(cerrar);
+            abrirVentana("GestionUsuarios.fxml");
+        } catch (SQLException ex) {
+            Logger.getLogger(Administrador.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Administrador.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     public void crearDepartamento(Button cerrar, String nombreDepartamento, String descripcionDepartamento, ArrayList<String> tecnicos) throws IOException{        
@@ -358,7 +440,7 @@ public class Administrador extends Persona{
             columna2.setCellFactory(CheckBoxTableCell.forTableColumn(columna2));
             columna1.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getNombre()));
             
-                tabla.setItems(conectar.obtenerListadoYAsignarCheckbox("select * from usuarios where id_departamento IS NULL and id_estado = 1;", "nombre_usuario" , ""));
+            tabla.setItems(conectar.obtenerListadoYAsignarCheckbox("select * from usuarios where id_rol = 2 and id_departamento is null;", "nombre_usuario" , "", ""));
             tabla.setEditable(true);
         } catch (SQLException ex) {
             Logger.getLogger(GestionRolesPermisosController.class.getName()).log(Level.SEVERE, null, ex);
