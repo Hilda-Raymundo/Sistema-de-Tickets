@@ -28,6 +28,7 @@ public class Administrador extends Persona{
     private Departamentos parametrosDepartamento = new Departamentos("", "");
     private Tecnicos tecnico = new Tecnicos("", "", "", "","", "");
     private EstadosTicket estadosTicket = new EstadosTicket("", "");
+    FlujosDeTrabajo flujo = new FlujosDeTrabajo();
     conection conectar = new conection();
     LocalDate fecha = LocalDate.now();
     int id= conectar.getIdUsuario();
@@ -452,8 +453,37 @@ public class Administrador extends Persona{
     
     }
     
-    public void crearFlujosTrabajo(){
-    
+    public void crearFlujosTrabajo(Button cerrar, String nombreFlujo, ArrayList<String> estadoInicial, ArrayList<String> estadoSiguiente){
+        try {
+            if(!nombreFlujo.equals("") && estadoInicial.size()!=0){
+                flujo.setNombre(nombreFlujo);
+                conectar.consultaDML("INSERT INTO flujo_trabajo(nombre_flujo) VALUES('"+ flujo.getNombre() +"')");
+                for(String estado: estadoInicial){
+                    int datoa = conectar.buscar("SELECT id_estado FROM estados_ticket WHERE nombre_estado = '"+ flujo.getNombre() +"' AND estado_final = 1");
+                    for(String siguiente: estadoSiguiente){
+                        if(datoa==0){
+                            int dato = conectar.buscar("SELECT * FROM estados_transicion WHERE estado_siguiente = (SELECT id_estado FROM estados_ticket WHERE nombre_estado ='"+ siguiente +"') AND estado_inicial = (SELECT id_estado FROM estados_ticket WHERE nombre_estado = '"+ estado +"') LIMIT 1");
+                            if(dato>0){
+                                conectar.consultaDML("INSERT INTO estados_flujo(id_flujo, estado_actual, estado_siguiente) VALUES((SELECT MAX(id_flujo FROM flujo_trabajo), '"+ estado +"', '"+ siguiente +"')");
+                            }
+                        }else{
+                            conectar.consultaDML("INSERT INTO estados_flujo(id_flujo, estado_actual) VALUES((SELECT MAX(id_flujo FROM flujo_trabajo), estado))");
+                        }
+                    }                    
+                }
+                
+                JOptionPane.showMessageDialog(null, "Se creó el flujo de trabajo exitosamente");
+                abrirVentana("GestionFlujosDeTrabajo.fxml"); 
+                cerrar(cerrar);
+            }else{
+                JOptionPane.showMessageDialog(null, "Revise los datos ingresaos");
+            }
+            
+        } catch (IOException ex) {
+            Logger.getLogger(Administrador.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(Administrador.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     public void modificarFlujosTrabajo(){
