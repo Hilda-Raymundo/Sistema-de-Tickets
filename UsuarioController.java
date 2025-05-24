@@ -13,6 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.TableView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -35,6 +36,8 @@ public class UsuarioController implements Initializable {
     public javafx.scene.control.Button cancelarTicket;
     public javafx.scene.control.Button atras;
     public ImageView logo;
+    
+    
         
     @FXML
     private void crearTicket() throws IOException{

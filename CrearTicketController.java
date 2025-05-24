@@ -51,7 +51,7 @@ public class CrearTicketController implements Initializable {
         int opcionSeleccionada = JOptionPane.showConfirmDialog(null, "¿Está seguro de cancelar?", "Cancelar",JOptionPane.YES_NO_OPTION);
         if(opcionSeleccionada == JOptionPane.YES_OPTION){
            operaciones.cerrar(cancelar);
-            operaciones.abrirVentana("Admin.fxml");
+            operaciones.abrirVentana("Principal.fxml");
         }
     }
     

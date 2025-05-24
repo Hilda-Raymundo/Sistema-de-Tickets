@@ -6,7 +6,6 @@ package sistemadetickets;
 
 import java.io.File;
 import java.time.LocalDate;
-import java.util.Date;
 import javax.swing.JOptionPane;
 
 /**
@@ -42,8 +41,6 @@ public class Tickets {
             
         }
     }
-
-    
     
     public int getNumeroTicket() {
         return numeroTicket;

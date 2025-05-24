@@ -42,14 +42,10 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <TableView layoutX="20.0" layoutY="64.0" prefHeight="397.0" prefWidth="711.0">
+                  <TableView fx:id="misTickets" layoutX="20.0" layoutY="64.0" prefHeight="397.0" prefWidth="711.0">
                      <columns>
-                        <TableColumn prefWidth="101.59997367858887" text="NumeroTicket" />
-                        <TableColumn prefWidth="87.19995880126953" text="Estado" />
-                        <TableColumn prefWidth="100.79998779296875" text="FechaCreacion" />
-                        <TableColumn prefWidth="108.0" text="Departamento" />
-                        <TableColumn prefWidth="109.59994506835938" text="Prioridad" />
-                        <TableColumn prefWidth="109.59994506835938" text="Resumen" />
+                        <TableColumn fx:id="numero_ticket" prefWidth="381.6000003814697" text="NumeroTicket" />
+                        <TableColumn fx:id="estado_ticket" prefWidth="319.1999816894531" text="Prioridad" />
                      </columns>
                   </TableView>
                   <Button fx:id="adjuntarDocumentacion" layoutX="742.0" layoutY="141.0" mnemonicParsing="false" onAction="#adjuntarDocumentacion" prefHeight="25.0" prefWidth="104.0" style="-fx-background-color: yellow; -fx-background-radius: 50;" text="Adjuntar Documentación">

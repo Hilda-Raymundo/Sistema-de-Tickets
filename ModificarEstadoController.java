@@ -27,14 +27,13 @@ public class ModificarEstadoController implements Initializable {
     
     public void atras() throws Exception{
         operaciones.cerrar(atras);
-        operaciones.abrirVentana("GestionarTicket.fxml");
+        operaciones.abrirVentana("Principal.fxml");
     }
     
     public void modificar() throws Exception{
         JOptionPane.showMessageDialog(null, "Se modificó el estado exitosamente");
         operaciones.cerrar(modificar);
-        operaciones.abrirVentana("GestionarTicket.fxml");
-        operaciones.abrirVentana("TicketsPendientes.fxml");
+        operaciones.abrirVentana("Principal.fxml");
     }
     
     @Override

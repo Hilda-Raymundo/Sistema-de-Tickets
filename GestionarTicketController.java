@@ -19,7 +19,6 @@ public class GestionarTicketController implements Initializable {
     /**
      * Initializes the controller class.
      */
-    public javafx.scene.control.Button crearNuevoTicket;
     public javafx.scene.control.Button atras;
     public javafx.scene.control.Button cambiarEstado;
     public javafx.scene.control.Button agregarNota;
@@ -29,10 +28,6 @@ public class GestionarTicketController implements Initializable {
     
     OperacionesVentana operaciones = new OperacionesVentana();
     
-    public void crearNuevoTicket() throws Exception{
-        operaciones.cerrar(crearNuevoTicket);
-        operaciones.abrirVentana("CrearTicket.fxml");
-    }
     
     public void atras() throws Exception{
         operaciones.cerrar(atras);

@@ -619,9 +619,30 @@ public class Administrador extends Persona{
         }
     }
     
+    public void consultarTicketsTabla(TableView<DatosTableViewSinCheckbox> tabla, TableColumn<DatosTableViewSinCheckbox, String> columna1, TableColumn<DatosTableViewSinCheckbox, String> columna2){
+        try {            
+            columna1.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDato1()));
+            columna2.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDato2()));
+                
+            tabla.setItems(conectar.obtenerListado("SELECT t.titulo, e.nombre_estado FROM tickets t INNER JOIN estados_ticket e ON t.estado = e.id_estado  WHERE usuario = 3", "titulo", "nombre_estado", "", ""));
+        } catch (SQLException ex) {
+            Logger.getLogger(GestionRolesPermisosController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void consultarTicketsTablaEstados(TableView<DatosTableViewSinCheckbox> tabla, TableColumn<DatosTableViewSinCheckbox, String> columna1, TableColumn<DatosTableViewSinCheckbox, String> columna2){
+        try {            
+            columna1.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDato1()));
+            columna2.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDato2()));
+                
+            tabla.setItems(conectar.obtenerListado("SELECT t.titulo, e.nombre_prioridad FROM tickets t INNER JOIN prioridades e ON t.prioridad = e.id_prioridad WHERE departamento = (SELECT id_departamento FROM usuarios WHERE id_usuario = "+ id +")", "titulo", "nombre_prioridad", "", ""));
+        } catch (SQLException ex) {
+            Logger.getLogger(GestionRolesPermisosController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
     @Override
-    public void consultarTickets(){
-        
+    public void consultarTickets() {
     }
     
 }

@@ -5,8 +5,17 @@
 package sistemadetickets;
 
 import java.net.URL;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javax.swing.JOptionPane;
 
 /**
@@ -19,6 +28,15 @@ public class TicketsPendientesController implements Initializable {
     /**
      * Initializes the controller class.
      */
+    Administrador admin = new Administrador("", "", "", "", "", "");
+    conection conectado = new conection();
+    
+    @FXML
+    public TableView<DatosTableViewSinCheckbox> misTickets;
+    @FXML
+    public TableColumn<DatosTableViewSinCheckbox, String> numero_ticket;
+    @FXML
+    public TableColumn<DatosTableViewSinCheckbox, String> estado_ticket;
     
     public javafx.scene.control.Button cambiarEstado;
     public javafx.scene.control.Button agregarNota;
@@ -51,7 +69,7 @@ public class TicketsPendientesController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        admin.consultarTicketsTablaEstados(misTickets, numero_ticket, estado_ticket);
     }    
     
 }
