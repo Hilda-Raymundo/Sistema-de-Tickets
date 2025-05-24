@@ -11,10 +11,10 @@ import java.time.LocalDate;
  *
  * @author hraym
  */
-public class CambiosEstado extends HistorialTickets{
+public class HistorialNotas extends HistorialTickets{
     
-    public CambiosEstado(LocalDate fechaModificacion, String usuario, String descripcion) throws SQLException {
+    public HistorialNotas(LocalDate fechaModificacion, String usuario, String descripcion) throws SQLException {
         super(fechaModificacion, usuario, descripcion);
     }
-    
+      
 }

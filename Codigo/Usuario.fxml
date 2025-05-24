@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="750.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sistemadetickets.UsuarioController">
+   <children>
+      <Pane layoutX="8.0" layoutY="227.0" prefHeight="424.0" prefWidth="982.0" style="-fx-background-color: #96C549; -fx-background-radius: 30;">
+         <children>
+            <Pane layoutX="221.0" layoutY="77.0" prefHeight="74.0" prefWidth="541.0" style="-fx-background-color: white; -fx-background-radius: 50;">
+               <children>
+                  <ImageView fitHeight="81.0" fitWidth="88.0" layoutX="-10.0" layoutY="-3.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@imagenes/crear.png" />
+                     </image>
+                  </ImageView>
+                  <Button fx:id="crearTicket" layoutX="70.0" layoutY="12.0" mnemonicParsing="false" onAction="#crearTicket" prefHeight="50.0" prefWidth="445.0" style="-fx-background-color: none; -fx-label-padding: 5;" text="Crear Ticket" textAlignment="RIGHT">
+                     <font>
+                        <Font name="Segoe UI" size="20.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+               </children>
+            </Pane>
+            <Pane layoutX="221.0" layoutY="160.0" prefHeight="74.0" prefWidth="541.0" style="-fx-background-color: white; -fx-background-radius: 50;">
+               <children>
+                  <ImageView fitHeight="67.0" fitWidth="81.0" layoutX="-8.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@imagenes/consultar.png" />
+                     </image>
+                  </ImageView>
+                  <Button fx:id="consultarTicket" layoutX="70.0" layoutY="13.0" mnemonicParsing="false" onAction="#consultarTicket" prefHeight="50.0" prefWidth="445.0" style="-fx-background-color: none; -fx-label-padding: 5;" text="Consultar Tickets">
+                     <font>
+                        <Font name="Segoe UI" size="20.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+               </children>
+            </Pane>
+            <Pane layoutX="221.0" layoutY="244.0" prefHeight="74.0" prefWidth="541.0" style="-fx-background-color: white; -fx-background-radius: 50;">
+               <children>
+                  <ImageView fitHeight="67.0" fitWidth="81.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@imagenes/agregar.png" />
+                     </image>
+                  </ImageView>
+                  <Button fx:id="agregarNota" layoutX="70.0" layoutY="12.0" mnemonicParsing="false" onAction="#agregarNota" prefHeight="56.0" prefWidth="445.0" style="-fx-background-color: none; -fx-label-padding: 5;" text="Agregar Nota">
+                     <font>
+                        <Font name="Segoe UI" size="20.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+               </children>
+            </Pane>
+            <Pane layoutX="221.0" layoutY="328.0" prefHeight="74.0" prefWidth="541.0" style="-fx-background-color: white; -fx-background-radius: 50;">
+               <children>
+                  <ImageView fitHeight="67.0" fitWidth="81.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@imagenes/cancelar.png" />
+                     </image>
+                  </ImageView>
+                  <Button fx:id="cancelarTicket" layoutX="70.0" layoutY="12.0" mnemonicParsing="false" onAction="#cancelarTicket" prefHeight="50.0" prefWidth="445.0" style="-fx-background-color: none; -fx-label-padding: 5;" text="Cancelar Ticket">
+                     <font>
+                        <Font name="Segoe UI" size="20.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+               </children>
+            </Pane>
+         </children>
+      </Pane>
+      <ImageView fx:id="logo" fitHeight="176.0" fitWidth="223.0" layoutX="411.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true" />
+      <Label layoutX="344.0" layoutY="46.0" text="Bienvenido !">
+         <font>
+            <Font name="Segoe UI Black" size="50.0" />
+         </font>
+      </Label>
+      <Label layoutX="425.0" layoutY="63.0">
+         <font>
+            <Font name="Segoe UI Black" size="27.0" />
+         </font>
+      </Label>
+      <Button fx:id="atras" layoutX="315.0" layoutY="664.0" mnemonicParsing="false" onAction="#atras" prefHeight="25.0" prefWidth="369.0" style="-fx-background-color: #96C549; -fx-background-radius: 50;" text="Salir y Cerrar Sesión" textFill="WHITE">
+         <font>
+            <Font name="Segoe UI Black" size="26.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+   </children>
+</AnchorPane>

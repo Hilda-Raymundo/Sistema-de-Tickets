@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sistemadetickets.GestionarPermisoController">
+   <children>
+      <Pane prefHeight="239.0" prefWidth="800.0" style="-fx-background-color: #96C549;">
+         <children>
+            <Label layoutX="31.0" layoutY="35.0" text="Gestionar Permiso" textFill="WHITE">
+               <font>
+                  <Font name="Segoe UI Black" size="30.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Pane layoutY="130.0" prefHeight="472.0" prefWidth="800.0" style="-fx-background-color: white; -fx-background-radius: 50;">
+         <children>
+            <Label layoutX="47.0" layoutY="26.0" text="Permiso:" />
+            <TableView fx:id="tablaPermisos" layoutX="41.0" layoutY="54.0" onKeyPressed="#seleccionarPermiso" prefHeight="397.0" prefWidth="311.0">
+               <columns>
+                  <TableColumn fx:id="nombre_Permiso" onEditStart="#seleccionarPermiso" prefWidth="144.0" text="Nombre" />
+                  <TableColumn fx:id="descripcion_permiso" onEditStart="#seleccionarPermiso" prefWidth="155.20001220703125" text="Descripcion" />
+               </columns>
+            </TableView>
+            <Label layoutX="400.0" layoutY="53.0" text="Nombre:" />
+            <TextField fx:id="nombrePermiso" layoutX="400.0" layoutY="79.0" prefHeight="31.0" prefWidth="297.0">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </TextField>
+            <Label layoutX="398.0" layoutY="123.0" text="Descripción:" />
+            <TextArea fx:id="descripcionPermiso" layoutX="400.0" layoutY="140.0" prefHeight="107.0" prefWidth="297.0">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </TextArea>
+            <Button fx:id="crearPermiso" layoutX="526.0" layoutY="274.0" mnemonicParsing="false" onAction="#crearPermiso" prefHeight="30.0" prefWidth="171.0" style="-fx-background-color: #96C549; -fx-background-radius: 50;" text="Crear Permiso">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button fx:id="modificarPermiso" layoutX="526.0" layoutY="317.0" mnemonicParsing="false" onAction="#modificarPermiso" prefHeight="30.0" prefWidth="171.0" style="-fx-background-color: Orange; -fx-background-radius: 50;" text="Modificar Permiso">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button fx:id="eliminarPermiso" layoutX="526.0" layoutY="362.0" mnemonicParsing="false" onAction="#eliminarPermiso" prefHeight="30.0" prefWidth="171.0" style="-fx-background-color: red; -fx-background-radius: 50;" text="Eliminar Permiso">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button fx:id="cancelar" layoutX="600.0" layoutY="406.0" mnemonicParsing="false" onAction="#cancelar" prefHeight="30.0" prefWidth="97.0" style="-fx-background-color: red; -fx-background-radius: 50;" text="cancelar" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

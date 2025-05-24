@@ -36,15 +36,7 @@ public class Administrador extends Persona{
     public Administrador(String nombreCompleto, String correo, String nombreUsuario, String contrasenia, String rol, String estado) {
         super(nombreCompleto, correo, nombreUsuario, contrasenia, rol, estado);
     }    
-    
-    public void establecerParametrosSistema(){
-    
-    }
-    
-    public void modificarParametrosSistema(){
-    
-    }
-    
+   
     public void crearRoles(Button crear, String nombre, String descripcion, ArrayList<String> permisos) throws IOException{
         if(nombre.equals("") || descripcion.equals("") || permisos.size()<1){
             parametros.setNombre(nombre);
@@ -215,8 +207,12 @@ public class Administrador extends Persona{
     
     }
     
-    public void cambiarEstadoTickets(){
-    
+    public void cambiarEstadoTickets(Button cerrar, String consulta){
+        try {
+            conectar.consultaDML(consulta);
+        } catch (SQLException ex) {
+            Logger.getLogger(Administrador.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     public void verReporteTickets(){
