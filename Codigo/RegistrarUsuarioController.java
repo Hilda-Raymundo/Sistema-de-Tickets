@@ -59,6 +59,7 @@ public class RegistrarUsuarioController implements Initializable {
                 
                 Administrador admin = new Administrador("", "", "", "", "", "");
                 admin.crearUsuarios(crear, nombre.getText(), correo.getText(), nombreUsuario.getText(), contrasenia.getText(), rol.getValue(), departamento.getValue());
+                JOptionPane.showMessageDialog(null, "Se enviaron las credenciales al correo");
             }
         }        
     }

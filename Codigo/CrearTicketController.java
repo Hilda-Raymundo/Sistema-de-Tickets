@@ -31,7 +31,7 @@ public class CrearTicketController implements Initializable {
     public javafx.scene.control.Button cancelar;
     public javafx.scene.control.Button crear;
     LocalDate fecha = LocalDate.now();
-     Tickets ticket = new Tickets();
+    Tickets ticket = new Tickets();
     @FXML
     public TextField titulo;
     @FXML
@@ -45,7 +45,7 @@ public class CrearTicketController implements Initializable {
     
     OperacionesVentana operaciones = new OperacionesVentana();
     conection conectado = new conection();
-    Administrador admin = new Administrador("", "", "", "", "", "");
+    Administrador usuario = new Administrador("", "", "", "", "", "");
     
     public void cancelar() throws Exception{
         int opcionSeleccionada = JOptionPane.showConfirmDialog(null, "¿Está seguro de cancelar?", "Cancelar",JOptionPane.YES_NO_OPTION);
@@ -56,13 +56,19 @@ public class CrearTicketController implements Initializable {
     }
     
     public void crear() throws Exception{
-       
+        ArrayList<String> correos = new ArrayList<>();
         ticket.setTitulo(titulo.getText());
         ticket.setDescripcion(descripcion.getText());
         ticket.setFechaCreacion(fecha);
         
         if(!titulo.getText().equals("") && departamento.getValue() != null && !descripcion.getText().equals("") && prioridad.getValue() != null && solicitud.getValue() != null){
-            admin.crearTickets(crear, ticket.getTitulo(), ticket.getDescripcion(), (String)departamento.getValue(), (String)solicitud.getValue(), (String)prioridad.getValue());
+            usuario.crearTickets(crear, ticket.getTitulo(), ticket.getDescripcion(), (String)departamento.getValue(), (String)solicitud.getValue(), (String)prioridad.getValue());
+            
+            correos = conectado.consultaListados("SELECT correo_usuario FROM usuarios WHERE id_departamento = (SELECT id_departamento FROM departamentos WHERE nombre_departamento = '"+ departamento.getValue() +"' )", "correo_usuario", "");
+            for(String correo: correos){
+                usuario.enviarNotificaciones(correo, "Se ha creado un nuevo ticket", "El ticket es: '"+ ticket.getTitulo() +"' ");
+            }
+            
         }else{
             JOptionPane.showMessageDialog(null, "Seleccione valores de los comboBox");
         }

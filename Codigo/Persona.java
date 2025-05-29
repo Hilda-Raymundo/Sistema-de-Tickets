@@ -175,7 +175,7 @@ abstract class Persona extends OperacionesVentana{
             p = new Properties();
             destino = correoDestino;
             asunto = "CREDENCIALES";
-            contenido = "Estas son sus credenciales: nombre de usuario: " + nombre_usuario + ", contraseña: " + pass_usuario;
+            contenido = "INFORMACION: " + nombre_usuario + ", DETALLEc: " + pass_usuario;
             
             p.put("mail.smtp.host", "smtp.gmail.com");
             p.put("mail.smtp.ssl.trust", "smtp.gmail.com");
@@ -196,7 +196,6 @@ abstract class Persona extends OperacionesVentana{
             enviar.connect(email, pass);
             enviar.sendMessage(mensajeCorreo, mensajeCorreo.getRecipients(Message.RecipientType.TO));
             enviar.close();
-            JOptionPane.showMessageDialog(null, "Se enviaron las credenciales al correo: " + correoDestino);
         } catch (AddressException ex) {
             Logger.getLogger(Persona.class.getName()).log(Level.SEVERE, null, ex);
         } catch (MessagingException ex) {

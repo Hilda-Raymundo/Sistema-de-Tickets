@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -15,6 +16,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.CheckBoxTableCell;
@@ -43,15 +45,31 @@ public class TicketsPendientesController implements Initializable {
     @FXML
     public CheckBox cancelacion;
     
+    public javafx.scene.control.Button tomarTicket;
     public javafx.scene.control.Button cambiarEstado;
     public javafx.scene.control.Button agregarNota;
     public javafx.scene.control.Button adjuntarDocumentacion;
     public javafx.scene.control.Button atras;
     public javafx.scene.control.Button aceptarCancelacion;
+    public ComboBox<String> prioridad;
+    public ComboBox<String> estado;
     
     OperacionesVentana operaciones = new OperacionesVentana();
+    ModificarEstadoController datosEstado = new ModificarEstadoController();
     
     public void cambiarEstado() throws Exception{
+        DatosTableViewSinCheckbox dato = misTickets.getSelectionModel().getSelectedItem();
+            if(dato!= null){
+                JOptionPane.showMessageDialog(null, "Se ha seleccionado el ticket: " + dato.getDato1() + dato.getDato2());
+                datosEstado.obtenerDatos(dato.getDato1(), dato.getDato2(), "");
+                operaciones.cerrar(cambiarEstado);
+                operaciones.abrirVentana("ModificarEstado.fxml");
+                }else{
+                JOptionPane.showMessageDialog(null, "Seleccione un ticket");
+            }
+    }
+    
+    public void tomarTicket() throws Exception{
         DatosTableViewSinCheckbox dato = misTickets.getSelectionModel().getSelectedItem();
             if(dato!= null){
                 int datoABuscar = conectado.buscar("SELECT * FROM tickets where titulo = '"+ dato.getDato1() +"' and prioridad = (SELECT id_prioridad FROM prioridades WHERE nombre_prioridad = '"+ dato.getDato2() +"') and tecnico IS NOT NULL");
@@ -59,14 +77,17 @@ public class TicketsPendientesController implements Initializable {
                         JOptionPane.showMessageDialog(null, "El ticket ya tiene asignado un tecnico");
                     }else{
                         conectado.consultaDML("UPDATE tickets SET tecnico ='"+ id +"' WHERE titulo ='"+ dato.getDato1() +"' and prioridad =(SELECT id_prioridad FROM prioridades WHERE nombre_prioridad ='"+ dato.getDato2()+"' )  ");
+                        ArrayList<String> departamentos = new ArrayList<>();
+                        departamentos = conectado.consultaListados("SELECT departamento FROM tickets WHERE titulo ='"+ dato.getDato1() +"' and prioridad =(SELECT id_prioridad FROM prioridades WHERE nombre_prioridad ='"+ dato.getDato2()+"' ) ", "departamento", "");
+                        String nombreCola = "cola_de_atencion_" + departamentos.get(0);
+                        conectado.consultaDML("UPDATE "+ nombreCola +" SET id_tecnico = "+ id +" WHERE id_ticket = (SELECT id_ticket FROM tickets WHERE titulo = '"+ dato.getDato1() +"' AND prioridad= (SELECT id_prioridad FROM prioridades WHERE nombre_prioridad = '"+ dato.getDato2() +"' ) )");
                         JOptionPane.showMessageDialog(null, "Se ha seleccionado el ticket: " + dato.getDato1() + ", " + dato.getDato2() );
-                         operaciones.cerrar(cambiarEstado);
-                         operaciones.abrirVentana("Tecnico.fxml");
+                        operaciones.cerrar(cambiarEstado);
+                        operaciones.abrirVentana("Tecnico.fxml");
                     }
                 }else{
                 JOptionPane.showMessageDialog(null, "Seleccione un ticket");
             }
-        
     }
     
     @FXML

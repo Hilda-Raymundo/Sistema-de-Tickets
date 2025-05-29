@@ -54,7 +54,7 @@ public class TecnicoController implements Initializable {
     
     public void resolverTicket() throws Exception{
         operaciones.cerrar(resolverTicket);
-        operaciones.abrirVentana("ModificarEstado.fxml");
+        operaciones.abrirVentana("TicketsPendientes.fxml");
     }
     
     public void agregarNotaATicket() throws Exception{

@@ -49,7 +49,7 @@ public class Tecnicos extends Persona{
     public void asignarTicket(){
         
     }
-    
+        
     @Override
     public void consultarTickets(){
         

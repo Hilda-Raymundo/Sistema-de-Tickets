@@ -246,7 +246,7 @@ public class Administrador extends Persona{
                     HistorialConfiguracionesSistema historial = new HistorialConfiguracionesSistema(fecha, "Se creó el usuario(nombre = "+ tecnico.getNombreUsuario()+", correo = "+ tecnico.getCorreo()+") ", "" + id);
                     cerrar(cerrar);
                     abrirVentana("GestionUsuarios.fxml");
-                    enviarNotificaciones(tecnico.getCorreo(), nombreUsuario, contrasenia);
+                    enviarNotificaciones(tecnico.getCorreo(), "Estas son sus credenciales \n El nombre del usuario es: " + nombreUsuario,  " La contrasenia es: " + contrasenia);
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(Administrador.class.getName()).log(Level.SEVERE, null, ex);
